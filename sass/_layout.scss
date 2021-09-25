@@ -9,18 +9,41 @@
 }
 
 .header{
+  font-size: 1.4rem;
   height: 7rem;
   background-color: var(--color-tertiary);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .content{
   display: flex;
+  flex-wrap: wrap;
 }
 
-.title{
-  background-color: var(--color-secondary);
+.title-bar{
+  display: flex;
+  flex: 1 0 100%;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+  background-color: var(--color-secondary-dark);
+  box-shadow: inset 0 1rem 1rem rgba(0,0,0,.5);
+}
+
+.title-box{
+  display: flex;
+
+  &__title{
+    font-family: "Lucida Handwriting", sans-serif;
+    font-size: 2rem;
+    color: var(--color-tertiary);
+  }
 }
 
 .recipes-view{
-
+  flex: 0 1 100%;
+  background-color: red;
 }
