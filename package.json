@@ -1,0 +1,15 @@
+{
+  "name": "cookinillas",
+  "version": "1.0.0",
+  "description": "Landing page for cookinillas",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "node-sass": "^6.0.1"
+  },
+  "scripts": {
+    "compile:sass": "node-sass sass/main.scss css/style.css"
+  },
+  "author": "drmartinez",
+  "license": "ISC"
+}

@@ -1,0 +1,26 @@
+.container{
+  width: 100vw;
+  max-width: 120rem;
+  margin: 8rem auto;
+  background-color: var(--color-secondary-light);
+  box-shadow: var(--shadow-dark);
+
+  min-height: 50rem;
+}
+
+.header{
+  height: 7rem;
+  background-color: var(--color-tertiary);
+}
+
+.content{
+  display: flex;
+}
+
+.title{
+  background-color: var(--color-secondary);
+}
+
+.recipes-view{
+
+}

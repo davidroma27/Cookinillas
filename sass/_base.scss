@@ -1,0 +1,83 @@
+/*
+COLORS
+
+Primary: #e2f9f1
+Primary light: #f7fff7
+Primary dark: #d0f4ec
+
+Secondary: #1a535c
+Secondary light: #4ecdc4
+Secondary dark: #16444c
+
+Tertiary: #ff6b6b
+
+Grey light 1: #faf9f9
+Grey light 2: #f4f2f2
+Grey light 3: #f0eeee
+Grey light 4: #ccc
+
+Grey dark 1: #333
+Grey dark 2: #777
+Grey dark 3: #999
+
+*/
+
+:root{
+  --color-primary: #ff6b6b;
+  --color-primary-light: #ff8585;
+  --color-primary-dark: #b92f2f;
+
+  --color-secondary: #e2f9f1;
+  --color-secondary-light: #f7fff7;
+  --color-secondary-dark: #d0f4ec;
+
+  --color-tertiary: #1a535c;
+  --color-tertiary-light: #4ecdc4;
+  --color-tertiary-dark: #16444c;
+
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-light-4: #ccc;
+
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #777;
+  --color-grey-dark-3: #999;
+
+  --shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+//Todos los elementos heredan border-box del html
+*,
+*::before,
+*::after{
+  box-sizing: inherit;
+}
+
+html{
+  box-sizing: border-box;
+  font-size: 62.5%; //1rem = 10px, 10px/16px = 62.5%, being 16px the browser default
+}
+
+body {
+  font-family: 'Candara', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-tertiary-dark);
+  background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+
+  display: flex;
+  /* all blocks are placed in a row direction, but in mobile layout, each is
+  full-length across main direction, so they will wrap (see in column) */
+  flex-flow: row wrap;
+}
