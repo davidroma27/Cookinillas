@@ -77,8 +77,18 @@ body {
   min-height: 100vh;
 
   display: flex;
+  flex-direction: column;
   /* all blocks are placed in a row direction, but in mobile layout, each is
   full-length across main direction, so they will wrap (see in column) */
-  flex-flow: row wrap;
+  flex-flow: nowrap;
 
+}
+
+footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 3rem;
+  background-color: var(--color-tertiary);
 }

@@ -63,9 +63,17 @@ body {
   background-repeat: no-repeat;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   /* all blocks are placed in a row direction, but in mobile layout, each is
   full-length across main direction, so they will wrap (see in column) */
-  flex-flow: row wrap; }
+  flex-flow: nowrap; }
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  background-color: var(--color-tertiary); }
 
 .container {
   width: 100vw;
@@ -167,7 +175,7 @@ body {
     margin-right: 1rem; }
   .user-nav__user-name {
     color: var(--color-tertiary-light); }
-  .user-nav__user:hover .user-nav__user-photo + .user-nav__user-name {
+  .user-nav__user:hover .user-nav__user-name {
     transform: scale(1.2, 1.2);
     transition: all .2s; }
 
@@ -192,8 +200,8 @@ body {
   justify-content: space-around;
   align-items: flex-start;
   flex: 0 1 100%;
-  background-color: var(--color-secondary);
   min-height: 100vh;
+  background-color: var(--color-secondary);
   box-shadow: inset 0 1rem 1rem rgba(0, 0, 0, 0.2); }
 
 .recipes {
@@ -201,22 +209,30 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin-top: 3rem; }
+  margin: 3rem 0; }
   .recipes__box {
     display: flex;
     align-self: center;
     flex-direction: column;
     flex: 0 0 30rem;
-    background-color: var(--color-secondary-dark);
+    max-width: 30rem;
     border-radius: 1.5rem;
-    margin: 1.5rem; }
+    margin: 1.5rem;
+    background-color: var(--color-secondary-dark);
+    box-shadow: 1px 1px 20px 3px rgba(0, 0, 0, 0.5); }
   .recipes__box-photo {
     height: 20rem;
     border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem; }
+    border-top-right-radius: 1.5rem;
+    object-fit: cover;
+    vertical-align: bottom; }
   .recipes__box-text {
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 1.5rem;
     height: 6rem;
     margin: 1rem; }
+
+.footerText {
+  font-size: 1.5rem;
+  color: var(--color-tertiary-light); }

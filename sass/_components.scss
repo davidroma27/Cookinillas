@@ -114,7 +114,7 @@
     color: var(--color-tertiary-light);
   }
 
-  &__user:hover &__user-photo + &__user-name{
+  &__user:hover &__user-name{
     transform: scale(1.2, 1.2);
     transition: all .2s;
   }
@@ -146,8 +146,8 @@
   justify-content: space-around;
   align-items: flex-start;
   flex: 0 1 100%;
-  background-color: var(--color-secondary);
   min-height: 100vh;
+  background-color: var(--color-secondary);
   box-shadow: inset 0 1rem 1rem rgba(0,0,0,.2);
 }
 
@@ -156,22 +156,25 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin-top: 3rem;
-
+  margin: 3rem 0;
   &__box{
     display: flex;
     align-self: center;
     flex-direction: column;
     flex: 0 0 30rem;
-    background-color: var(--color-secondary-dark);
+    max-width: 30rem;
     border-radius: 1.5rem;
     margin: 1.5rem;
+    background-color: var(--color-secondary-dark);
+    box-shadow: 1px 1px 20px 3px rgba(0,0,0,0.5);
   }
 
   &__box-photo{
     height: 20rem;
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
+    object-fit: cover;
+    vertical-align: bottom;
   }
 
   &__box-text{
@@ -181,5 +184,11 @@
     height: 6rem;
     margin: 1rem;
   }
+}
+
+/////////////// FOOTER /////////////
+.footerText{
+  font-size: 1.5rem;
+  color: var(--color-tertiary-light);
 }
 
