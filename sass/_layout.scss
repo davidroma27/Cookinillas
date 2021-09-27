@@ -16,34 +16,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  /* all blocks are placed in a row direction, but in mobile layout, each is
+  full-length across main direction, so they will wrap (see in column) */
+  flex-wrap: wrap;
 }
 
 .content{
   display: flex;
   flex-wrap: wrap;
-}
-
-.title-bar{
-  display: flex;
-  flex: 1 0 100%;
-  align-items: center;
-  justify-content: center;
-  height: 7rem;
-  background-color: var(--color-secondary-dark);
-  box-shadow: inset 0 1rem 1rem rgba(0,0,0,.5);
-}
-
-.title-box{
-  display: flex;
-
-  &__title{
-    font-family: "Lucida Handwriting", sans-serif;
-    font-size: 2rem;
-    color: var(--color-tertiary);
-  }
-}
-
-.recipes-view{
-  flex: 0 1 100%;
-  background-color: red;
 }

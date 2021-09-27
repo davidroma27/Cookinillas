@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Landing page for cookinillas",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "live-server": "^1.2.1"
+  },
   "devDependencies": {
     "node-sass": "^6.0.1"
   },
