@@ -30,33 +30,49 @@ CREATE TABLE IF NOT EXISTS `USUARIOS` (
     UNIQUE KEY `alias` (`alias`),
     UNIQUE KEY `email` (`email`)
 
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `INGREDIENTES` (
 
-    `nombre` varchar(15) NOT NULL,
+    `nombre` varchar(15) NOT NULL UNIQUE,
 
-    PRIMARY KEY (`nombre`),
-    UNIQUE KEY (`nombre`)
+    PRIMARY KEY (`nombre`)
 
-)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+)ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `RECETAS` (
 
     `id_receta` int(3) NOT NULL AUTO_INCREMENT,
     `titulo` varchar(50) NOT NULL,
     `imagen` varchar (128) NOT NULL,
-    `nombre` varchar(15) NOT NULL,
     `tiempo` int(4) NOT NULL,
     `pasos` varchar(8192) NOT NULL,
     `alias` varchar(15) NOT NULL,
 
     PRIMARY KEY (`id_receta`),
-    FOREIGN KEY (`nombre`) REFERENCES INGREDIENTES(`nombre`),
-    FOREIGN KEY (`alias`) REFERENCES USUARIOS(`alias`)
+    FOREIGN KEY (`alias`)
+        REFERENCES USUARIOS(`alias`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+)ENGINE=InnoDB;
 
-);
+CREATE TABLE IF NOT EXISTS `RECETA_INGREDIENTE` (
 
+    `id_rec_ing` int(3) NOT NULL AUTO_INCREMENT,
+    `id_receta` int(3) NOT NULL,
+    `nombre` varchar(15) NOT NULL UNIQUE,
+    `cantidad` int(2)  NOT NULL,
+
+    CONSTRAINT pk_idRecIng PRIMARY KEY(`id_rec_ing`),
+    CONSTRAINT fk_idRec FOREIGN KEY (`id_receta`)
+        REFERENCES RECETAS(`id_receta`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    CONSTRAINT fk_nombre FOREIGN KEY (`nombre`)
+        REFERENCES INGREDIENTES(`nombre`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+)ENGINE=InnoDB;
 
 INSERT INTO `USUARIOS` (`alias`, `password`, `email`) VALUES ('jprobles', '3989da4eb832867da1eb82598a780c37', 'jacinto@gmail.com');
 INSERT INTO `USUARIOS` (`alias`, `password`, `email`) VALUES ('jsribera', '18f854b217d390ef7916cfeb407b8b74', 'julia@gmail.com');
@@ -67,8 +83,14 @@ INSERT INTO `INGREDIENTES` (`nombre`) VALUES ('Pollo');
 INSERT INTO `INGREDIENTES` (`nombre`) VALUES ('Huevos');
 INSERT INTO `INGREDIENTES` (`nombre`) VALUES ('Patatas');
 INSERT INTO `INGREDIENTES` (`nombre`) VALUES ('Harina');
+INSERT INTO `INGREDIENTES` (`nombre`) VALUES ('Pasta');
 
-INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `nombre`, `tiempo`, `pasos`, `alias`) VALUES ('1','Pollo empanado al limon','../views/img/recipe1.jpg','','30','Pasos a realizar para elaborar pollo al limon...', 'jprobles');
-INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `nombre`, `tiempo`, `pasos`, `alias`) VALUES ('2','Lasaña boloñesa','../views/img/recipe2.jpg','','60','Pasos a realizar para elaborar lasaña boloñesa...', 'agramos');
-INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `nombre`, `tiempo`, `pasos`, `alias`) VALUES ('3','Lomo de cerdo con salsa de setas','../views/img/recipe3.jpg','','60','Pasos a realizar para elaborar lomo de cerdo con salsa de setas...', 'sgmartinez');
-INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `nombre`, `tiempo`, `pasos`, `alias`) VALUES ('4','Rollitos de jamon y queso','../views/img/recipe4.jpg','','40','Pasos a realizar para elaborar rollitos de jamon y queso...', 'jprobles');
+INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('1','Pollo empanado al limon','../views/img/recipe1.jpg','30','Pasos a realizar para elaborar pollo al limon...', 'jprobles');
+INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('2','Lasaña boloñesa','../views/img/recipe2.jpg','60','Pasos a realizar para elaborar lasaña boloñesa...', 'agramos');
+INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('3','Lomo de cerdo con salsa de setas','../views/img/recipe3.jpg','60','Pasos a realizar para elaborar lomo de cerdo con salsa de setas...', 'sgmartinez');
+INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('4','Rollitos de jamon y queso','../views/img/recipe4.jpg','40','Pasos a realizar para elaborar rollitos de jamon y queso...', 'jprobles');
+
+INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('1','1','Pollo','1');
+INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('2','1','Huevos','3');
+INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('3','2','Pasta','1');
+INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('4','3','Harina','1');
