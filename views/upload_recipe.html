@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+
+        <title>Cookinillas &mdash; Subir receta</title>
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <button class="home__button">
+                    <img src="img/logo.svg" alt="cookinillas logo" class="logo">
+                </button>
+
+                <form action="#" class="search">
+                    <input type="text" class="search__input" placeholder="Buscar por ingredientes">
+                    <button class="search__button">
+                        <svg class="search__icon">
+                            <use href="img/sprite.svg#icon-magnifying-glass"></use>
+                        </svg>
+                    </button>
+                </form>
+
+                <nav class="user-nav">
+                    <div class="user-nav__icon-box">
+                        <svg class="user-nav__icon">
+                            <use href="img/sprite.svg#icon-upload-to-cloud"></use>
+                        </svg>
+                    </div>
+                    <div class="user-nav__user">
+                        <img src="img/user.jpg" alt="user photo" class="user-nav__user-photo">
+                        <span class="user-nav__user-name">David</span>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="content">
+                <div class="title-bar">
+                    <div class="title-box">
+                        <span class="title-box__title">Subir receta</span>
+                    </div>
+                </div>
+
+                <main class="main-content">
+                    <form action="" method="post" class="recipe__form">
+                        <label>
+                            <span>Nombre de la receta</span>
+                            <input type="text" name="Nombre receta">
+                        </label>
+                        <label>
+                            <span>Imagen de la receta</span>
+                            <input type="file" name="Nombre receta">
+                        </label>
+                        <label>
+                            <span>Tiempo de preparación (minutos)</span>
+                            <input type="number" name="Nombre receta">
+                        </label>
+                        <label>
+                            <span>Ingredientes</span>
+                            <input list="ingredients" name="Nombre receta">
+                            <datalist id="ingredients">
+                                <option value="Sal"></option>
+                                <option value="Aceite"></option>
+                                <option value="Tomate"></option>
+                            </datalist>
+                            <input class="form__button" type="submit">
+                        </label>
+                    </form>
+                </main>
+            </div>
+
+        </div>
+    </body>
+</html>

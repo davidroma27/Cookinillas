@@ -1,5 +1,12 @@
+<!--
+todo:
+ -Arreglar responsive header
+ -Corregir svg icons
+ -Ajustar textos en recipe box
+-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial scale=1.0">
@@ -22,7 +29,7 @@
                     <input type="text" class="search__input" placeholder="Buscar por ingredientes">
                     <button class="search__button">
                         <svg class="search__icon">
-                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+                            <use href="img/sprite.svg#icon-magnifying-glass"></use>
                         </svg>
                     </button>
                 </form>
@@ -30,7 +37,7 @@
                 <nav class="user-nav">
                     <div class="user-nav__icon-box">
                         <svg class="user-nav__icon">
-                            <use xlink:href="img/sprite.svg#icon-upload-to-cloud"></use>
+                            <use href="img/sprite.svg#icon-upload-to-cloud"></use>
                         </svg>
                     </div>
                     <div class="user-nav__user">
@@ -47,73 +54,123 @@
                      </div>
                 </div>
 
-                <main class="recipes-view">
+                <main class="main-content">
                     <div class="recipes">
+                            <div class="recipes__box">
+                                <a href="#" class="recipes__box-link">
+                                    <span><img src="img/recipe1.jpg" alt="Photo of recipe 1" class="recipes__box-photo"></span>
+                                </a>
+                                <h3 class="recipes__box-title">
+                                    Lorem ipsum dolor sit amet
+                                </h3>
+                                <span class="recipes__box-text">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                </span>
+                            </div>
                         <div class="recipes__box">
-                            <a href="#"><img src="img/recipe1.jpg" alt="Photo of recipe 1" class="recipes__box-photo"></a>
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe2.jpg" alt="Photo of recipe 2" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                             </span>
                         </div>
                         <div class="recipes__box">
-                            <img src="img/recipe2.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe3.jpg" alt="Photo of recipe 3" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                             </span>
                         </div>
                         <div class="recipes__box">
-                            <img src="img/recipe3.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe4.jpg" alt="Photo of recipe 4" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                             </span>
                         </div>
                         <div class="recipes__box">
-                            <img src="img/recipe4.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe5.jpg" alt="Photo of recipe 5" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                             </span>
                         </div>
                         <div class="recipes__box">
-                            <img src="img/recipe5.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe6.jpg" alt="Photo of recipe 6" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                             </span>
                         </div>
                         <div class="recipes__box">
-                            <img src="img/recipe6.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe7.jpg" alt="Photo of recipe 7" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                             </span>
                         </div>
                         <div class="recipes__box">
-                            <img src="img/recipe7.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe8.jpg" alt="Photo of recipe 8" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                             </span>
                         </div>
                         <div class="recipes__box">
-                            <img src="img/recipe8.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe9.jpg" alt="Photo of recipe 9" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                             </span>
                         </div>
                         <div class="recipes__box">
-                            <img src="img/recipe9.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
-                            <span class="recipes__box-text">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                            </span>
-                        </div>
-                        <div class="recipes__box">
-                            <img src="img/recipe10.jpg" alt="Photo of recipe 1" class="recipes__box-photo">
+                            <a href="#" class="recipes__box-link">
+                                <img src="img/recipe10.jpg" alt="Photo of recipe 10" class="recipes__box-photo">
+                            </a>
+                            <h3 class="recipes__box-title">
+                                Lorem ipsum dolor sit amet
+                            </h3>
                             <span class="recipes__box-text">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                 sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.

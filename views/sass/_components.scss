@@ -1,5 +1,6 @@
 //////////// LOGO /////////////
 .home__button{
+  display: flex;
   border: none;
   background-color: var(--color-tertiary);
   cursor: pointer;
@@ -11,7 +12,8 @@
 }
 
 .logo{
-  height: 7rem;
+  flex: 0 1 auto;
+  max-height: 7rem;
   margin: 0 1rem;
 
   &:hover{
@@ -141,12 +143,12 @@
   }
 }
 
-.recipes-view{
+.main-content{
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   flex: 0 1 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: var(--color-secondary);
   box-shadow: inset 0 1rem 1rem rgba(0,0,0,.2);
 }
@@ -161,27 +163,48 @@
     display: flex;
     align-self: center;
     flex-direction: column;
-    flex: 0 0 30rem;
+    flex: 0 1 30rem;
     max-width: 30rem;
     border-radius: 1.5rem;
     margin: 1.5rem;
     background-color: var(--color-secondary-dark);
     box-shadow: 1px 1px 20px 3px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+
+  &__box-title {
+    align-self: self-start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-decoration: underline;
+    font-size: 2rem;
+    margin: 1rem 1rem 0 1rem;
+  }
+
+  &__box-link{
+    display: flex;
+    flex-direction: column;
   }
 
   &__box-photo{
     height: 20rem;
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
-    object-fit: cover;
     vertical-align: bottom;
+    object-fit: cover;
+    max-width: 100%;
+  }
+
+  &__box-photo:hover{
+    filter: alpha(70%);
   }
 
   &__box-text{
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 1.5rem;
-    height: 6rem;
     margin: 1rem;
   }
 }
@@ -190,5 +213,28 @@
 .footerText{
   font-size: 1.5rem;
   color: var(--color-tertiary-light);
+}
+
+//--------- UPLOAD RECIPE VIEW -------//
+/////////// RECIPE FORM //////////////
+.recipe__form{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1 1 60%;
+  flex-wrap: wrap;
+  margin: 4rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  //border: 2px solid var(--color-tertiary-dark);
+  background-color: var(--color-secondary-dark);
+  box-shadow: var(--shadow-dark);
+
+  span{
+   font-size: 1.5rem;
+  }
+}
+
+.form__button{
 }
 

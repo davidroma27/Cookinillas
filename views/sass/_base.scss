@@ -44,7 +44,7 @@ Grey dark 3: #999
   --color-grey-dark-2: #777;
   --color-grey-dark-3: #999;
 
-  --shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
+  --shadow-dark: 0 0 5rem rgba(0,0,0,.5);
 
 }
 
@@ -82,6 +82,18 @@ body {
   full-length across main direction, so they will wrap (see in column) */
   flex-flow: nowrap;
 
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: space-between;
+  margin-bottom: 2rem;
+
+  & > * {
+    align-self: flex-start;
+  }
 }
 
 footer{
