@@ -77,6 +77,18 @@ label {
   label > * {
     align-self: flex-start; }
 
+input {
+  padding: .25rem;
+  border-width: 1px;
+  border-radius: .5rem;
+  border-color: var(--color-tertiary-dark); }
+
+textarea {
+  padding: .25rem;
+  border-width: 1px;
+  border-radius: .5rem;
+  border-color: var(--color-tertiary-dark); }
+
 footer {
   display: flex;
   justify-content: center;
@@ -167,6 +179,7 @@ footer {
 
 .user-nav {
   display: flex;
+  position: relative;
   align-items: center;
   align-self: stretch; }
   .user-nav > * {
@@ -180,19 +193,52 @@ footer {
   .user-nav__icon {
     height: 2rem;
     width: 2rem;
+    vertical-align: bottom;
     fill: var(--color-tertiary-light); }
   .user-nav__icon-box:hover .user-nav__icon {
     transform: scale(1.5, 1.5);
     transition: all .2s; }
+  .user-nav__user {
+    display: flex;
+    justify-content: center;
+    flex-direction: column; }
   .user-nav__user-photo {
+    align-items: center;
     height: 3.75rem;
     border-radius: 50%;
     margin-right: 1rem; }
-  .user-nav__user-name {
+  .user-nav__user-box {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .user-nav__user-dropbtn {
+    background: none;
+    border: none;
     color: var(--color-tertiary-light); }
-  .user-nav__user:hover .user-nav__user-name {
-    transform: scale(1.2, 1.2);
-    transition: all .2s; }
+    .user-nav__user-dropbtn:hover {
+      transform: scale(1.2, 1.2);
+      transition: all .2s; }
+  .user-nav__user-dropcont {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15.3rem;
+    background-color: var(--color-tertiary); }
+    .user-nav__user-dropcont a {
+      text-decoration: none;
+      color: var(--color-tertiary-light);
+      padding: 1rem 2rem;
+      width: 100%; }
+  .user-nav__user:hover .user-nav__user-dropcont {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15.3rem;
+    background-color: var(--color-tertiary); }
+    .user-nav__user:hover .user-nav__user-dropcont a:hover {
+      background-color: var(--color-tertiary-dark); }
 
 .title-bar {
   display: flex;
@@ -280,3 +326,13 @@ footer {
   box-shadow: var(--shadow-dark); }
   .recipe__form span {
     font-size: 1.5rem; }
+
+.form__button {
+  border: none;
+  margin-top: 1rem;
+  padding: .5rem;
+  border-radius: .5rem;
+  background-color: var(--color-tertiary-dark);
+  color: var(--color-tertiary-light); }
+  .form__button:hover {
+    background-color: var(--color-tertiary); }

@@ -13,9 +13,11 @@
     <body>
         <div class="container">
             <header class="header">
-                <button class="home__button">
-                    <img src="img/logo.svg" alt="cookinillas logo" class="logo">
-                </button>
+                <a href="../views/index.html">
+                    <button class="home__button">
+                        <img src="img/logo.svg" alt="cookinillas logo" class="logo">
+                    </button>
+                </a>
 
                 <form action="#" class="search">
                     <input type="text" class="search__input" placeholder="Buscar por ingredientes">
@@ -27,14 +29,22 @@
                 </form>
 
                 <nav class="user-nav">
-                    <div class="user-nav__icon-box">
-                        <svg class="user-nav__icon">
-                            <use href="img/sprite.svg#icon-upload-to-cloud"></use>
-                        </svg>
-                    </div>
+                    <a href="../views/upload_recipe.html">
+                        <div class="user-nav__icon-box">
+                            <svg class="user-nav__icon">
+                                <use href="img/sprite.svg#icon-upload-to-cloud"></use>
+                            </svg>
+                        </div>
+                    </a>
                     <div class="user-nav__user">
-                        <img src="img/user.jpg" alt="user photo" class="user-nav__user-photo">
-                        <span class="user-nav__user-name">David</span>
+                        <div class="user-nav__user-box">
+                            <img src="img/user.jpg" alt="user photo" class="user-nav__user-photo">
+                            <button class="user-nav__user-dropbtn">Username</button>
+                        </div>
+                        <div class="user-nav__user-dropcont">
+                            <a href="#">Recetas favoritas</a>
+                            <a href="#">Mis recetas</a>
+                        </div>
                     </div>
                 </nav>
             </header>
@@ -48,28 +58,33 @@
 
                 <main class="main-content">
                     <form action="" method="post" class="recipe__form">
+
                         <label>
                             <span>Nombre de la receta</span>
                             <input type="text" name="Nombre receta">
                         </label>
-                        <label>
+                        <label class="file-upload">
                             <span>Imagen de la receta</span>
-                            <input type="file" name="Nombre receta">
+                            <input id="sel_file" type="file" name="Imagen receta">
                         </label>
                         <label>
                             <span>Tiempo de preparación (minutos)</span>
-                            <input type="number" name="Nombre receta">
+                            <input type="number" name="Tiempo receta">
                         </label>
                         <label>
                             <span>Ingredientes</span>
-                            <input list="ingredients" name="Nombre receta">
+                            <input list="ingredients" name="Ingredientes receta">
                             <datalist id="ingredients">
                                 <option value="Sal"></option>
                                 <option value="Aceite"></option>
                                 <option value="Tomate"></option>
                             </datalist>
-                            <input class="form__button" type="submit">
                         </label>
+                        <label>
+                            <span>Pasos para elaborar la receta</span>
+                            <textarea name="Pasos receta" id="recipeTextArea" cols="30" rows="10"></textarea>
+                        </label>
+                        <input class="form__button" type="submit">
                     </form>
                 </main>
             </div>

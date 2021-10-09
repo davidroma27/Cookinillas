@@ -52,8 +52,6 @@ CREATE TABLE IF NOT EXISTS `RECETAS` (
     PRIMARY KEY (`id_receta`),
     FOREIGN KEY (`alias`)
         REFERENCES USUARIOS(`alias`)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `RECETA_INGREDIENTE` (
@@ -65,13 +63,9 @@ CREATE TABLE IF NOT EXISTS `RECETA_INGREDIENTE` (
 
     CONSTRAINT pk_idRecIng PRIMARY KEY(`id_rec_ing`),
     CONSTRAINT fk_idRec FOREIGN KEY (`id_receta`)
-        REFERENCES RECETAS(`id_receta`)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+        REFERENCES RECETAS(`id_receta`),
     CONSTRAINT fk_nombre FOREIGN KEY (`nombre`)
         REFERENCES INGREDIENTES(`nombre`)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
 )ENGINE=InnoDB;
 
 INSERT INTO `USUARIOS` (`alias`, `password`, `email`) VALUES ('jprobles', '3989da4eb832867da1eb82598a780c37', 'jacinto@gmail.com');
