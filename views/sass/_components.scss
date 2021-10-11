@@ -294,3 +294,56 @@
   }
 }
 
+//---------------- ACCESS VIEW -----------------//
+////////////////// CONTAINER ////////////////////
+.access-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+}
+
+.access__form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  min-width: 30rem;
+  min-height: 50rem;
+  background-color: var(--color-secondary);
+  box-shadow: var(--shadow-dark);
+
+  span{
+    font-size: 1.5rem;
+  }
+}
+
+.form-signin, .form-signup{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  
+  label{
+    font-size: 1.5rem;
+    margin: .5rem;
+  }
+  
+  span{
+
+    font-family: "Lucida Handwriting", sans-serif;
+    font-size: 2.5rem;
+  }
+}
+
+.bg-video{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
