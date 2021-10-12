@@ -75,6 +75,8 @@ body {
   background-repeat: no-repeat;
 
   min-height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
