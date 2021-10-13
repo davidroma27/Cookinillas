@@ -62,10 +62,23 @@ CREATE TABLE IF NOT EXISTS `RECETA_INGREDIENTE` (
     `cantidad` int(2)  NOT NULL,
 
     CONSTRAINT pk_idRecIng PRIMARY KEY(`id_rec_ing`),
-    CONSTRAINT fk_idRec FOREIGN KEY (`id_receta`)
+    CONSTRAINT fk_idRec_recIng FOREIGN KEY (`id_receta`)
         REFERENCES RECETAS(`id_receta`),
     CONSTRAINT fk_nombre FOREIGN KEY (`nombre`)
         REFERENCES INGREDIENTES(`nombre`)
+)ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `RECETA_FAV` (
+
+    `id_rec_fav` int(3) NOT NULL AUTO_INCREMENT,
+    `id_receta` int(3) NOT NULL,
+    `alias` varchar(15) NOT NULL,
+
+    CONSTRAINT pk_idRecFav PRIMARY KEY(`id_rec_fav`),
+    CONSTRAINT fk_idRec_recFav FOREIGN KEY (`id_receta`)
+        REFERENCES RECETAS(`id_receta`),
+    CONSTRAINT fk_alias FOREIGN KEY (`alias`)
+        REFERENCES USUARIOS(`alias`)
 )ENGINE=InnoDB;
 
 INSERT INTO `USUARIOS` (`alias`, `password`, `email`) VALUES ('jprobles', '3989da4eb832867da1eb82598a780c37', 'jacinto@gmail.com');
@@ -88,3 +101,8 @@ INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad
 INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('2','1','Huevos','3');
 INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('3','2','Pasta','1');
 INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('4','3','Harina','1');
+
+INSERT INTO `RECETA_FAV` (`id_rec_fav`, `id_receta`, `alias`) VALUES ('1','1','jprobles');
+INSERT INTO `RECETA_FAV` (`id_rec_fav`, `id_receta`, `alias`) VALUES ('2','1','agramos');
+INSERT INTO `RECETA_FAV` (`id_rec_fav`, `id_receta`, `alias`) VALUES ('3','2','jprobles');
+INSERT INTO `RECETA_FAV` (`id_rec_fav`, `id_receta`, `alias`) VALUES ('4','3','jprobles');

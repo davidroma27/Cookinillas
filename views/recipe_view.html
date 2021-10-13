@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
 
-    <title>Cookinillas &mdash; Cocina para todos</title>
+    <title>Cookinillas &mdash; *** Titulo receta ***</title>
 </head>
 
 <body>
@@ -57,9 +57,58 @@
             </div>
         </div>
 
-        <main class="main-content">
+        <main class="recipe-main">
             <div class="recipe__img">
                 <img src="../views/img/recipe1.jpg" alt="">
+            </div>
+            <div class="recipe__bar">
+                <svg class="recipe__bar-time__logo">
+                    <use href="img/sprite.svg#icon-stopwatch"></use>
+                </svg>
+                <span class="recipe__bar-time">30min</span>
+
+                <svg class="recipe__bar-user__logo">
+                    <use href="img/sprite.svg#icon-user"></use>
+                </svg>
+                <span class="recipe__bar-alias">drmartinez</span>
+
+                <button id="fav_button" class="fav__button">
+                    <svg class="fav__icon">
+                        <use href="img/sprite.svg#icon-heart"></use>
+                    </svg>
+                    <span class="fav__text">Me gusta</span>
+                    <span class="fav__count">(346)</span>
+                </button>
+            </div>
+            <div class="recipe__content">
+                <div class="recipe__ing">
+                    <h3>Listado de ingredientes</h3>
+                    <ul class="recipe__ing-list">
+                        <li>500g Pollo</li>
+                        <li>100g pan rallado</li>
+                        <li>3 huevos</li>
+                    </ul>
+                </div>
+
+                <div class="recipe__text">
+                    <p>
+                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
+                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
+                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
+                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
+                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
+                    </p>
+                </div>
+
+                <div class="recipe__steps">
+                    <h3>Pasos a realizar</h3>
+                    <ol class="recipe__steps-list">
+                        <li>Paso 1</li>
+                        <li>Paso 2</li>
+                        <li>Paso 3</li>
+                        <li>Paso 4</li>
+                    </ol>
+                </div>
             </div>
         </main>
     </div>
