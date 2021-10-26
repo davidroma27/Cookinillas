@@ -1,0 +1,569 @@
+//////////// LOGO /////////////
+.home__button{
+  display: flex;
+  border: none;
+  background-color: var(--color-tertiary);
+  cursor: pointer;
+  height: 70px;
+
+  &:hover{
+    background-color: var(--color-tertiary-dark);
+  }
+}
+
+.logo{
+  flex: 0 1 auto;
+  max-height: 7rem;
+  margin: 0 1rem;
+
+  &:hover{
+    transform: scale(1.1,1.1);
+    transition: all .2s;
+  }
+}
+
+/////////////// SEARCH //////////////
+.search{
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__input{
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: var(--color-secondary-light);
+    border: none;
+    padding: .7rem 2rem;
+    border-radius: 100px;
+    width: 90%;
+    transition: all .2s;
+    margin-right: -3.5rem;
+
+    &:focus{
+      outline: none;
+      width: 100%;
+      background-color: var(--color-secondary-dark);
+    }
+
+    &::-webkit-input-placeholder{
+      font-weight: 100;
+      color: var(--color-grey-light-4);
+    }
+  }
+
+  &__input:focus + &__button{
+      background-color: var(--color-secondary-dark);
+  }
+
+  &__button{
+    border: none;
+    cursor: pointer;
+    background-color: var(--color-secondary-light);
+
+    &__focus{
+      outline: none;
+    }
+
+    &__active{
+      transform: translateY(2px);
+    }
+  }
+
+  &__icon{
+    height: 2rem;
+    width: 2rem;
+    fill: var(--color-tertiary);
+  }
+}
+
+////////////// USER NAV /////////////
+.user-nav{
+  display: flex;
+  position: relative;
+  align-items: center;
+  align-self: stretch;
+
+  & > * { //Modifica user-nav y todos sus elementos hijos
+    padding: 0 3rem;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  & > *:hover{
+    background-color: var(--color-tertiary-dark);
+  }
+
+  &__icon{
+    height: 2rem;
+    width: 2rem;
+    vertical-align: bottom;
+    fill: var(--color-tertiary-light);
+  }
+
+  &__icon-box:hover &__icon{
+    transform: scale(1.5, 1.5);
+    transition: all .2s;
+  }
+
+  &__user{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__user-photo{
+    align-items: center;
+    height: 3.75rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+
+  &__user-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__user-dropbtn{
+    background: none;
+    border: none;
+    color: var(--color-tertiary-light);
+
+    &:hover{
+      transform: scale(1.2, 1.2);
+      transition: all .2s;
+    }
+  }
+
+  &__user-dropcont{
+    display: none;
+
+    a{
+      text-decoration: none;
+      color: var(--color-tertiary-light);
+      padding: 1rem 2rem;
+      width: 100%;
+    }
+  }
+
+  &__user:hover &__user-dropcont{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15.3rem;
+    background-color: var(--color-tertiary);
+
+    a:hover{
+      background-color: var(--color-tertiary-dark);
+    }
+  }
+}
+
+//////////////// CONTENT //////////////
+.title-bar{
+  display: flex;
+  flex: 1 0 100%;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+  background-color: var(--color-secondary-dark);
+  box-shadow: inset 0 1rem 1rem rgba(0,0,0,.5);
+}
+
+.title-box{
+  display: flex;
+
+  &__title{
+    font-family: "Lucida Handwriting", sans-serif;
+    font-size: 3rem;
+    color: var(--color-tertiary);
+  }
+}
+
+.main-content{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex: 0 1 100%;
+  min-height: 80vh;
+  max-width: 100vw;
+  background-color: var(--color-secondary);
+  box-shadow: inset 0 1rem 1rem rgba(0,0,0,.2);
+}
+
+.recipes{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 3rem 0;
+  max-width: 100vw;
+  &__box{
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    flex: 0 1 30rem;
+    max-width: 100vw;
+    border-radius: 1.5rem;
+    margin: 1.5rem;
+    background-color: var(--color-secondary-dark);
+    box-shadow: 1px 1px 20px 3px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+
+  &__box-title {
+    align-self: self-start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-decoration: underline;
+    font-size: 2rem;
+    margin: 1rem 1rem 0 1rem;
+  }
+
+  &__box-link{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__box-photo{
+    height: 20rem;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    vertical-align: bottom;
+    object-fit: cover;
+    max-width: 100%;
+  }
+
+  &__box-photo:hover{
+    filter: alpha(70%);
+  }
+
+  &__box-text{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 1.5rem;
+    margin: 1rem;
+  }
+}
+
+/////////////// FOOTER /////////////
+.footerText{
+  font-size: 1.5rem;
+  color: var(--color-tertiary-light);
+}
+
+//--------- UPLOAD-RECIPE VIEW -------//
+/////////// RECIPE FORM //////////////
+.recipe__form{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1 1 60%;
+  max-width: 100vw;
+  flex-wrap: wrap;
+  margin: 4rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  //border: 2px solid var(--color-tertiary-dark);
+  background-color: var(--color-secondary-dark);
+  box-shadow: var(--shadow-dark);
+
+  span{
+   font-size: 1.5rem;
+  }
+}
+
+.form__button{
+  border: none;
+  margin-top: 1rem;
+  padding: .5rem;
+  border-radius: .5rem;
+  max-width: 100%;
+  background-color: var(--color-tertiary-dark);
+  color: var(--color-tertiary-light);
+
+  &:hover{
+    cursor: pointer;
+    background-color: var(--color-tertiary);
+  }
+}
+
+//---------------- ACCESS VIEW -----------------//
+////////////////// CONTAINER ////////////////////
+.access-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+}
+
+////////////////// FORM ////////////////////
+.access-logo{
+  background-color: var(--color-secondary);
+
+  & > .logo{
+    max-height: 10rem;
+  }
+}
+
+
+.access__form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  min-width: 30rem;
+  min-height: 50rem;
+  background-color: var(--color-secondary);
+  box-shadow: var(--shadow-dark);
+  span{
+    font-size: 1.5rem;
+  }
+}
+
+.form-signin, .form-signup{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+
+  input{
+    width: 30rem;
+
+  }
+  
+  label{
+    font-size: 1.5rem;
+    margin: .5rem;
+  }
+  
+  span{
+
+    font-family: "Lucida Handwriting", sans-serif;
+    font-size: 2.5rem;
+  }
+
+  & > label > input{
+    max-width: 100%;
+  }
+}
+
+.file-upload{
+  max-width: 100%;
+
+  input{
+    max-width: 100%;
+  }
+}
+
+
+////////////////// BACKGROUND ////////////////////
+
+.bg-video{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+
+////////////////// LANG CHOOSER //////////////////
+#languagechooser{
+  display: flex;
+
+  img{
+    height: 5rem;
+    padding: .5rem;
+  }
+}
+
+//---------------- RECIPE VIEW -----------------//
+////////////////// RECIPE IMG ////////////////////
+.recipe__img{
+
+  img {
+    margin-top: 2rem;
+    max-height: 40rem;
+    max-width: 100%;
+  }
+}
+
+.recipe-main{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 0 1 100%;
+  min-height: 80vh;
+  max-width: 100vw;
+  background-color: var(--color-secondary);
+  box-shadow: inset 0 1rem 1rem rgba(0,0,0,.2);
+}
+
+//----------------- RECIPE BAR ------------//
+.recipe__bar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+
+  & > svg{
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .fav__button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-right: 1rem;
+
+    &:hover{
+      background-color: var(--color-tertiary);
+      color: var(--color-secondary);
+    }
+
+    &:focus{
+      .fav__icon{
+        fill: var(--color-primary-light);
+        animation-name: in;
+        animation-duration: .3s;
+
+        @keyframes in {
+          from {transform: scale(1, 1);}
+          to {transform: scale(1.5, 1.5);}
+        }
+
+        &::after{
+          animation-name: out;
+          animation-duration: .3s;
+
+          @keyframes out {
+            from {transform: scale(1.5, 1.5);}
+            to {transform: scale(1, 1);}
+          }
+        }
+      }
+    }
+
+    svg{
+      height: 3rem;
+      width: 3rem;
+    }
+
+    .fav__text, .fav__count{
+      font-family: 'Candara', sans-serif;
+      padding-left: 1rem;
+    }
+  }
+
+  & > * {
+    padding: 1rem;
+    font-size: 2rem;
+    color: var(--color-tertiary);
+  }
+}
+
+//--------------- RECIPE CONTENT -----------//
+.recipe__content{
+  max-width: 60%;
+
+  & > *{
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .recipe__ing-list{
+    padding: 0 2rem 2rem 2rem;
+  }
+
+  .recipe__steps-list{
+    padding: 0 2rem 2rem 2rem;
+  }
+}
+
+//------------------------------------------//
+//>>>>>>>>>>>>>> RESPONSIVE <<<<<<<<<<<<<<<<//
+//------------------------------------------//
+
+@media all and (max-width: 640px) {
+  .home__button {
+    align-items: center;
+    .logo {
+      max-height: 3.5rem;
+    }
+  }
+
+  .user-nav > * {
+    padding: 0 1.5rem;
+  }
+
+  .user-nav__user-dropbtn{
+    display: none;
+  }
+
+  .user-nav__user:hover .user-nav__user-dropcont{
+    margin-top: 19.7rem;
+    margin-right: 4.5rem;
+  }
+
+  .user-nav__user-photo{
+    margin-right: 0;
+  }
+
+  .title-box__title{
+    font-size: 1.5rem;
+  }
+
+  .recipe__content{
+    max-width: 80%;
+  }
+
+  .recipe__bar > span{
+    font-size: 1rem;
+  }
+
+  .fav__text{
+    font-size: 1rem;
+  }
+}
+
+@media all and (max-width: 420px) {
+  .home__button {
+    align-items: center;
+    .logo {
+      max-height: 2rem;
+    }
+  }
+
+  .user-nav > * {
+    padding: 0 .5rem;
+  }
+
+  .user-nav__user-dropbtn{
+    display: none;
+  }
+
+  .user-nav__user-dropcont{
+    margin-top: 19.7rem;
+    margin-right: 4.5rem;
+  }
+}
+

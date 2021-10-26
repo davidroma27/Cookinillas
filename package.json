@@ -10,7 +10,7 @@
     "node-sass": "^6.0.1"
   },
   "scripts": {
-    "compile:sass": "node-sass views/sass/main.scss views/css/style.css"
+    "compile:sass": "node-sass view/sass/main.scss css/style.css"
   },
   "author": "drmartinez",
   "license": "ISC"

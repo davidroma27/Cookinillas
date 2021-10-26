@@ -1,0 +1,98 @@
+<!--
+TODO:
+    -Corregir rutas
+-->
+
+<?php
+    //file: view/layouts/default.php
+
+    $view = ViewManager::getInstance();
+    $currentuser = $view->getVariable("currentusername");
+
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/png" href="../img/favicon.png">
+
+    <script src="index.php?controller=language&amp;action=i18njs">
+    </script>
+    <?= $view->getFragment("css") ?>
+    <?= $view->getFragment("javascript") ?>
+
+    <title>Cookinillas &mdash; <?= i18n("Cocina para todos") ?></title>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.php?controller=users&amp;action=login">
+                <button class="home__button">
+                    <img src="../img/logo.svg" alt="cookinillas logo" class="logo">
+                </button>
+            </a>
+
+            <form action="#" class="search">
+                <input type="text" class="search__input" placeholder="Buscar por ingredientes">
+                <button class="search__button">
+                    <svg class="search__icon">
+                        <use href="img/sprite.svg#icon-magnifying-glass"></use>
+                    </svg>
+                </button>
+            </form>
+
+            <nav class="user-nav">
+                <a href="../view/upload_recipe.html">
+                    <div class="user-nav__icon-box">
+                        <svg class="user-nav__icon">
+                            <use href="img/sprite.svg#icon-upload-to-cloud"></use>
+                        </svg>
+                    </div>
+                </a>
+                <div class="user-nav__user">
+                    <div class="user-nav__user-box">
+                        <!--<img src="../img/user.jpg" alt="user photo" class="user-nav__user-photo">-->
+                        <button class="user-nav__user-dropbtn">
+                            <?php if (isset($currentuser)): ?>
+                                <li><?= printf(i18n($currentuser))?>
+                                    <a href="index.php?controller=users&amp;action=logout">(Logout)</a>
+                                </li>
+
+                            <?php else: ?>
+                                <li><a href="index.php?controller=users&amp;action=login"><?= i18n("Login") ?></a></li>
+                            <?php endif ?>
+                        </button>
+                    </div>
+                    <div class="user-nav__user-dropcont">
+                        <a href="#"><?= i18n("Recetas favoritas") ?></a>
+                        <a href="#"><?= i18n("Mis recetas") ?></a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="content">
+            <main class="main-content">
+                <div id="flash">
+                    <?= $view->popFlash() ?>
+                </div>
+            </main>
+        </div>
+
+
+        <footer>
+            <p class="footerText">Cookinillas - Copyright (c) 2021 drmartinez</p>
+            <?php
+                include(__DIR__."/language_select_element.php");
+            ?>
+        </footer>
+    </div>
+</body>
+</html>
+
