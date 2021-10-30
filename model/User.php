@@ -6,7 +6,7 @@ require_once(__DIR__ . "/../core/ValidationException.php");
 /**
  * Class User
  *
- * Represents a User in the blog
+ * Represents a User in the web
  *
  * @author drmartinez
  */

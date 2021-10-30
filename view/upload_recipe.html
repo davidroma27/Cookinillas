@@ -57,23 +57,23 @@
                 </div>
 
                 <main class="main-content">
-                    <form action="" method="post" class="recipe__form">
+                    <form action="" method="post" class="recipe__form" enctype="multipart/form-data">
 
                         <label>
                             <span>Nombre de la receta</span>
-                            <input type="text" name="Nombre receta">
+                            <input type="text" name="title">
                         </label>
                         <label class="file-upload">
                             <span>Imagen de la receta</span>
-                            <input id="sel_file" type="file" name="Imagen receta">
+                            <input id="sel_file" type="file" name="img">
                         </label>
                         <label>
                             <span>Tiempo de preparación (minutos)</span>
-                            <input type="number" name="Tiempo receta">
+                            <input type="number" name="time">
                         </label>
                         <label>
                             <span>Ingredientes</span>
-                            <input list="ingredients" name="Ingredientes receta">
+                            <input list="ingredients" name="ingr">
                             <datalist id="ingredients">
                                 <option value="Sal"></option>
                                 <option value="Aceite"></option>
@@ -81,8 +81,12 @@
                             </datalist>
                         </label>
                         <label>
+                            <span>Cantidad</span>
+                            <input type="text" name="quant">
+                        </label>
+                        <label>
                             <span>Pasos para elaborar la receta</span>
-                            <textarea name="Pasos receta" id="recipeTextArea" cols="30" rows="10"></textarea>
+                            <textarea name="steps" id="recipeTextArea" cols="30" rows="10"></textarea>
                         </label>
                         <input class="form__button" type="submit">
                     </form>

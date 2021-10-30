@@ -13,10 +13,10 @@
     <span><?= i18n("Inicia sesión")?></span>
 
     <label class="username"><?= i18n("Nombre de usuario")?></label>
-    <input type="text" name="Nombre de usuario" value="">
+    <input type="text" name="alias" value="">
 
     <label class="username"><?= i18n("Contraseña")?></label>
-    <input type="password" name="Contraseña" value="">
+    <input type="password" name="passwd" value="">
 
     <input class="form__button" type="submit" value="<?= i18n("Inicia sesión")?>">
 </form>
@@ -27,14 +27,14 @@
     <span><?= i18n("Regístrate")?></span>
 
     <label class="username"><?= i18n("Nombre de usuario")?></label>
-    <input type="text" name="Nombre de usuario" value="">
+    <input type="text" name="alias" value="">
     <?= isset($errors["alias"])?i18n($errors["Nombre de usuario"]):"" ?><br>
 
     <label class="username"><?= i18n("Contraseña")?></label>
-    <input type="password" name="Contraseña">
+    <input type="password" name="passwd">
 
     <label class="username"><?= i18n("e-mail")?></label>
-    <input type="text" name="e-mail">
+    <input type="text" name="email">
 
     <input class="form__button" type="submit" value="<?= i18n("Regístrate")?>">
 </form>

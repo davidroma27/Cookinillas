@@ -143,7 +143,7 @@ class UsersController extends BaseController {
                     // perform the redirection. More or less:
                     // header("Location: index.php?controller=users&action=login")
                     // die();
-                    $this->view->redirect("users", "access");
+                    $this->view->redirect("users", "login");
                 } else {
                     $errors = array();
                     $errors["username"] = "Username or email already exists";
@@ -185,7 +185,7 @@ class UsersController extends BaseController {
         // perform a redirection. More or less:
         // header("Location: index.php?controller=users&action=access")
         // die();
-        $this->view->redirect("users", "access");
+        $this->view->redirect("recipes", "index");
 
     }
 

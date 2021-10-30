@@ -1,3 +1,11 @@
+/**
+ * file: view/cookinillas.sql
+ *
+ * Database schema for Cookinillas app
+ *
+ * @author drmartinez
+ */
+
 /*Crear la base de datos borrandola si ya existiera*/
 
 DROP DATABASE IF EXISTS `cookinillas`;
@@ -18,7 +26,7 @@ CREATE USER IF NOT EXISTS `cookinillas`@`localhost` IDENTIFIED BY 'cookinillasTS
 GRANT USAGE ON *.* TO `cookinillas`@`localhost` REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 GRANT ALL PRIVILEGES ON `cookinillas`.* TO `cookinillas`@`localhost` WITH GRANT OPTION;
 
-/*Creaci�n de tablas*/
+/*Creación de tablas*/
 
 CREATE TABLE IF NOT EXISTS `USUARIOS` (
 
@@ -42,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `INGREDIENTES` (
 
 CREATE TABLE IF NOT EXISTS `RECETAS` (
 
-    `id_receta` int(3) NOT NULL AUTO_INCREMENT,
+    `id_receta` int(3) AUTO_INCREMENT,
     `titulo` varchar(50) NOT NULL,
     `imagen` varchar (128) NOT NULL,
     `tiempo` int(4) NOT NULL,
@@ -56,10 +64,10 @@ CREATE TABLE IF NOT EXISTS `RECETAS` (
 
 CREATE TABLE IF NOT EXISTS `RECETA_INGREDIENTE` (
 
-    `id_rec_ing` int(3) NOT NULL AUTO_INCREMENT,
-    `id_receta` int(3) NOT NULL,
+    `id_rec_ing` int(3) AUTO_INCREMENT,
+    `id_receta` int(3),
     `nombre` varchar(15) NOT NULL UNIQUE,
-    `cantidad` int(2)  NOT NULL,
+    `cantidad` varchar(10)  NOT NULL,
 
     CONSTRAINT pk_idRecIng PRIMARY KEY(`id_rec_ing`),
     CONSTRAINT fk_idRec_recIng FOREIGN KEY (`id_receta`)
@@ -70,8 +78,8 @@ CREATE TABLE IF NOT EXISTS `RECETA_INGREDIENTE` (
 
 CREATE TABLE IF NOT EXISTS `RECETA_FAV` (
 
-    `id_rec_fav` int(3) NOT NULL AUTO_INCREMENT,
-    `id_receta` int(3) NOT NULL,
+    `id_rec_fav` int(3) AUTO_INCREMENT,
+    `id_receta` int(3),
     `alias` varchar(15) NOT NULL,
 
     CONSTRAINT pk_idRecFav PRIMARY KEY(`id_rec_fav`),
@@ -97,10 +105,10 @@ INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alia
 INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('3','Lomo de cerdo con salsa de setas','../views/img/recipe3.jpg','60','Pasos a realizar para elaborar lomo de cerdo con salsa de setas...', 'sgmartinez');
 INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('4','Rollitos de jamon y queso','../views/img/recipe4.jpg','40','Pasos a realizar para elaborar rollitos de jamon y queso...', 'jprobles');
 
-INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('1','1','Pollo','1');
+INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('1','1','Pollo','500g');
 INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('2','1','Huevos','3');
-INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('3','2','Pasta','1');
-INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('4','3','Harina','1');
+INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('3','2','Pasta','300g');
+INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('4','3','Harina','200g');
 
 INSERT INTO `RECETA_FAV` (`id_rec_fav`, `id_receta`, `alias`) VALUES ('1','1','jprobles');
 INSERT INTO `RECETA_FAV` (`id_rec_fav`, `id_receta`, `alias`) VALUES ('2','1','agramos');

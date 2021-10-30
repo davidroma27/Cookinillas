@@ -82,7 +82,7 @@ body {
   flex-direction: column;
   /* all blocks are placed in a row direction, but in mobile layout, each is
   full-length across main direction, so they will wrap (see in column) */
-  flex-flow: nowrap;
+  //flex-flow: nowrap;
 
 }
 
@@ -118,7 +118,7 @@ footer{
   justify-content: center;
   align-items: center;
 
-  height: 3rem;
+  height: 4rem;
   background-color: var(--color-tertiary);
 }
 

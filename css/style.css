@@ -67,8 +67,7 @@ body {
   display: flex;
   flex-direction: column;
   /* all blocks are placed in a row direction, but in mobile layout, each is
-  full-length across main direction, so they will wrap (see in column) */
-  flex-flow: nowrap; }
+  full-length across main direction, so they will wrap (see in column) */ }
 
 label {
   display: flex;
@@ -95,7 +94,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 3rem;
+  height: 4rem;
   background-color: var(--color-tertiary); }
 
 #access_body {
@@ -211,7 +210,7 @@ footer {
     height: 100%;
     display: flex;
     align-items: center; }
-  .user-nav > *:hover {
+  .user-nav *:hover {
     background-color: var(--color-tertiary-dark); }
   .user-nav__icon {
     height: 2rem;
@@ -225,6 +224,8 @@ footer {
     display: flex;
     justify-content: center;
     flex-direction: column; }
+    .user-nav__user:hover {
+      background-color: var(--color-tertiary-dark); }
   .user-nav__user-photo {
     align-items: center;
     height: 3.75rem;
@@ -233,14 +234,23 @@ footer {
   .user-nav__user-box {
     display: flex;
     justify-content: center;
-    align-items: center; }
-  .user-nav__user-dropbtn {
-    background: none;
-    border: none;
-    color: var(--color-tertiary-light); }
-    .user-nav__user-dropbtn:hover {
-      transform: scale(1.2, 1.2);
-      transition: all .2s; }
+    align-items: center;
+    height: 100%;
+    color: var(--color-tertiary-light);
+    font-size: 2rem;
+    font-family: 'Candara', sans-serif; }
+    .user-nav__user-box > a {
+      border: none;
+      color: var(--color-tertiary-light);
+      font-size: 2rem;
+      font-family: 'Candara', sans-serif;
+      background: none;
+      text-decoration: none;
+      height: 4rem;
+      padding: 0 1rem; }
+  .user-nav__user-dropbtn:hover {
+    transform: scale(1.2, 1.2);
+    transition: all .2s; }
   .user-nav__user-dropcont {
     display: none; }
     .user-nav__user-dropcont a {
@@ -417,9 +427,10 @@ footer {
   z-index: -1; }
 
 #languagechooser {
-  display: flex; }
+  display: flex;
+  height: 4rem; }
   #languagechooser img {
-    height: 5rem;
+    height: 4rem;
     padding: .5rem; }
 
 .recipe__img img {

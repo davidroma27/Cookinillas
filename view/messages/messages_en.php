@@ -22,6 +22,8 @@
         "Buscar por ingredientes" => "Search by ingredients",
         "Me gusta" => "Like",
         "Listado de ingredientes" => "List of ingredients",
-        "Pasos a realizar" => "Steps to take"
+        "Pasos a realizar" => "Steps to take",
+        "Cantidad" => "Quantity",
+        "Acceder" => "Login"
     )
 ?>

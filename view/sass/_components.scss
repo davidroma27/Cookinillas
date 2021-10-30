@@ -93,8 +93,8 @@
     align-items: center;
   }
 
-  & > *:hover{
-    background-color: var(--color-tertiary-dark);
+  & *:hover{
+      background-color: var(--color-tertiary-dark);
   }
 
   &__icon{
@@ -113,6 +113,10 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+
+    &:hover{
+      background-color: var(--color-tertiary-dark);
+    }
   }
 
   &__user-photo{
@@ -126,17 +130,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    color: var(--color-tertiary-light);
+    font-size: 2rem;
+    font-family: 'Candara', sans-serif;
+
+    & > a{
+      border: none;
+      color: var(--color-tertiary-light);
+      font-size: 2rem;
+      font-family: 'Candara', sans-serif;
+      background: none;
+      text-decoration: none;
+      height: 4rem;
+      padding: 0 1rem;
+    }
   }
 
-  &__user-dropbtn{
-    background: none;
-    border: none;
-    color: var(--color-tertiary-light);
-
-    &:hover{
-      transform: scale(1.2, 1.2);
-      transition: all .2s;
-    }
+  &__user-dropbtn:hover {
+    transform: scale(1.2, 1.2);
+    transition: all .2s;
   }
 
   &__user-dropcont{
@@ -382,9 +395,10 @@
 ////////////////// LANG CHOOSER //////////////////
 #languagechooser{
   display: flex;
+  height: 4rem;
 
   img{
-    height: 5rem;
+    height: 4rem;
     padding: .5rem;
   }
 }
