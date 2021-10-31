@@ -8,12 +8,11 @@ $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
 
 $view->setVariable("title", "View Recipe");
-
 ?>
 
 <div class="title-bar">
     <div class="title-box">
-        <span class="title-box__title"><?= htmlentities($recipe->getTitle()) ?></span>
+        <h1 class="title-box__title"><?= htmlentities($recipe->getTitle()) ?></h1>
     </div>
 </div>
 
@@ -25,18 +24,18 @@ $view->setVariable("title", "View Recipe");
         <svg class="recipe__bar-time__logo">
             <use href="/view/img/sprite.svg#icon-stopwatch"></use>
         </svg>
-        <span class="recipe__bar-time"><?= $recipe->getTime() ?></span>
+        <span class="recipe__bar-time"><?= $recipe->getTime() ?> min</span>
 
         <svg class="recipe__bar-user__logo">
             <use href="/view/img/sprite.svg#icon-user"></use>
         </svg>
-        <span class="recipe__bar-alias"><?= $recipe->getAlias() ?></span>
+        <span class="recipe__bar-alias"><?= $recipe->getAlias()->getAlias() ?></span>
 
         <button id="fav_button" class="fav__button">
             <svg class="fav__icon">
                 <use href="/view/img/sprite.svg#icon-heart"></use>
             </svg>
-            <span class="fav__text">Me gusta</span>
+            <span class="fav__text"><?= i18n("Me gusta") ?></span>
             <span class="fav__count">(346)</span>
         </button>
     </div>
@@ -44,25 +43,26 @@ $view->setVariable("title", "View Recipe");
         <div class="recipe__ing">
             <h3><?= i18n("Listado de ingredientes") ?></h3>
             <ul class="recipe__ing-list">
-                <?php foreach($recipe as $rec): ?>
-                    <li><?= $rec->getQuant() ?><?= $rec->getIngr() ?></li>
+                <?php
+                $arr1 = $recipe->getIngr();
+                $arr2 = $recipe->getQuant();
+                
+                $res = array_combine($arr1, $arr2);
+                ?>
+                 <?php foreach ($res as $key => $val): ?>
+                    <li> <?php print_r($key) ?>: <?php print_r($val) ?> </li>
+
                 <?php endforeach; ?>
             </ul>
         </div>
 
-        <!--<div class="recipe__text">
-            <p>
-                <?/*= htmlentities($recipe->getSteps())*/?>
-            </p>
-        </div>-->
-
         <div class="recipe__steps">
             <h3><?= i18n("Pasos a realizar") ?></h3>
-            <ol class="recipe__steps-list">
+            <ul class="recipe__steps-list">
                 <p>
                     <?= htmlentities($recipe->getSteps())?>
                 </p>
-            </ol>
+            </ul>
         </div>
     </div>
 </main>

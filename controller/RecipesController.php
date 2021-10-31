@@ -1,11 +1,3 @@
-<!--
-TODO:
-    -Crear los models y sus mappers para importarlos:
-        +User.php
-        +Recipe.php
-        +RecipeMapper.php
--->
-
 <?php
     //file: controller/RecipeController.php
 
@@ -101,11 +93,6 @@ TODO:
 
             // put the recipe object to the view
             $this->view->setVariable("recipe", $recipe);
-
-            // check if comment is already on the view (for example as flash variable)
-            // if not, put an empty Comment for the view
-            //$comment = $this->view->getVariable("comment");
-            //$this->view->setVariable("comment", ($comment==NULL)?new Comment():$comment);
 
             // render the view (/view/recipes/view.php)
             $this->view->render("recipes", "view");

@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `RECETA_INGREDIENTE` (
 
     PRIMARY KEY(`id_rec_ing`),
     FOREIGN KEY (`id_receta`)
-        REFERENCES RECETAS(`id_receta`) ON UPDATE CASCADE,
+        REFERENCES RECETAS(`id_receta`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`nombre`)
         REFERENCES INGREDIENTES(`nombre`) ON UPDATE CASCADE
 )ENGINE=InnoDB;
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `RECETA_FAV` (
 
     PRIMARY KEY(`id_rec_fav`),
     FOREIGN KEY (`id_receta`)
-        REFERENCES RECETAS(`id_receta`),
+        REFERENCES RECETAS(`id_receta`) ON DELETE CASCADE,
     FOREIGN KEY (`alias`)
         REFERENCES USUARIOS(`alias`)
 )ENGINE=InnoDB;

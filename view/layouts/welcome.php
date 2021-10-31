@@ -14,10 +14,10 @@ $currentuser = $view->getVariable("currentusername");
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" type="image/png" href="../img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="view/img/favicon.png">
 
-    <script src="index.php?controller=language&amp;action=i18njs">
-    </script>
+    <script src="index.php?controller=language&amp;action=i18njs"></script>
+
     <?= $view->getFragment("css") ?>
     <?= $view->getFragment("javascript") ?>
 

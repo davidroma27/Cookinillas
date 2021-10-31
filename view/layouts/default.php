@@ -1,8 +1,3 @@
-<!--
-TODO:
-    -Corregir rutas
--->
-
 <?php
     //file: view/layouts/default.php
 
@@ -19,14 +14,14 @@ TODO:
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" type="image/png" href="../img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="view/img/favicon.png">
 
     <script src="index.php?controller=language&amp;action=i18njs"></script>
 
     <?= $view->getFragment("css") ?>
     <?= $view->getFragment("javascript") ?>
 
-    <title>Cookinillas &mdash; <?= i18n("Cocina para todos") ?></title>
+    <title>Cookinillas &mdash; <?= i18n("Cocinando para todos") ?></title>
 </head>
 
 <body>
@@ -51,7 +46,7 @@ TODO:
                 <?php if (isset($currentuser)): ?>
                     <a href="index.php?controller=recipes&amp;action=add">
                         <div class="user-nav__icon-box">
-                            <svg class="user-nav__icon">
+                            <svg id="upload_icon" class="user-nav__icon">
                                 <use href="/view/img/sprite.svg#icon-upload-to-cloud"></use>
                             </svg>
                         </div>

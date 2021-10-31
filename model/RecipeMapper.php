@@ -32,18 +32,22 @@ class RecipeMapper {
      * @return mixed Array of Recipe instances
      */
     public function findAll() {
-        $stmt = $this->db->query("SELECT recetas.* 
+        $stmt1 = $this->db->query("SELECT recetas.*
                                             FROM recetas, usuarios
                                             WHERE recetas.alias = usuarios.alias");
+        $stmt2 = $this->db->query("SELECT receta_ingrediente.nombre, receta_ingrediente.cantidad 
+                                            FROM recetas, receta_ingrediente
+                                            WHERE recetas.id_receta = receta_ingrediente.id_receta");
 
-        $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $recipes_db = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        $ingr_db = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         $recipes = array();
 
         foreach ($recipes_db as $recipe) {
+            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"], $recipe["imagen"], $recipe["tiempo"],
+                new User($recipe["alias"]),$ingr_db,$ingr_db, $recipe["pasos"]));
 
-            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"], $recipe["imagen"], $recipe["pasos"]));
         }
-
         return $recipes;
     }
 
@@ -54,23 +58,34 @@ class RecipeMapper {
      * @return Recipe The Recipe instances. NULL if the Recipe is not found
      */
     public function findById($recipeid){
-        $stmt = $this->db->prepare("SELECT recetas.*, receta_ingrediente.nombre, receta_ingrediente.cantidad
-                                            FROM recetas,
-                                                 receta_ingrediente
+        $stmt1 = $this->db->prepare("SELECT *
+                                            FROM recetas
                                             WHERE recetas.id_receta=?");
-        $stmt->execute(array($recipeid));
-        $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt2 = $this->db->prepare("SELECT nombre
+                                            FROM receta_ingrediente, recetas
+                                            WHERE recetas.id_receta=? AND receta_ingrediente.id_receta=?");
+        $stmt3 = $this->db->prepare("SELECT cantidad
+                                            FROM receta_ingrediente, recetas
+                                            WHERE recetas.id_receta=? AND receta_ingrediente.id_receta=?");
+        $stmt1->execute(array($recipeid));
+        $stmt2->execute(array($recipeid,$recipeid));
+        $stmt3->execute(array($recipeid,$recipeid));
+
+        $recipe = $stmt1->fetch(PDO::FETCH_ASSOC);
+        $nombre = $stmt2->fetchAll(PDO::FETCH_COLUMN);
+        $cant = $stmt3->fetchAll(PDO::FETCH_COLUMN);
 
         if($recipe != null) {
             return new Recipe(
-                $recipe["id"],
-                $recipe["title"],
-                $recipe["img"],
-                $recipe["ingr"],
-                $recipe["quant"],
-                $recipe["time"],
-                $recipe["steps"],
-                new User($recipe["alias"]));
+                $recipe["id_receta"],
+                $recipe["titulo"],
+                $recipe["imagen"],
+                $recipe["tiempo"],
+                new User($recipe["alias"]),
+                $nombre,
+                $cant,
+                $recipe["pasos"]
+                );
         } else {
             return NULL;
         }

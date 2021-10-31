@@ -38,14 +38,20 @@ class Recipe
     private $time;
 
     /**
+     * The author of the recipe
+     * @var User
+     */
+    private $alias;
+
+    /**
      * The ingredients of the recipe
-     * @var string
+     * @var array
      */
     private $ingr;
 
     /**
      * The quantity of each ingredient
-     * @var string
+     * @var array
      */
     private $quant;
 
@@ -55,11 +61,6 @@ class Recipe
      */
     private $steps;
 
-    /**
-     * The author of the recipe
-     * @var User
-     */
-    private $alias;
 
     /**
      * The constructor
@@ -68,20 +69,20 @@ class Recipe
      * @param string $title The title of the recipe
      * @param mixed $img The img of the recipe
      * @param int $time The time of the recipe
-     * @param string $ingr The ingredients of the recipe
-     * @param string $quant The quantity of each ingredient
+     * @param array $ingr The ingredients of the recipe
+     * @param array $quant The quantity of each ingredient
      * @param string $steps The steps of the recipe
      * @param User $alias The author of the recipe
      */
-    public function __construct($id = NULL, $title = NULL, $img = NULL, $steps = NULL, $time = NULL, $ingr = NULL, $quant = NULL, User $alias = NULL)
+    public function __construct($id = NULL, $title = NULL, $img = NULL, $time = NULL, User $alias = NULL, array $ingr = NULL, array $quant = NULL, $steps = NULL)
     {
         $this->id = $id;
         $this->title = $title;
         $this->img = $img;
-        $this->steps = $steps;
         $this->ingr = $ingr;
         $this->quant = $quant;
         $this->time = $time;
+        $this->steps = $steps;
         $this->alias = $alias;
     }
 
@@ -172,7 +173,7 @@ class Recipe
     /**
      * Gets the ingredients of the recipe
      *
-     * @return string The ingredients of the recipe
+     * @return array The ingredients of the recipe
      */
     public function getIngr()
     {
@@ -193,7 +194,7 @@ class Recipe
     /**
      * Gets the quantity of each ingredient
      *
-     * @return string The quantity of the recipe
+     * @return array The quantity of the recipe
      */
     public function getQuant()
     {
@@ -203,10 +204,10 @@ class Recipe
     /**
      * Sets the quantity of each ingredient
      *
-     * @param int $quant The quantity of each ingredient
+     * @param string $quant The quantity of each ingredient
      * @return void
      */
-    public function setQuant($quant)
+    public function setQuant( $quant)
     {
         $this->quant = $quant;
     }

@@ -15,7 +15,7 @@ $view->setVariable("title", "Add Recipe");
 
 <div class="title-bar">
     <div class="title-box">
-        <span class="title-box__title"><?= i18n("Subir receta") ?></span>
+        <h1 class="title-box__title"><?= i18n("Subir receta") ?></h1>
     </div>
 </div>
 

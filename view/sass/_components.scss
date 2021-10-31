@@ -49,7 +49,7 @@
 
     &::-webkit-input-placeholder{
       font-weight: 100;
-      color: var(--color-grey-light-4);
+      color: var(--color-grey-dark-3);
     }
   }
 
@@ -85,6 +85,10 @@
   align-items: center;
   align-self: stretch;
 
+  a:hover{
+    background-color: var(--color-tertiary-dark);
+  }
+
   & > * { //Modifica user-nav y todos sus elementos hijos
     padding: 0 3rem;
     cursor: pointer;
@@ -93,8 +97,9 @@
     align-items: center;
   }
 
-  & *:hover{
-      background-color: var(--color-tertiary-dark);
+  a:hover &__icon-box{
+    transform: scale(1.5, 1.5);
+    transition: all .2s;
   }
 
   &__icon{
@@ -102,11 +107,6 @@
     width: 2rem;
     vertical-align: bottom;
     fill: var(--color-tertiary-light);
-  }
-
-  &__icon-box:hover &__icon{
-    transform: scale(1.5, 1.5);
-    transition: all .2s;
   }
 
   &__user{
@@ -135,6 +135,11 @@
     font-size: 2rem;
     font-family: 'Candara', sans-serif;
 
+    &:hover{
+      transform: scale(1.2, 1.2);
+      transition: all .2s;
+    }
+
     & > a{
       border: none;
       color: var(--color-tertiary-light);
@@ -145,11 +150,6 @@
       height: 4rem;
       padding: 0 1rem;
     }
-  }
-
-  &__user-dropbtn:hover {
-    transform: scale(1.2, 1.2);
-    transition: all .2s;
   }
 
   &__user-dropcont{
@@ -437,6 +437,7 @@
   & > svg{
     height: 5rem;
     width: 5rem;
+    fill: var(--color-tertiary);
   }
 
   .fav__button{
@@ -450,7 +451,7 @@
     padding-right: 1rem;
 
     &:hover{
-      background-color: var(--color-tertiary);
+      background-color: var(--color-tertiary-light);
       color: var(--color-secondary);
     }
 
@@ -480,6 +481,7 @@
     svg{
       height: 3rem;
       width: 3rem;
+      fill: var(--color-tertiary);
     }
 
     .fav__text, .fav__count{
@@ -497,7 +499,11 @@
 
 //--------------- RECIPE CONTENT -----------//
 .recipe__content{
+  display: flex;
+  flex-direction: column;
   max-width: 60%;
+  width: 100%;
+  margin: 3rem 0;
 
   & > *{
     font-size: 1.5rem;
@@ -546,6 +552,12 @@
     font-size: 1.5rem;
   }
 
+  .recipe__img{
+    img{
+      max-height: 25rem;
+    }
+  }
+
   .recipe__content{
     max-width: 80%;
   }
@@ -554,7 +566,21 @@
     font-size: 1rem;
   }
 
-  .fav__text{
+  .recipe__bar{
+    svg{
+      height: 4rem;
+    }
+
+    .fav__button > svg{
+      height: 2rem;
+    }
+  }
+
+  .fav__text, .fav__count{
+    font-size: 1rem;
+  }
+
+  .footerText{
     font-size: 1rem;
   }
 }
