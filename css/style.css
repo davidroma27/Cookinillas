@@ -516,6 +516,9 @@ footer {
   .recipe__content .recipe__steps-list {
     padding: 0 2rem 2rem 2rem; }
 
+#fav_button {
+  text-decoration: none; }
+
 @media all and (max-width: 640px) {
   .home__button {
     align-items: center; }

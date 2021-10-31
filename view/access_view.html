@@ -11,7 +11,7 @@
     <title>Cookinillas &mdash; Acceder</title>
 </head>
 
-<body>
+<body style="overflow: hidden">
     <div class="bg-video">
         <video class="bg-video__content" autoplay muted loop>
             <source src="img/video.mp4" type="video/mp4">
@@ -19,41 +19,51 @@
             Your browser is not supported!
         </video>
     </div>
-    <div class="access-container">
-        <div class="access__form">
-            <div class="access-logo">
-                <img src="img/logo.svg" alt="cookinillas logo" class="logo">
+    <ul id="languagechooser">
+        <a href="index.php?controller=language&amp;action=change&amp;lang=es">
+            <img src="../view/img/es.png" alt="">
+        </a>
+        <a href="index.php?controller=language&amp;action=change&amp;lang=en">
+            <img src="../view/img/en.png" alt="">
+        </a>
+    </ul>
+
+    <main class="access-main">
+        <div class="access-container">
+            <div class="access__form">
+                <div class="access-logo">
+                    <img src="img/logo.svg" alt="cookinillas logo" class="logo">
+                </div>
+                <form action="" method="POST" class="form-signin">
+                    <span>Inicia sesión</span>
+
+                    <label class="username">Nombre de usuario</label>
+                    <input type="text" name="Nombre de usuario">
+
+                    <label class="username">Contraseña</label>
+                    <input type="text" name="Contraseña">
+
+                    <input class="form__button" type="submit" value="Inicia sesión">
+                </form>
+
+                <span>&mdash;&mdash;&mdash; o bien &mdash;&mdash;&mdash;</span>
+
+                <form action="" method="POST" class="form-signup">
+                    <span>Regístrate</span>
+
+                    <label class="username">Nombre de usuario</label>
+                    <input type="text" name="Nombre de usuario">
+
+                    <label class="username">Contraseña</label>
+                    <input type="text" name="Contraseña">
+
+                    <label class="username">e-mail</label>
+                    <input type="text" name="e-mail">
+
+                    <input class="form__button" type="submit" value="Regístrate">
+                </form>
             </div>
-            <form action="" method="POST" class="form-signin">
-                <span>Inicia sesión</span>
-
-                <label class="username">Nombre de usuario</label>
-                <input type="text" name="Nombre de usuario">
-
-                <label class="username">Contraseña</label>
-                <input type="text" name="Contraseña">
-
-                <input class="form__button" type="submit" value="Inicia sesión">
-            </form>
-
-            <span>&mdash;&mdash;&mdash; o bien &mdash;&mdash;&mdash;</span>
-
-            <form action="" method="POST" class="form-signup">
-                <span>Regístrate</span>
-
-                <label class="username">Nombre de usuario</label>
-                <input type="text" name="Nombre de usuario">
-
-                <label class="username">Contraseña</label>
-                <input type="text" name="Contraseña">
-
-                <label class="username">e-mail</label>
-                <input type="text" name="e-mail">
-
-                <input class="form__button" type="submit" value="Regístrate">
-            </form>
         </div>
-
-    </div>
+    </main>
 </body>
 </html>

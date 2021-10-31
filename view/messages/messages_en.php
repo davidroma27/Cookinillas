@@ -13,6 +13,7 @@
         "Recetas favoritas" => "Favorite recipes",
         "Mis recetas" => "My recipes",
         "Subir receta" => "Upload recipe",
+        "Editar receta" => "Edit recipe",
         "Nombre de la receta" => "Recipe name",
         "Imagen de la receta" => "Recipe image",
         "Tiempo de preparación (minutos)" => "Preparation time (minutes)",

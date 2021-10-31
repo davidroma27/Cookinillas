@@ -29,7 +29,7 @@ TODO:
                     <input type="text" class="search__input" placeholder="Buscar por ingredientes">
                     <button class="search__button">
                         <svg class="search__icon">
-                            <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+                            <use href="../view/img/sprite.svg#icon-magnifying-glass"></use>
                         </svg>
                     </button>
                 </form>
@@ -38,14 +38,18 @@ TODO:
                     <a href="../view/upload_recipe.html">
                         <div class="user-nav__icon-box">
                             <svg class="user-nav__icon">
-                                <use xlink:href="img/sprite.svg#icon-upload-to-cloud"></use>
+                                <use href="../view/img/sprite.svg#icon-upload-to-cloud"></use>
                             </svg>
                         </div>
                     </a>
                     <div class="user-nav__user">
                         <div class="user-nav__user-box">
-                            <img src="img/user.jpg" alt="user photo" class="user-nav__user-photo">
-                            <button class="user-nav__user-dropbtn">Username</button>
+                            <p>Usuario</p>
+                            <a href="index.php?controller=users&amp;action=logout">
+                                <svg class="user-nav__icon">
+                                    <use href="/view/img/sprite.svg#icon-exit"></use>
+                                </svg>
+                            </a>
                         </div>
                         <div class="user-nav__user-dropcont">
                             <a href="#">Recetas favoritas</a>
@@ -189,6 +193,14 @@ TODO:
             </div>
             <footer>
                 <p class="footerText">Cookinillas - Copyright (c) 2021 drmartinez</p>
+                <ul id="languagechooser">
+                    <a href="index.php?controller=language&amp;action=change&amp;lang=es">
+                        <img src="../view/img/es.png" alt="">
+                    </a>
+                    <a href="index.php?controller=language&amp;action=change&amp;lang=en">
+                        <img src="../view/img/en.png" alt="">
+                    </a>
+                </ul>
             </footer>
         </div>
   </body>

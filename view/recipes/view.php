@@ -38,6 +38,13 @@ $view->setVariable("title", "View Recipe");
             <span class="fav__text"><?= i18n("Me gusta") ?></span>
             <span class="fav__count">(346)</span>
         </button>
+
+        <a href="index.php?controller=recipes&amp;action=edit&amp;id=<?= $recipe->getId() ?>" id="fav_button" class="fav__button">
+            <svg class="fav__icon">
+                <use href="/view/img/sprite.svg#icon-pencil"></use>
+            </svg>
+            <span class="fav__text"><?= i18n("Editar") ?></span>
+        </a>
     </div>
     <div class="recipe__content">
         <div class="recipe__ing">
@@ -46,7 +53,7 @@ $view->setVariable("title", "View Recipe");
                 <?php
                 $arr1 = $recipe->getIngr();
                 $arr2 = $recipe->getQuant();
-                
+
                 $res = array_combine($arr1, $arr2);
                 ?>
                  <?php foreach ($res as $key => $val): ?>

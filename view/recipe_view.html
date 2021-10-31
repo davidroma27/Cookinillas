@@ -39,8 +39,12 @@
             </a>
             <div class="user-nav__user">
                 <div class="user-nav__user-box">
-                    <img src="img/user.jpg" alt="user photo" class="user-nav__user-photo">
-                    <button class="user-nav__user-dropbtn">Username</button>
+                    <p>Usuario</p>
+                    <a href="index.php?controller=users&amp;action=logout">
+                        <svg class="user-nav__icon">
+                            <use href="/view/img/sprite.svg#icon-exit"></use>
+                        </svg>
+                    </a>
                 </div>
                 <div class="user-nav__user-dropcont">
                     <a href="#">Recetas favoritas</a>
@@ -53,7 +57,7 @@
     <div class="content">
         <div class="title-bar">
             <div class="title-box">
-                <span class="title-box__title">*** TITULO RECETA ***</span>
+                <h1 class="title-box__title">Pavo empanado al limon</h1>
             </div>
         </div>
 
@@ -84,29 +88,33 @@
                 <div class="recipe__ing">
                     <h3>Listado de ingredientes</h3>
                     <ul class="recipe__ing-list">
-                        <li>500g Pollo</li>
-                        <li>100g pan rallado</li>
-                        <li>3 huevos</li>
+                        <li>4 solomillos de pavo</li>
+                        <li>2 huevos</li>
+                        <li>Pan rallado</li>
                     </ul>
                 </div>
-
                 <div class="recipe__text">
                     <p>
-                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
-                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
-                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
-                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
-                        Sunt calceuses amor fatalis, raptus adiuratores.Ionicis tormento, lamia, et compater.Pol, a bene homo.Devirginatos cadunt, tanquam salvus adgium.
+                        Típica de Ucrania, los platos al estilo Kiev se acostumbran a preparar con pollo, pero en la receta
+                        que te proponemos utilizamos solomillos de pavo, que también funcionan estupendamente bien con esta delicia empanada.
                     </p>
                 </div>
 
                 <div class="recipe__steps">
                     <h3>Pasos a realizar</h3>
                     <ol class="recipe__steps-list">
-                        <li>Paso 1</li>
-                        <li>Paso 2</li>
-                        <li>Paso 3</li>
-                        <li>Paso 4</li>
+                        <li>Lava y pica el cebollino y el perejil. También pica el diente de ajo.</li>
+                        <li>En un bol, vierte la mantequilla a temperatura ambiente con el ajo, el perejil, el cebollino, el tomillo, la ralladura de limón y sal. Mezcla bien.</li>
+                        <li>A la mezcla anterior, dale forma de rulo, envuelve en papel film y mete en el congelador durante 1 hora.</li>
+                        <li>Salpimenta los solomillos y corta por un lateral, tiene que quedar una abertura para rellenar con una rodaja de mantequilla.</li>
+                        <li>Casca y bate los huevos en un plato, y salpimenta al gusto.</li>
+                        <li>Prepara dos platos, y en uno vierte harina y en el otro pan rallado.</li>
+                        <li>Retira la mantequilla del congelador y corta el rulo en 4 trozos. Coloca un trozo dentro de cada solomillo, y cierra con la ayuda de palillos.</li>
+                        <li>Pasa los solomillos por harina, huevo y pan rallado.</li>
+                        <li>En una sartén con abundante aceite, fríe los solomillos hasta que estén dorados por cada lado.</li>
+                        <li>Reserva los solomillos sobre papel absorbente y precalienta el horno.</li>
+                        <li>Hornea los solomillos a 180 grados durante 10 minutos.</li>
+                        <li>Retira los solomillos del horno, retira los palillos y a disfrutar.</li>
                     </ol>
                 </div>
             </div>
@@ -114,6 +122,14 @@
     </div>
     <footer>
         <p class="footerText">Cookinillas - Copyright (c) 2021 drmartinez</p>
+        <ul id="languagechooser">
+            <a href="index.php?controller=language&amp;action=change&amp;lang=es">
+                <img src="../view/img/es.png" alt="">
+            </a>
+            <a href="index.php?controller=language&amp;action=change&amp;lang=en">
+                <img src="../view/img/en.png" alt="">
+            </a>
+        </ul>
     </footer>
 </div>
 </body>
