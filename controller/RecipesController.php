@@ -148,17 +148,22 @@ TODO:
 
             if (isset($_POST["submit"])) { // reaching via HTTP Post...
 
+                if(!empty($_FILES["img"]["name"])) { //Manage the file upload
+
+                    //Get file info
+                    $fileName = $_FILES["img"]["name"];
+                    $path = "view/img/".$fileName;
+
+                    $recipe->setImg($path);
+                }
                 // populate the Recipe object with data from the form
                 $recipe->setTitle($_POST["title"]);
-                $recipe->setImg($_POST["img"]);
                 $recipe->setTime($_POST["time"]);
                 $recipe->setIngr($_POST["ingr"]);
                 $recipe->setQuant($_POST["quant"]);
                 $recipe->setSteps($_POST["steps"]);
-
                 // The user of the Recipe is the currentUser (user in session)
                 $recipe->setAlias($this->currentUser);
-
                 try {
                     // validate Recipe object
                     $recipe->checkIsValidForCreate(); // if it fails, ValidationException
@@ -185,6 +190,10 @@ TODO:
                     $this->view->setVariable("errors", $errors);
                 }
             }
+
+            //Retrieve all available ingredients of database
+            $ingredients = $this->recipeMapper->getIngredients();
+            $this->view->setVariable("ingredients", $ingredients);
 
             // Put the Recipes object visible to the view
             $this->view->setVariable("recipe", $recipe);

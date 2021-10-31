@@ -6,9 +6,10 @@ require_once(__DIR__."/../../controller/LanguageController.php");
 $view = ViewManager::getInstance();
 
 $recipe = $view->getVariable("recipe");
+$ingredients = $view->getVariable("ingredients");
 $errors = $view->getVariable("errors");
 
-$view->setVariable("title", "Edit Recipe");
+$view->setVariable("title", "Add Recipe");
 
 ?>
 
@@ -37,11 +38,9 @@ $view->setVariable("title", "Edit Recipe");
             <span><?= i18n("Ingredientes") ?></span>
             <input list="ingredients" name="ingr">
             <datalist id="ingredients">
-                <option value="">
-                    <?php foreach($recipe as $rec): ?>
-                        <?= $rec->getIngr() ?>
-                    <?php endforeach; ?>
-                </option>
+                <?php foreach ($ingredients as $ingr): ?>
+                    <option value="<?php print_r($ingr) ?>"></option>
+                <?php endforeach; ?>
             </datalist>
         </label>
         <label>
@@ -52,6 +51,6 @@ $view->setVariable("title", "Edit Recipe");
             <span><?= i18n("Pasos para elaborar la receta") ?></span>
             <textarea name="steps" id="recipeTextArea" cols="30" rows="10"></textarea>
         </label>
-        <input class="form__button" type="submit" value="<?= i18n("Enviar") ?>">
+        <input class="form__button" name="submit" type="submit" value="<?= i18n("Enviar") ?>">
     </form>
 </main>

@@ -27,7 +27,7 @@ class Recipe
 
     /**
      * The image of the recipe
-     * @var string
+     * @var mixed
      */
     private $img;
 
@@ -57,7 +57,7 @@ class Recipe
 
     /**
      * The author of the recipe
-     * @var string
+     * @var User
      */
     private $alias;
 
@@ -66,7 +66,7 @@ class Recipe
      *
      * @param int $id The id of the recipe
      * @param string $title The title of the recipe
-     * @param string $img The img of the recipe
+     * @param mixed $img The img of the recipe
      * @param int $time The time of the recipe
      * @param string $ingr The ingredients of the recipe
      * @param string $quant The quantity of each ingredient
@@ -130,7 +130,7 @@ class Recipe
     /**
      * Gets the img of the recipe
      *
-     * @return string The img of the recipe
+     * @return mixed The img of the recipe
      */
     public function getImg()
     {
@@ -140,7 +140,7 @@ class Recipe
     /**
      * Sets the img of the recipe
      *
-     * @param string $img The img of the recipe
+     * @param mixed $img The img of the recipe
      * @return void
      */
     public function setImg($img)
@@ -235,7 +235,7 @@ class Recipe
     /**
      * Gets the author of this recipe
      *
-     * @return string The author of this recipe
+     * @return User The author of this recipe
      */
     public function getAlias()
     {
@@ -245,10 +245,10 @@ class Recipe
     /**
      * Sets the author of this recipe
      *
-     * @param string $alias The author of this recipe
+     * @param User $alias The author of this recipe
      * @return void
      */
-    public function setAlias($alias)
+    public function setAlias(User $alias)
     {
         $this->alias = $alias;
     }
@@ -267,7 +267,7 @@ class Recipe
         if (strlen(trim($this->title)) == 0 ) {
             $errors["title"] = "title is mandatory";
         }
-        if (strlen(trim($this->img)) == 0 ) {
+        if ($this->img == NULL) {
             $errors["img"] = "image is mandatory";
         }
         if ($this->time == NULL ) {

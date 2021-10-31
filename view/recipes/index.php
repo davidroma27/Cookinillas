@@ -31,7 +31,7 @@ $view->setVariable("title", "Recipe");
                     <?= $recipe->getTitle() ?>
                 </h3>
                 <span class="recipes__box-text"><?= htmlentities($recipe->getSteps()) ?></span>
-                <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
+
             </div>
         <?php endforeach; ?>
 

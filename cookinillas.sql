@@ -34,46 +34,42 @@ CREATE TABLE IF NOT EXISTS `USUARIOS` (
     `password` varchar(128) NOT NULL,
     `email` varchar(60) NOT NULL,
 
-    PRIMARY KEY (`alias`),
-    UNIQUE KEY `alias` (`alias`),
-    UNIQUE KEY `email` (`email`)
-
+    PRIMARY KEY (`alias`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `INGREDIENTES` (
 
-    `nombre` varchar(15) NOT NULL UNIQUE,
+    `nombre` varchar(15) NOT NULL,
 
     PRIMARY KEY (`nombre`)
-
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `RECETAS` (
 
     `id_receta` int(3) AUTO_INCREMENT,
     `titulo` varchar(50) NOT NULL,
-    `imagen` varchar (128) NOT NULL,
+    `imagen` varchar(128) NOT NULL,
     `tiempo` int(4) NOT NULL,
     `pasos` varchar(8192) NOT NULL,
     `alias` varchar(15) NOT NULL,
 
     PRIMARY KEY (`id_receta`),
     FOREIGN KEY (`alias`)
-        REFERENCES USUARIOS(`alias`)
+        REFERENCES USUARIOS(`alias`) ON DELETE NO ACTION
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `RECETA_INGREDIENTE` (
 
     `id_rec_ing` int(3) AUTO_INCREMENT,
-    `id_receta` int(3),
-    `nombre` varchar(15) NOT NULL UNIQUE,
+    `id_receta` int(3) NOT NULL,
+    `nombre` varchar(15) NOT NULL,
     `cantidad` varchar(10)  NOT NULL,
 
-    CONSTRAINT pk_idRecIng PRIMARY KEY(`id_rec_ing`),
-    CONSTRAINT fk_idRec_recIng FOREIGN KEY (`id_receta`)
-        REFERENCES RECETAS(`id_receta`),
-    CONSTRAINT fk_nombre FOREIGN KEY (`nombre`)
-        REFERENCES INGREDIENTES(`nombre`)
+    PRIMARY KEY(`id_rec_ing`),
+    FOREIGN KEY (`id_receta`)
+        REFERENCES RECETAS(`id_receta`) ON UPDATE CASCADE,
+    FOREIGN KEY (`nombre`)
+        REFERENCES INGREDIENTES(`nombre`) ON UPDATE CASCADE
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `RECETA_FAV` (
@@ -82,10 +78,10 @@ CREATE TABLE IF NOT EXISTS `RECETA_FAV` (
     `id_receta` int(3),
     `alias` varchar(15) NOT NULL,
 
-    CONSTRAINT pk_idRecFav PRIMARY KEY(`id_rec_fav`),
-    CONSTRAINT fk_idRec_recFav FOREIGN KEY (`id_receta`)
+    PRIMARY KEY(`id_rec_fav`),
+    FOREIGN KEY (`id_receta`)
         REFERENCES RECETAS(`id_receta`),
-    CONSTRAINT fk_alias FOREIGN KEY (`alias`)
+    FOREIGN KEY (`alias`)
         REFERENCES USUARIOS(`alias`)
 )ENGINE=InnoDB;
 
@@ -100,10 +96,10 @@ INSERT INTO `INGREDIENTES` (`nombre`) VALUES ('Patatas');
 INSERT INTO `INGREDIENTES` (`nombre`) VALUES ('Harina');
 INSERT INTO `INGREDIENTES` (`nombre`) VALUES ('Pasta');
 
-INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('1','Pollo empanado al limon','../views/img/recipe1.jpg','30','Pasos a realizar para elaborar pollo al limon...', 'jprobles');
-INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('2','Lasaña boloñesa','../views/img/recipe2.jpg','60','Pasos a realizar para elaborar lasaña boloñesa...', 'agramos');
-INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('3','Lomo de cerdo con salsa de setas','../views/img/recipe3.jpg','60','Pasos a realizar para elaborar lomo de cerdo con salsa de setas...', 'sgmartinez');
-INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('4','Rollitos de jamon y queso','../views/img/recipe4.jpg','40','Pasos a realizar para elaborar rollitos de jamon y queso...', 'jprobles');
+INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('1','Pollo empanado al limon','../view/img/recipe1.jpg','30','Pasos a realizar para elaborar pollo al limon...', 'jprobles');
+INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('2','Lasaña boloñesa','../view/img/recipe2.jpg','60','Pasos a realizar para elaborar lasaña boloñesa...', 'agramos');
+INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('3','Lomo de cerdo con salsa de setas','../view/img/recipe3.jpg','60','Pasos a realizar para elaborar lomo de cerdo con salsa de setas...', 'sgmartinez');
+INSERT INTO `RECETAS` (`id_receta`, `titulo`, `imagen`, `tiempo`, `pasos`, `alias`) VALUES ('4','Rollitos de jamon y queso','../view/img/recipe4.jpg','40','Pasos a realizar para elaborar rollitos de jamon y queso...', 'jprobles');
 
 INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('1','1','Pollo','500g');
 INSERT INTO `RECETA_INGREDIENTE` (`id_rec_ing`, `id_receta`, `nombre`, `cantidad`) VALUES ('2','1','Huevos','3');
