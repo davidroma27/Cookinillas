@@ -307,13 +307,6 @@ class Recipe
             $errors["id"] = "id is mandatory";
         }
 
-        try{
-            $this->checkIsValidForCreate();
-        }catch(ValidationException $ex) {
-            foreach ($ex->getErrors() as $key=>$error) {
-                $errors[$key] = $error;
-            }
-        }
         if (sizeof($errors) > 0) {
             throw new ValidationException($errors, "recipe is not valid");
         }

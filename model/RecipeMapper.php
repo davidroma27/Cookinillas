@@ -109,6 +109,23 @@ class RecipeMapper {
     }
 
     /**
+     * Retrieves all existing ingredients in database
+     *
+     * @throws PDOException if a database error occurs
+     * @return mixed an array of existing ingredients
+     */
+    public function getQuant(){
+        $stmt = $this->db->query("SELECT cantidad FROM ingredientes");
+        $stmt->execute();
+
+        $ingr = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        if($ingr != NULL){
+            return $ingr;
+        }
+        else return null;
+    }
+
+    /**
      * Count likes adding to db who liked a recipe
      *
      * @throws PDOException if a database error occurs
@@ -202,14 +219,14 @@ class RecipeMapper {
      * @return void
      */
     public function update(Recipe $recipe) {
+        var_dump($recipe);
         $stmt1 = $this->db->prepare("UPDATE recetas set titulo=?, imagen=?, tiempo=?, pasos=? where id_receta=?");
         $stmt2 = $this->db->prepare("INSERT INTO ingredientes(nombre) VALUES (?) ON DUPLICATE KEY UPDATE nombre = nombre");
         $stmt3 = $this->db->prepare("UPDATE receta_ingrediente set nombre=?, cantidad=? WHERE id_receta=?");
 
-        $stmt1->execute(array($recipe->getTitle(), $recipe->getImg(), $recipe->getTime(), $recipe->getSteps(), $recipe->getAlias()->getAlias(), $recipe->getId()));
-        $recipeid = $this->db->lastInsertId();
+        $stmt1->execute(array($recipe->getTitle(), $recipe->getImg(), $recipe->getTime(), $recipe->getSteps(), $recipe->getId()));
         $stmt2->execute(array($recipe->getIngr()));
-        $stmt3->execute(array($recipeid, $recipe->getIngr(), $recipe->getQuant()));
+        $stmt3->execute(array($recipe->getIngr(), $recipe->getQuant(), $recipe->getId()));
 
     }
 

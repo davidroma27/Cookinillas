@@ -180,6 +180,7 @@
 
             //Retrieve all available ingredients of database
             $ingredients = $this->recipeMapper->getIngredients();
+            $quantity = $this->recipeMapper->getQuant();
             $this->view->setVariable("ingredients", $ingredients);
 
             // Put the Recipes object visible to the view
@@ -226,6 +227,7 @@
          * @return void
          */
         public function edit() {
+
             if (!isset($_REQUEST["id"])) {
                 throw new Exception("A recipe id is mandatory");
             }
@@ -237,6 +239,8 @@
             // Get the Recipe object from the database
             $recipeid = $_REQUEST["id"];
             $recipe = $this->recipeMapper->findById($recipeid);
+
+            var_dump($recipe);
 
             // Does the recipe exist?
             if ($recipe == NULL) {
@@ -264,6 +268,8 @@
                 $recipe->setIngr($_POST["ingr"]);
                 $recipe->setQuant($_POST["quant"]);
                 $recipe->setSteps($_POST["steps"]);
+
+                var_dump($recipe);
 
                 try {
                     // validate Recipe object

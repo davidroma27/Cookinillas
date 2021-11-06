@@ -9,6 +9,7 @@ $errors = $view->getVariable("errors");
 $ingredients = $view->getVariable("ingredients");
 
 $view->setVariable("title", "Edit Recipe");
+var_dump($recipe);
 
 ?>
 
@@ -24,7 +25,7 @@ $view->setVariable("title", "Edit Recipe");
         <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
         <label>
             <span><?= i18n("Nombre de la receta") ?></span>
-            <input type="text" name="title">
+            <input type="text" name="title" value="<?= $recipe->getTitle() ?>">
         </label>
         <label class="file-upload">
             <span><?= i18n("Imagen de la receta") ?></span>
@@ -32,11 +33,11 @@ $view->setVariable("title", "Edit Recipe");
         </label>
         <label>
             <span><?= i18n("Tiempo de preparación (minutos)") ?></span>
-            <input type="number" name="time">
+            <input type="number" name="time" value="<?= $recipe->getTime() ?>">
         </label>
         <label>
             <span><?= i18n("Ingredientes") ?></span>
-            <input list="ingredients" name="ingr">
+            <input list="ingredients" name="ingr" value="<?php foreach ($recipe->getIngr() as $ingr): print_r($ingr); endforeach; ?>">
             <datalist id="ingredients">
                 <?php foreach ($ingredients as $ingr): ?>
                     <option value="<?php print_r($ingr) ?>"></option>
@@ -45,11 +46,15 @@ $view->setVariable("title", "Edit Recipe");
         </label>
         <label>
             <span><?= i18n("Cantidad") ?></span>
-            <input type="text" name="quant">
+            <input type="text" name="quant" value="<?php
+                foreach ($recipe->getQuant() as $quant):
+                    print_r($quant);
+                endforeach;
+            ?>">
         </label>
         <label>
             <span><?= i18n("Pasos para elaborar la receta") ?></span>
-            <textarea name="steps" id="recipeTextArea" cols="30" rows="10"></textarea>
+            <textarea name="steps" id="recipeTextArea" cols="30" rows="10" ><?= $recipe->getSteps() ?></textarea>
         </label>
         <input class="form__button" name="submit" type="submit" value="<?= i18n("Enviar") ?>">
     </form>
