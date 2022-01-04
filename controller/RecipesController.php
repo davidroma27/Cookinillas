@@ -180,7 +180,6 @@
 
             //Retrieve all available ingredients of database
             $ingredients = $this->recipeMapper->getIngredients();
-            $quantity = $this->recipeMapper->getQuant();
             $this->view->setVariable("ingredients", $ingredients);
 
             // Put the Recipes object visible to the view
@@ -239,8 +238,6 @@
             // Get the Recipe object from the database
             $recipeid = $_REQUEST["id"];
             $recipe = $this->recipeMapper->findById($recipeid);
-
-            var_dump($recipe);
 
             // Does the recipe exist?
             if ($recipe == NULL) {
@@ -306,63 +303,64 @@
             $this->view->render("recipes", "edit");
         }
 
-//        /**
-//         * Action to delete a post
-//         *
-//         * This action should only be called via HTTP POST
-//         *
-//         * The expected HTTP parameters are:
-//         * <ul>
-//         * <li>id: Id of the post (via HTTP POST)</li>
-//         * </ul>
-//         *
-//         * The views are:
-//         * <ul>
-//         * <li>posts/index: If post was successfully deleted (via redirect)</li>
-//         * </ul>
-//         * @throws Exception if no id was provided
-//         * @throws Exception if no user is in session
-//         * @throws Exception if there is not any post with the provided id
-//         * @throws Exception if the author of the post to be deleted is not the current user
-//         * @return void
-//         */
-//        public function delete() {
-//            if (!isset($_POST["id"])) {
-//                throw new Exception("id is mandatory");
-//            }
-//            if (!isset($this->currentUser)) {
-//                throw new Exception("Not in session. Editing posts requires login");
-//            }
-//
-//            // Get the Post object from the database
-//            $postid = $_REQUEST["id"];
-//            $post = $this->recipeMapper->findById($postid);
-//
-//            // Does the post exist?
-//            if ($post == NULL) {
-//                throw new Exception("no such post with id: ".$postid);
-//            }
-//
-//            // Check if the Post author is the currentUser (in Session)
-//            if ($post->getAuthor() != $this->currentUser) {
-//                throw new Exception("Post author is not the logged user");
-//            }
-//
-//            // Delete the Post object from the database
-//            $this->recipeMapper->delete($post);
-//
-//            // POST-REDIRECT-GET
-//            // Everything OK, we will redirect the user to the list of posts
-//            // We want to see a message after redirection, so we establish
-//            // a "flash" message (which is simply a Session variable) to be
-//            // get in the view after redirection.
-//            $this->view->setFlash(sprintf(i18n("Post \"%s\" successfully deleted."),$post ->getTitle()));
-//
-//            // perform the redirection. More or less:
-//            // header("Location: index.php?controller=posts&action=index")
-//            // die();
-//            $this->view->redirect("posts", "index");
-//
-//        }
+        /**
+         * Action to delete a recipe
+         *
+         * This action should only be called via HTTP POST
+         *
+         * The expected HTTP parameters are:
+         * <ul>
+         * <li>id: Id of the post (via HTTP POST)</li>
+         * </ul>
+         *
+         * The views are:
+         * <ul>
+         * <li>recipe/index: If recipe was successfully deleted (via redirect)</li>
+         * </ul>
+         * @throws Exception if no id was provided
+         * @throws Exception if no user is in session
+         * @throws Exception if there is not any recipe with the provided id
+         * @throws Exception if the author of the recipe to be deleted is not the current user
+         * @return void
+         */
+        public function delete() {
+            if (!isset($_POST["id"])) {
+                throw new Exception("id is mandatory");
+            }
+            if (!isset($this->currentUser)) {
+                throw new Exception("Not in session. Editing recipes requires login");
+            }
+
+            // Get the recipe object from the database
+            $recipeid = $_REQUEST["id"];
+            $recipe = $this->recipeMapper->findById($recipeid);
+
+            var_dump($recipe);
+            // Does the post exist?
+            if ($recipe == NULL) {
+                throw new Exception("no such post with id: ".$recipeid);
+            }
+
+            // Check if the Recipe author is the currentUser (in Session)
+            if ($recipe->getAlias() != $this->currentUser) {
+                throw new Exception("Recipe author is not the logged user");
+            }
+
+            // Delete the Recipe object from the database
+            $this->recipeMapper->delete($recipe);
+
+            // POST-REDIRECT-GET
+            // Everything OK, we will redirect the user to the list of recipes
+            // We want to see a message after redirection, so we establish
+            // a "flash" message (which is simply a Session variable) to be
+            // get in the view after redirection.
+            $this->view->setFlash(sprintf(i18n("Post \"%s\" successfully deleted."),$recipe ->getTitle()));
+
+            // perform the redirection. More or less:
+            // header("Location: index.php?controller=recipes&action=index")
+            // die();
+            $this->view->redirect("recipes", "index");
+
+        }
 
     }

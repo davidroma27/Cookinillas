@@ -1,6 +1,16 @@
 <!--
 TODO:
- -Preguntar por variable CANTIDADES en BD, tipo de dato?
+ -Como añadir mas de 1 ingrediente? y como asociar las cantidades?
+    +En el formulario de addReceta creamos inputs para ingredientes y cantidades hasta un maximo de 10.
+    +Se crea un boton con javascript que cree los inputs de forma dinamica.
+    +En el name tendriamos name="ingredientes[]". Al pillarlo por php lo tomara como un array.
+ -Revisar SCHEMA SQL... Tema de LIKES=> nueva tabla? Como se gestiona a nivel de CRUD?
+    +Se registran en una tabla favoritos que almacena el IDusuario e IDreceta.
+    +Para el conteo de likes se realiza una query con SELECT COUNT que cuenta todos los usuarios que le gustan una receta concreta
+ -Buscar por ingredientes... al igual que añadir ingredientes, como busco por varios ingredientes?
+    +Crear una nueva vista con un formulario donde se introducen ingredientes.
+    +Crear inputs para los ingredientes de forma dinamica con un boton con javascript
+ -Para migrar a SPA => Prescindimos de los controladores y las vistas, solo nos quedamos con los modelos
 -->
 
 <!DOCTYPE html>

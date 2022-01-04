@@ -109,23 +109,6 @@ class RecipeMapper {
     }
 
     /**
-     * Retrieves all existing ingredients in database
-     *
-     * @throws PDOException if a database error occurs
-     * @return mixed an array of existing ingredients
-     */
-    public function getQuant(){
-        $stmt = $this->db->query("SELECT cantidad FROM ingredientes");
-        $stmt->execute();
-
-        $ingr = $stmt->fetchAll(PDO::FETCH_COLUMN);
-        if($ingr != NULL){
-            return $ingr;
-        }
-        else return null;
-    }
-
-    /**
      * Count likes adding to db who liked a recipe
      *
      * @throws PDOException if a database error occurs

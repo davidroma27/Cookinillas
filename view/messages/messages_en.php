@@ -25,6 +25,7 @@
         "Listado de ingredientes" => "List of ingredients",
         "Pasos a realizar" => "Steps to take",
         "Cantidad" => "Quantity",
-        "Acceder" => "Login"
+        "Acceder" => "Login",
+        "¿Seguro que deseas eliminar la receta?" => "Are you sure you want to delete the recipe?"
     )
 ?>

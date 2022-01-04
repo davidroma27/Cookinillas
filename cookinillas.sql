@@ -17,6 +17,26 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+/*Crear la base de datos borrandola si ya existiera*/
+
+DROP DATABASE IF EXISTS `cookinillas`;
+CREATE DATABASE `cookinillas` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+/*Seleccionamos para usar*/
+
+USE `cookinillas`;
+
+/*Damos permiso de uso y borramos el usuario que queremos crear por si existe*/
+
+/*GRANT USAGE ON * . * TO `cookinillas`@`localhost`;
+	DROP USER `cookinillas`@`localhost`;*/
+
+/*Creamos el usuario y le damos password,damos permiso de uso y damos permisos sobre la base de datos*/
+
+CREATE USER IF NOT EXISTS `cookinillas`@`localhost` IDENTIFIED BY 'cookinillasTSW';
+GRANT USAGE ON *.* TO `cookinillas`@`localhost` REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+GRANT ALL PRIVILEGES ON `cookinillas`.* TO `cookinillas`@`localhost` WITH GRANT OPTION;
+
 --
 -- Base de datos: `cookinillas`
 --

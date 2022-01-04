@@ -333,7 +333,9 @@ footer {
   .recipes__box-photo:hover {
     filter: opacity(70%); }
   .recipes__box-text {
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 1.5rem;
@@ -516,8 +518,14 @@ footer {
   .recipe__content .recipe__steps-list {
     padding: 0 2rem 2rem 2rem; }
 
-#fav_button {
+#action_button {
   text-decoration: none; }
+
+.del_recipe:hover {
+  background-color: var(--color-tertiary-light); }
+
+#del_button {
+  padding: 0; }
 
 @media all and (max-width: 640px) {
   .home__button {

@@ -258,7 +258,9 @@
   }
 
   &__box-text{
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 1.5rem;
@@ -354,12 +356,12 @@
     width: 30rem;
 
   }
-  
+
   label{
     font-size: 1.5rem;
     margin: .5rem;
   }
-  
+
   span{
 
     font-family: "Lucida Handwriting", sans-serif;
@@ -519,8 +521,16 @@
   }
 }
 
-#fav_button{
+#action_button{
   text-decoration: none;
+}
+
+.del_recipe:hover{
+  background-color: var(--color-tertiary-light);
+}
+
+#del_button{
+  padding: 0;
 }
 
 //------------------------------------------//

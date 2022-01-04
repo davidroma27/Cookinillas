@@ -9,7 +9,6 @@ $errors = $view->getVariable("errors");
 $ingredients = $view->getVariable("ingredients");
 
 $view->setVariable("title", "Edit Recipe");
-var_dump($recipe);
 
 ?>
 
