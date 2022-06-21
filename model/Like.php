@@ -1,23 +1,17 @@
 <?php
-// file: model/Favorite.php
+// file: model/Like.php
 
 require_once(__DIR__."/../core/ValidationException.php");
 
 /**
- * Class Favorite
+ * Class Like
  *
  * Represents a Liked Recipe in the web. A Like is attached
  * to a Recipe and was liked by an specific User (author)
  *
  * @author drmartinez
  */
-class Favorite {
-
-    /**
-     * The id of the like
-     * @var string
-     */
-    private $id;
+class Like {
 
     /**
      * The author of the like
@@ -34,23 +28,12 @@ class Favorite {
     /**
      * The constructor
      *
-     * @param string $id The id of the like
      * @param User $alias The author of the like
      * @param Recipe $recipe The liked recipe
      */
-    public function __construct($id=NULL, User $alias=NULL, Recipe $recipe=NULL) {
-        $this->id = $id;
+    public function __construct(User $alias=NULL, Recipe $recipe=NULL) {
         $this->alias = $alias;
         $this->recipe = $recipe;
-    }
-
-    /**
-     * Gets the id of this like
-     *
-     * @return string The id of this like
-     */
-    public function getId(){
-        return $this->id;
     }
 
     /**
@@ -87,7 +70,7 @@ class Favorite {
      * @param Recipe $recipe the parent Recipe
      * @return void
      */
-    public function setPost(Recipe $recipe) {
+    public function setRecipe(Recipe $recipe) {
         $this->recipe = $recipe;
     }
 

@@ -4,7 +4,7 @@ require_once(__DIR__."/../core/PDOConnection.php");
 
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/Recipe.php");
-require_once(__DIR__."/../model/Favorite.php");
+require_once(__DIR__ . "/../model/Like.php");
 
 /**
  * Class RecipeMapper
@@ -35,9 +35,10 @@ class RecipeMapper {
         $stmt1 = $this->db->query("SELECT recetas.*
                                             FROM recetas, usuarios
                                             WHERE recetas.alias = usuarios.alias");
-        $stmt2 = $this->db->query("SELECT receta_ingrediente.nombre, receta_ingrediente.cantidad 
-                                            FROM recetas, receta_ingrediente
-                                            WHERE recetas.id_receta = receta_ingrediente.id_receta");
+        $stmt2 = $this->db->query("SELECT ingredientes.nombre, receta_ingrediente.cantidad 
+                                            FROM recetas, receta_ingrediente, ingredientes
+                                            WHERE receta_ingrediente.id_receta =  recetas.id_receta
+                                            AND receta_ingrediente.id_ingr = ingredientes.id_ingr");
 
         $recipes_db = $stmt1->fetchAll(PDO::FETCH_ASSOC);
         $ingr_db = $stmt2->fetchAll(PDO::FETCH_ASSOC);
@@ -45,7 +46,7 @@ class RecipeMapper {
 
         foreach ($recipes_db as $recipe) {
             array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"], $recipe["imagen"], $recipe["tiempo"],
-                new User($recipe["alias"]),$ingr_db,$ingr_db, $recipe["pasos"]));
+                new User($recipe["alias"]),$ingr_db["nombre"], $ingr_db["cantidad"], $recipe["pasos"]));
 
         }
         return $recipes;
@@ -61,19 +62,15 @@ class RecipeMapper {
         $stmt1 = $this->db->prepare("SELECT *
                                             FROM recetas
                                             WHERE recetas.id_receta=?");
-        $stmt2 = $this->db->prepare("SELECT nombre
-                                            FROM receta_ingrediente, recetas
-                                            WHERE recetas.id_receta=? AND receta_ingrediente.id_receta=?");
-        $stmt3 = $this->db->prepare("SELECT cantidad
-                                            FROM receta_ingrediente, recetas
-                                            WHERE recetas.id_receta=? AND receta_ingrediente.id_receta=?");
+        $stmt2 = $this->db->query("SELECT ingredientes.nombre, receta_ingrediente.cantidad 
+                                            FROM recetas, receta_ingrediente, ingredientes
+                                            WHERE receta_ingrediente.id_receta =  recetas.id_receta
+                                            AND receta_ingrediente.id_ingr = ingredientes.id_ingr");
         $stmt1->execute(array($recipeid));
         $stmt2->execute(array($recipeid,$recipeid));
-        $stmt3->execute(array($recipeid,$recipeid));
 
         $recipe = $stmt1->fetch(PDO::FETCH_ASSOC);
-        $nombre = $stmt2->fetchAll(PDO::FETCH_COLUMN);
-        $cant = $stmt3->fetchAll(PDO::FETCH_COLUMN);
+        $ingr_db = $stmt2->fetchAll(PDO::FETCH_COLUMN);
 
         if($recipe != null) {
             return new Recipe(
@@ -82,8 +79,8 @@ class RecipeMapper {
                 $recipe["imagen"],
                 $recipe["tiempo"],
                 new User($recipe["alias"]),
-                $nombre,
-                $cant,
+                $ingr_db["nombre"],
+                $ingr_db["cantidad"],
                 $recipe["pasos"]
                 );
         } else {
@@ -183,7 +180,7 @@ class RecipeMapper {
     public function save(Recipe $recipe) {
         $stmt1 = $this->db->prepare("INSERT INTO recetas(titulo, imagen, tiempo, pasos, alias) values (?,?,?,?,?)");
         $stmt2 = $this->db->prepare("INSERT INTO ingredientes(nombre) VALUES (?) ON DUPLICATE KEY UPDATE nombre = nombre");
-        $stmt3 = $this->db->prepare("INSERT INTO receta_ingrediente(id_receta, nombre, cantidad) VALUES (?,?,?)");
+        $stmt3 = $this->db->prepare("INSERT INTO receta_ingrediente(id_receta, id_ingr, cantidad) VALUES (?,?,?)");
 
         $stmt1->execute(array($recipe->getTitle(), $recipe->getImg(), $recipe->getTime(), $recipe->getSteps(), $recipe->getAlias()->getAlias()));
         $recipeid = $this->db->lastInsertId();
@@ -205,7 +202,7 @@ class RecipeMapper {
         var_dump($recipe);
         $stmt1 = $this->db->prepare("UPDATE recetas set titulo=?, imagen=?, tiempo=?, pasos=? where id_receta=?");
         $stmt2 = $this->db->prepare("INSERT INTO ingredientes(nombre) VALUES (?) ON DUPLICATE KEY UPDATE nombre = nombre");
-        $stmt3 = $this->db->prepare("UPDATE receta_ingrediente set nombre=?, cantidad=? WHERE id_receta=?");
+        $stmt3 = $this->db->prepare("UPDATE receta_ingrediente set id_ingr=?, cantidad=? WHERE id_receta=?");
 
         $stmt1->execute(array($recipe->getTitle(), $recipe->getImg(), $recipe->getTime(), $recipe->getSteps(), $recipe->getId()));
         $stmt2->execute(array($recipe->getIngr()));
