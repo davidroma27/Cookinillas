@@ -62,7 +62,7 @@
          *
          * The expected HTTP parameters are:
          * <ul>
-         * <li>id: Id of the post (via HTTP GET)</li>
+         * <li>id: Id of the recipe (via HTTP GET)</li>
          * </ul>
          *
          * The views are:

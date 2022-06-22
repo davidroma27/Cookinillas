@@ -31,22 +31,22 @@ class RecipeMapper {
      * @throws PDOException if a database error occurs
      * @return mixed Array of Recipe instances
      */
-    public function findAll() {
-        $stmt1 = $this->db->query("SELECT recetas.*
-                                            FROM recetas, usuarios
-                                            WHERE recetas.alias = usuarios.alias");
-        $stmt2 = $this->db->query("SELECT ingredientes.nombre, receta_ingrediente.cantidad 
+    public function findAll($page = 0, $per_page = 6) {
+        $stmt = $this->db->prepare("SELECT recetas.*
+                                            FROM recetas ORDER BY recetas.id_receta DESC");
+        /*$stmt2 = $this->db->query("SELECT ingredientes.nombre, receta_ingrediente.cantidad
                                             FROM recetas, receta_ingrediente, ingredientes
                                             WHERE receta_ingrediente.id_receta =  recetas.id_receta
-                                            AND receta_ingrediente.id_ingr = ingredientes.id_ingr");
+                                            AND receta_ingrediente.id_ingr = ingredientes.id_ingr");*/
 
-        $recipes_db = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-        $ingr_db = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-        $recipes = array();
+        $offset = $page * $per_page;
+        $stmt->execute(array($offset, $per_page));
+        //$ingr_db = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($recipes_db as $recipe) {
             array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"], $recipe["imagen"], $recipe["tiempo"],
-                new User($recipe["alias"]),$ingr_db["nombre"], $ingr_db["cantidad"], $recipe["pasos"]));
+                 $recipe["pasos"], new User($recipe["alias"]), $recipe["nlikes"]));
 
         }
         return $recipes;
@@ -220,6 +220,18 @@ class RecipeMapper {
     public function delete(Recipe $recipe) {
         $stmt = $this->db->prepare("DELETE from recetas WHERE id_receta=?");
         $stmt->execute(array($recipe->getId()));
+    }
+
+
+    /**
+     * Counts all Recipes of the database
+     *
+     * @throws PDOException if a database error occurs
+     * @return int the number of recipes
+     */
+    public function countRecipes(){
+        $stmt = $this->db->query("SELECT COUNT(*) FROM recetas");
+        return $stmt->fetchColumn();
     }
 
 }
