@@ -4,6 +4,7 @@
     require_once(__DIR__."/../model/Recipe.php");
     require_once(__DIR__."/../model/RecipeMapper.php");
     require_once(__DIR__."/../model/User.php");
+    require_once(__DIR__."/../model/LikeMapper.php");
 
     require_once(__DIR__."/../core/ViewManager.php");
     require_once(__DIR__."/../controller/BaseController.php");
@@ -30,29 +31,6 @@
             parent::__construct();
 
             $this->recipeMapper = new RecipeMapper();
-        }
-
-        /**
-         * Action to list recipes
-         *
-         * Loads all the recipes from the database.
-         * No HTTP parameters are needed.
-         *
-         * The views are:
-         * <ul>
-         * <li>recipes/index (via include)</li>
-         * </ul>
-         */
-        public function index() {
-
-            // obtain the data from the database
-            $recipes = $this->recipeMapper->findAll();
-
-            // put the array containing Recipe object to the view
-            $this->view->setVariable("recipes", $recipes);
-
-            // render the view (/view/recipes/index.php)
-            $this->view->render("recipes", "index");
         }
 
         /**
@@ -86,7 +64,6 @@
 
             // find the recipe object in the database
             $recipe = $this->recipeMapper->findById($recipeid);
-
             if ($recipe == NULL) {
                 throw new Exception("no such post with id: ".$recipeid);
             }

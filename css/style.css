@@ -144,6 +144,12 @@ footer {
   justify-content: center;
   align-content: center; }
 
+.pag__box {
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 .home__button {
   display: flex;
   border: none;

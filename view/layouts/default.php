@@ -27,7 +27,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <a href="index.php?controller=recipes&amp;action=index">
+            <a href="index.php?controller=home&amp;action=index">
                 <button class="home__button">
                     <img src="/view/img/logo.svg" alt="cookinillas logo" class="logo">
                 </button>

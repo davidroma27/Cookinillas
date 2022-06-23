@@ -33,22 +33,18 @@ class RecipeMapper {
      */
     public function findAll($page = 0, $per_page = 6) {
         $stmt = $this->db->prepare("SELECT recetas.*
-                                            FROM recetas ORDER BY recetas.id_receta DESC");
-        /*$stmt2 = $this->db->query("SELECT ingredientes.nombre, receta_ingrediente.cantidad
-                                            FROM recetas, receta_ingrediente, ingredientes
-                                            WHERE receta_ingrediente.id_receta =  recetas.id_receta
-                                            AND receta_ingrediente.id_ingr = ingredientes.id_ingr");*/
+                                            FROM recetas ORDER BY recetas.id_receta DESC LIMIT ?,?");
 
         $offset = $page * $per_page;
         $stmt->execute(array($offset, $per_page));
-        //$ingr_db = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $recipes = array();
 
         foreach ($recipes_db as $recipe) {
-            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"], $recipe["imagen"], $recipe["tiempo"],
-                 $recipe["pasos"], new User($recipe["alias"]), $recipe["nlikes"]));
+            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"],$recipe["imagen"] ,$recipe["pasos"]));
 
         }
+
         return $recipes;
     }
 
@@ -59,18 +55,20 @@ class RecipeMapper {
      * @return Recipe The Recipe instances. NULL if the Recipe is not found
      */
     public function findById($recipeid){
-        $stmt1 = $this->db->prepare("SELECT *
-                                            FROM recetas
-                                            WHERE recetas.id_receta=?");
-        $stmt2 = $this->db->query("SELECT ingredientes.nombre, receta_ingrediente.cantidad 
-                                            FROM recetas, receta_ingrediente, ingredientes
-                                            WHERE receta_ingrediente.id_receta =  recetas.id_receta
-                                            AND receta_ingrediente.id_ingr = ingredientes.id_ingr");
+        $stmt1 = $this->db->prepare("SELECT * FROM recetas WHERE recetas.id_receta=?");
+        $stmt2 = $this->db->prepare("SELECT nombre FROM ingredientes,recetas,receta_ingrediente 
+                                            WHERE ingredientes.id_ingr = receta_ingrediente.id_ingr
+                                            AND recetas.id_receta = ? AND receta_ingrediente.id_receta = ?");
+        $stmt3 = $this->db->prepare("SELECT cantidad FROM receta_ingrediente, recetas
+                                            WHERE recetas.id_receta=? AND receta_ingrediente.id_receta=?");
+
         $stmt1->execute(array($recipeid));
         $stmt2->execute(array($recipeid,$recipeid));
+        $stmt3->execute(array($recipeid,$recipeid));
 
         $recipe = $stmt1->fetch(PDO::FETCH_ASSOC);
-        $ingr_db = $stmt2->fetchAll(PDO::FETCH_COLUMN);
+        $nombre = $stmt2->fetchAll(PDO::FETCH_COLUMN);
+        $cant = $stmt3->fetchAll(PDO::FETCH_COLUMN);
 
         if($recipe != null) {
             return new Recipe(
@@ -78,11 +76,11 @@ class RecipeMapper {
                 $recipe["titulo"],
                 $recipe["imagen"],
                 $recipe["tiempo"],
+                $nombre,
+                $cant,
+                $recipe["pasos"],
                 new User($recipe["alias"]),
-                $ingr_db["nombre"],
-                $ingr_db["cantidad"],
-                $recipe["pasos"]
-                );
+                $recipe["nlikes"]);
         } else {
             return NULL;
         }
@@ -111,11 +109,10 @@ class RecipeMapper {
      * @throws PDOException if a database error occurs
      * @return void
      *
-    public function countLikes(){
-        if(isset())
+    public function getNLikes(){
 
-    }
-     */
+    }*/
+
 
     /**
      * Loads a Recipe from the database given its ids (With LIKES)
@@ -199,7 +196,6 @@ class RecipeMapper {
      * @return void
      */
     public function update(Recipe $recipe) {
-        var_dump($recipe);
         $stmt1 = $this->db->prepare("UPDATE recetas set titulo=?, imagen=?, tiempo=?, pasos=? where id_receta=?");
         $stmt2 = $this->db->prepare("INSERT INTO ingredientes(nombre) VALUES (?) ON DUPLICATE KEY UPDATE nombre = nombre");
         $stmt3 = $this->db->prepare("UPDATE receta_ingrediente set id_ingr=?, cantidad=? WHERE id_receta=?");

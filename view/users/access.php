@@ -2,6 +2,7 @@
     //file: views/users/access.php
 
     require_once(__DIR__."/../../core/ViewManager.php");
+    require_once(__DIR__."/../../controller/LanguageController.php");
     $view = ViewManager::getInstance();
     $errors = $view->getVariable("errors");
     $alias = $view->getVariable("alias");

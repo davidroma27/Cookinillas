@@ -60,6 +60,11 @@ class Recipe
      * @var string
      */
     private $steps;
+    /**
+     * The likes of the recipe
+     * @var int
+     */
+    private $nlikes;
 
 
     /**
@@ -73,17 +78,19 @@ class Recipe
      * @param array $quant The quantity of each ingredient
      * @param string $steps The steps of the recipe
      * @param User $alias The author of the recipe
+     * @param int $nlikes The likes of the recipe
      */
-    public function __construct($id = NULL, $title = NULL, $img = NULL, $time = NULL, User $alias = NULL, array $ingr = NULL, array $quant = NULL, $steps = NULL)
+    public function __construct($id = NULL, $title = NULL, $img = NULL, $time = NULL, array $ingr = NULL, array $quant = NULL, $steps = NULL, User $alias = NULL, $nlikes = NULL)
     {
         $this->id = $id;
         $this->title = $title;
         $this->img = $img;
+        $this->time = $time;
         $this->ingr = $ingr;
         $this->quant = $quant;
-        $this->time = $time;
         $this->steps = $steps;
         $this->alias = $alias;
+        $this->nlikes = $nlikes;
     }
 
     /**
@@ -252,6 +259,27 @@ class Recipe
     public function setAlias(User $alias)
     {
         $this->alias = $alias;
+    }
+
+    /**
+     * Gets the likes of this recipe
+     *
+     * @return int The likes of this recipe
+     */
+    public function getNLikes()
+    {
+        return $this->nlikes;
+    }
+
+    /**
+     * Sets the likes of this recipe
+     *
+     * @param int $nlikes The likes of this recipe
+     * @return void
+     */
+    public function setNLikes(int $nlikes)
+    {
+        $this->nlikes = $nlikes;
     }
 
     /**

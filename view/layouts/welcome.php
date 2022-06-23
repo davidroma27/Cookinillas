@@ -39,7 +39,9 @@ $currentuser = $view->getVariable("currentusername");
         <div class="access-container">
             <div class="access__form">
                 <div class="access-logo">
-                    <img src="/view/img/logo.svg" alt="cookinillas logo" class="logo">
+                    <a href="index.php?controller=home&action=index">
+                        <img src="/view/img/logo.svg" alt="cookinillas logo" class="logo">
+                    </a>
                 </div>
 
                 <div id="flash">

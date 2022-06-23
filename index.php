@@ -4,7 +4,7 @@
 /**
  * Default controller if any controller is passed in the URL
  */
-define("DEFAULT_CONTROLLER", "recipes");
+define("DEFAULT_CONTROLLER", "home");
 
 /**
  * Default action if any action is passed in the URL

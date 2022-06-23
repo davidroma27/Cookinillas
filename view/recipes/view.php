@@ -6,7 +6,8 @@ $view = ViewManager::getInstance();
 $recipe = $view->getVariable("recipe");
 $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
-
+$isLike = $view->getVariable("isLike");
+var_dump($isLike);
 $view->setVariable("title", "View Recipe");
 ?>
 
@@ -31,35 +32,53 @@ $view->setVariable("title", "View Recipe");
         </svg>
         <span class="recipe__bar-alias"><?= $recipe->getAlias()->getAlias() ?></span>
 
-        <?php if (isset($currentuser)): ?>
-            <form method="POST" action="index.php?controller=users&amp;action=addLike&amp;id=<?= $recipe->getId() ?>">
-                <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
-                <button id="fav_button" class="fav__button" name="submit" type="submit">
-                    <svg class="fav__icon">
-                        <use href="/view/img/sprite.svg#icon-heart"></use>
-                    </svg>
-                    <span class="fav__text"><?= i18n("Me gusta") ?></span>
-                    <span class="fav__count">(346)</span>
-                </button>
-            </form>
+        <?php if (isset($currentuser)){
+            if($isLike) { //SI TIENE LIKE MUESTRA CORAZON LLENO Y ACTION = DISLIKE?>
+                <form method="POST" action="index.php?controller=like&amp;action=dislike">
+                    <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
+                    <button id="fav_button" class="fav__button" name="submit" type="submit">
+                        <svg class="fav__icon">
+                            <use href="/view/img/sprite.svg#icon-heart"></use>
+                        </svg>
+                        <span class="fav__text"><?= i18n("No me gusta") ?></span>
+                        <span class="fav__count">(<?= $recipe->getNLikes() ?>)</span>
+                    </button>
+                </form>
 
-            <a href="index.php?controller=recipes&amp;action=edit&amp;id=<?= $recipe->getId() ?>" id="action_button" class="fav__button">
-                <svg class="fav__icon">
-                    <use href="/view/img/sprite.svg#icon-pencil"></use>
-                </svg>
-            </a>
-
-            <form method="POST" action="index.php?controller=recipes&amp;action=delete" id="del_recipe_<?= $recipe->getId(); ?>" class="del_recipe">
-                <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
-                <a href="#" id="del_button" class="fav__button" onclick="
-                        if (confirm('<?= i18n("¿Seguro que deseas eliminar la receta?")?>')){
-                        document.getElementById('del_recipe_<?= $recipe->getId() ?>').submit()}">
+            <?php } else{ //SI NO TIENE LIKE MUESTRA CORAZON VACIO Y ACTION = DISLIKE?>
+                <form method="POST" action="index.php?controller=like&amp;action=like">
+                    <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
+                    <button id="fav_button" class="fav__button" name="submit" type="submit">
+                        <svg class="fav__icon">
+                            <use href="/view/img/sprite.svg#icon-heart-outlined"></use>
+                        </svg>
+                        <span class="fav__text"><?= i18n("Me gusta") ?></span>
+                        <span class="fav__count">(<?= $recipe->getNLikes() ?>)</span>
+                    </button>
+                </form>
+            <?php } ?>
+                <a href="index.php?controller=recipes&amp;action=edit&amp;id=<?= $recipe->getId() ?>" id="action_button" class="fav__button">
                     <svg class="fav__icon">
-                        <use href="/view/img/sprite.svg#icon-del"></use>
+                        <use href="/view/img/sprite.svg#icon-pencil"></use>
                     </svg>
                 </a>
-            </form>
-        <?php endif; ?>
+
+                <form method="POST" action="index.php?controller=recipes&amp;action=delete" id="del_recipe_<?= $recipe->getId(); ?>" class="del_recipe">
+                    <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
+                    <a href="#" id="del_button" class="fav__button" onclick="
+                            if (confirm('<?= i18n("¿Seguro que deseas eliminar la receta?")?>')){
+                            document.getElementById('del_recipe_<?= $recipe->getId() ?>').submit()}">
+                        <svg class="fav__icon">
+                            <use href="/view/img/sprite.svg#icon-del"></use>
+                        </svg>
+                    </a>
+                </form>
+        <?php } else{ //SI NO ESTA LOGEADO MUESTRA ALERTA?>
+            echo'<script type="text/javascript">
+                alert('<?= i18n("Debes iniciar sesión para hacer eso")?>');
+                window.location.href="view.php";
+            </script>'
+        <?php } ?>
     </div>
     <div class="recipe__content">
         <div class="recipe__ing">

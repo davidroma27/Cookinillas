@@ -4,7 +4,6 @@
 require_once(__DIR__ . "/../model/Recipe.php");
 
 require_once(__DIR__ . "/../model/RecipeMapper.php");
-require_once(__DIR__ . "/../model/UserMapper.php");
 
 require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../controller/BaseController.php");
@@ -12,17 +11,11 @@ require_once(__DIR__ . "/../controller/BaseController.php");
 class HomeController extends BaseController{
 
     private $recipeMapper;
-    private $likeMapper;
-    private $userMapper;
-    private $ingredientMapper;
 
     public function __construct() {
         parent::__construct();
 
         $this->recipeMapper = new RecipeMapper();
-        $this->likeMapper = new LikeMapper();
-        $this->userMapper = new UserMapper();
-        $this->ingredientMapper = new IngredientMapper();
     }
 
     public function index() {

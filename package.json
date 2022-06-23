@@ -3,15 +3,20 @@
   "version": "1.0.0",
   "description": "Landing page for cookinillas",
   "main": "index.js",
-  "dependencies": {
-    "live-server": "^1.2.1"
-  },
-  "devDependencies": {
-    "node-sass": "^6.0.1"
-  },
   "scripts": {
-    "compile:sass": "node-sass view/sass/main.scss css/style.css"
+    "compile:sass": "node-sass view/sass/main.scss css/style.css -w"
   },
   "author": "drmartinez",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidroma27/Cookinillas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidroma27/Cookinillas/issues"
+  },
+  "homepage": "https://github.com/davidroma27/Cookinillas#readme",
+  "devDependencies": {
+    "node-sass": "^7.0.1"
+  }
 }

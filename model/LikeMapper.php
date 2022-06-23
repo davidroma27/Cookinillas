@@ -36,7 +36,7 @@ class LikeMapper
 
     public function save($like)
     {
-        $stmt = $this->db->prepare("INSERT INTO receta_fav(id_receta, alias) values (?,?)");
+        $stmt = $this->db->prepare("INSERT INTO receta_fav(alias, id_receta) values (?,?)");
         $stmt->execute(array($like->getRecipe(), $like->getAlias()));
         return $this->db->lastInsertId();
     }

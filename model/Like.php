@@ -15,23 +15,21 @@ class Like {
 
     /**
      * The author of the like
-     * @var User
      */
     private $alias;
 
     /**
      * The recipe being liked by this like
-     * @var Recipe
      */
     private $recipe;
 
     /**
      * The constructor
      *
-     * @param User $alias The author of the like
-     * @param Recipe $recipe The liked recipe
+     * @param $alias The author of the like
+     * @param $recipe The liked recipe
      */
-    public function __construct(User $alias=NULL, Recipe $recipe=NULL) {
+    public function __construct($alias=NULL, $recipe=NULL) {
         $this->alias = $alias;
         $this->recipe = $recipe;
     }
@@ -39,7 +37,7 @@ class Like {
     /**
      * Gets the author of this like
      *
-     * @return User The author of this like
+     * @return The author of this like
      */
     public function getAlias() {
         return $this->alias;
@@ -48,17 +46,17 @@ class Like {
     /**
      * Sets the author of this like
      *
-     * @param User $alias the author of this like
+     * @param $alias the author of this like
      * @return void
      */
-    public function setAlias(User $alias){
+    public function setAlias($alias){
         $this->alias = $alias;
     }
 
     /**
      * Gets the parent recipe of this like
      *
-     * @return Recipe The parent recipe of this like
+     * @return The parent recipe of this like
      */
     public function getRecipe() {
         return $this->recipe;
@@ -67,10 +65,10 @@ class Like {
     /**
      * Sets the parent Recipe
      *
-     * @param Recipe $recipe the parent Recipe
+     * @param $recipe the parent Recipe
      * @return void
      */
-    public function setRecipe(Recipe $recipe) {
+    public function setRecipe($recipe) {
         $this->recipe = $recipe;
     }
 

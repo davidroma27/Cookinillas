@@ -71,7 +71,7 @@ class UsersController extends BaseController {
                 $_SESSION["currentuser"]=$_POST["alias"];
 
                 // send user to the restricted area (HTTP 302 code)
-                $this->view->redirect("recipes", "index");
+                $this->view->redirect("home", "index");
 
             }else{
                 $errors = array();
@@ -185,7 +185,7 @@ class UsersController extends BaseController {
         // perform a redirection. More or less:
         // header("Location: index.php?controller=users&action=access")
         // die();
-        $this->view->redirect("recipes", "index");
+        $this->view->redirect("home", "index");
 
     }
 
