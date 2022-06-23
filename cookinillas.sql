@@ -79,7 +79,7 @@ DROP TABLE IF EXISTS `recetas`;
 CREATE TABLE IF NOT EXISTS `recetas` (
   `id_receta` int(3) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(50) NOT NULL,
-  `imagen` varchar(128) NOT NULL,
+  `imagen` varchar(128),
   `tiempo` int(4) NOT NULL,
   `pasos` varchar(8192) NOT NULL,
   `alias` varchar(15) NOT NULL,

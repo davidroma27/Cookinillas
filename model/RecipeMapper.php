@@ -183,9 +183,10 @@ class RecipeMapper {
         $recipeid = $this->db->lastInsertId();
 
         $stmt2->execute(array($recipe->getIngr()));
-        $stmt3->execute(array($recipeid, $recipe->getIngr(), $recipe->getQuant()));
+        $id_ingr = $this->db->lastInsertId();
+        $stmt3->execute(array($recipeid, $id_ingr, $recipe->getQuant()));
 
-        return $this->db->lastInsertId();
+        return $recipeid;
     }
 
     /**
@@ -202,7 +203,8 @@ class RecipeMapper {
 
         $stmt1->execute(array($recipe->getTitle(), $recipe->getImg(), $recipe->getTime(), $recipe->getSteps(), $recipe->getId()));
         $stmt2->execute(array($recipe->getIngr()));
-        $stmt3->execute(array($recipe->getIngr(), $recipe->getQuant(), $recipe->getId()));
+        $id_ingr = $this->db->lastInsertId();
+        $stmt3->execute(array($recipe->getId(), $id_ingr, $recipe->getQuant()));
 
     }
 

@@ -467,6 +467,9 @@ footer {
     height: 5rem;
     width: 5rem;
     fill: var(--color-tertiary); }
+  .recipe__bar #like__form:hover, .recipe__bar #action_button:hover {
+    background-color: var(--color-tertiary-light);
+    color: var(--color-secondary); }
   .recipe__bar .fav__button {
     display: flex;
     flex-direction: row;
@@ -476,9 +479,6 @@ footer {
     border: none;
     cursor: pointer;
     padding-right: 1rem; }
-    .recipe__bar .fav__button:hover {
-      background-color: var(--color-tertiary-light);
-      color: var(--color-secondary); }
     .recipe__bar .fav__button:focus .fav__icon {
       fill: var(--color-primary-light);
       animation-name: in;

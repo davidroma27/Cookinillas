@@ -442,6 +442,12 @@
     fill: var(--color-tertiary);
   }
 
+  #like__form:hover, #action_button:hover{
+      background-color: var(--color-tertiary-light);
+      color: var(--color-secondary);
+
+  }
+
   .fav__button{
     display: flex;
     flex-direction: row;
@@ -452,10 +458,7 @@
     cursor: pointer;
     padding-right: 1rem;
 
-    &:hover{
-      background-color: var(--color-tertiary-light);
-      color: var(--color-secondary);
-    }
+
 
     &:focus{
       .fav__icon{

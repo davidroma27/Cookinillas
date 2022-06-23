@@ -30,7 +30,6 @@ class LikeMapper
     {
         $stmt = $this->db->prepare("SELECT id_receta FROM receta_fav WHERE alias=? and id_receta=?");
         $stmt->execute(array($alias, $receta));
-
         return $stmt->fetchColumn() > 0;
     }
 

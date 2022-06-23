@@ -22,6 +22,7 @@
         "Enviar" => "Send",
         "Buscar por ingredientes" => "Search by ingredients",
         "Me gusta" => "Like",
+        "No me gusta" => "Dislike",
         "Listado de ingredientes" => "List of ingredients",
         "Pasos a realizar" => "Steps to take",
         "Cantidad" => "Quantity",

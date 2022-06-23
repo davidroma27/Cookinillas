@@ -7,8 +7,8 @@ $recipe = $view->getVariable("recipe");
 $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
 $isLike = $view->getVariable("isLike");
-var_dump($isLike);
 $view->setVariable("title", "View Recipe");
+var_dump($isLike);
 ?>
 
 <div class="title-bar">
@@ -34,7 +34,8 @@ $view->setVariable("title", "View Recipe");
 
         <?php if (isset($currentuser)){
             if($isLike) { //SI TIENE LIKE MUESTRA CORAZON LLENO Y ACTION = DISLIKE?>
-                <form method="POST" action="index.php?controller=like&amp;action=dislike">
+                <p>ESTOY EN IS LIKE</p>
+                <form id="like__form" method="POST" action="index.php?controller=like&amp;action=dislike">
                     <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
                     <button id="fav_button" class="fav__button" name="submit" type="submit">
                         <svg class="fav__icon">
@@ -44,9 +45,9 @@ $view->setVariable("title", "View Recipe");
                         <span class="fav__count">(<?= $recipe->getNLikes() ?>)</span>
                     </button>
                 </form>
-
-            <?php } else{ //SI NO TIENE LIKE MUESTRA CORAZON VACIO Y ACTION = DISLIKE?>
-                <form method="POST" action="index.php?controller=like&amp;action=like">
+            <?php } else{ //SI NO TIENE LIKE MUESTRA CORAZON VACIO Y ACTION = LIKE?>
+                <p>ESTOY EN ELSE</p>
+                <form id="like__form" method="POST" action="index.php?controller=like&amp;action=like">
                     <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
                     <button id="fav_button" class="fav__button" name="submit" type="submit">
                         <svg class="fav__icon">
@@ -76,7 +77,7 @@ $view->setVariable("title", "View Recipe");
         <?php } else{ //SI NO ESTA LOGEADO MUESTRA ALERTA?>
             echo'<script type="text/javascript">
                 alert('<?= i18n("Debes iniciar sesión para hacer eso")?>');
-                window.location.href="view.php";
+                window.location.href="./index.php?controller=users&action=login";
             </script>'
         <?php } ?>
     </div>

@@ -296,9 +296,6 @@ class Recipe
         if (strlen(trim($this->title)) == 0 ) {
             $errors["title"] = "title is mandatory";
         }
-        if ($this->img == NULL) {
-            $errors["img"] = "image is mandatory";
-        }
         if ($this->time == NULL ) {
             $errors["time"] = "time is mandatory";
         }

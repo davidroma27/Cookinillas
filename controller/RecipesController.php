@@ -26,11 +26,13 @@
          * @var RecipeMapper
          */
         private $recipeMapper;
+        private $likeMapper;
 
         public function __construct() {
             parent::__construct();
 
             $this->recipeMapper = new RecipeMapper();
+            $this->likeMapper = new LikeMapper();
         }
 
         /**
@@ -70,6 +72,11 @@
 
             // put the recipe object to the view
             $this->view->setVariable("recipe", $recipe);
+
+            if (isset($this->currentUser)) {
+                $isLike = $this->likeMapper->isLike($_SESSION["currentuser"], $_GET["id"]);
+                $this->view->setVariable("isLike", $isLike);
+            }
 
             // render the view (/view/recipes/view.php)
             $this->view->render("recipes", "view");
@@ -145,7 +152,7 @@
                     // perform the redirection. More or less:
                     // header("Location: index.php?controller=recipes&action=index")
                     // die();
-                    $this->view->redirect("recipes", "index");
+                    $this->view->redirect("home", "index");
 
                 }catch(ValidationException $ex) {
                     // Get the errors array inside the exepction...
@@ -243,8 +250,6 @@
                 $recipe->setQuant($_POST["quant"]);
                 $recipe->setSteps($_POST["steps"]);
 
-                var_dump($recipe);
-
                 try {
                     // validate Recipe object
                     $recipe->checkIsValidForUpdate(); // if it fails, ValidationException
@@ -312,7 +317,6 @@
             $recipeid = $_REQUEST["id"];
             $recipe = $this->recipeMapper->findById($recipeid);
 
-            var_dump($recipe);
             // Does the post exist?
             if ($recipe == NULL) {
                 throw new Exception("no such post with id: ".$recipeid);
@@ -336,7 +340,7 @@
             // perform the redirection. More or less:
             // header("Location: index.php?controller=recipes&action=index")
             // die();
-            $this->view->redirect("recipes", "index");
+            $this->view->redirect("home", "index");
 
         }
 
