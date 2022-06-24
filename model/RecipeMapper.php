@@ -232,4 +232,42 @@ class RecipeMapper {
         return $stmt->fetchColumn();
     }
 
+    public function uploadImg(){
+        $toret = array();
+        $errors = array();
+        $errors_img = array();
+
+        if(isset($_FILES['imgUpload']) && $_FILES['imgUpload']['error'] === UPLOAD_ERR_OK){
+            $fileTmpPath = $_FILES['imgUpload']['tmp_name'];
+            $fileName = $_FILES['imgUpload']['name'];
+
+            $fileNameFields = explode(".", $fileName);
+            $fileExtension = strtolower(end($fileNameFields));
+
+            if ($fileExtension != "jpg" || $fileExtension != "jpeg") {
+                array_push($errors_img, "Only .jpg or .jpeg images are allowed");
+            }
+
+            if(empty($errors_img)){
+                $newFileName = time() . '_' . $_SESSION["currentuser"] . '.' . $fileExtension;
+                $dest_path = __DIR__ . "../../../../img/" . $newFileName;
+
+                $toret["fileName"] = $newFileName;
+                if (!move_uploaded_file($fileTmpPath, $dest_path)) {
+                    array_push($errors_img, "Error uploading image");
+                }
+            }
+
+        }else{
+            array_push($errors_img, "Error uploading image");
+        }
+
+        if (empty($errors_img)) {
+            return $toret;
+        } else {
+            $errors["image"] = $errors_img;
+            throw new ValidationException($errors, "Error uploading image");
+        }
+    }
+
 }

@@ -119,28 +119,43 @@
 
             if (isset($_POST["submit"])) { // reaching via HTTP Post...
 
-                if(!empty($_FILES["img"]["name"])) { //Manage the file upload
-
-                    //Get file info
-                    $fileName = $_FILES["img"]["name"];
-                    $path = "view/img/".$fileName;
-
-                    $recipe->setImg($path);
-                }
-                // populate the Recipe object with data from the form
-                $recipe->setTitle($_POST["title"]);
-                $recipe->setTime($_POST["time"]);
-                $recipe->setIngr($_POST["ingr"]);
-                $recipe->setQuant($_POST["quant"]);
-                $recipe->setSteps($_POST["steps"]);
-                // The user of the Recipe is the currentUser (user in session)
-                $recipe->setAlias($this->currentUser);
                 try {
+                    if(!empty($_FILES["img"]["name"])) { //Manage the file upload
+                        $uploadImage = $this->recipeMapper->uploadImg();
+
+                        $recipe->setImg($uploadImage["fileName"]);
+                    }
+                    // populate the Recipe object with data from the form
+                    $recipe->setTitle($_POST["title"]);
+                    $recipe->setTime($_POST["time"]);
+                    $recipe->setIngr($_POST["ingr"]);
+                    $recipe->setQuant($_POST["quant"]);
+                    $recipe->setSteps($_POST["steps"]);
+                    // The user of the Recipe is the currentUser (user in session)
+                    $recipe->setAlias($this->currentUser);
+
                     // validate Recipe object
                     $recipe->checkIsValidForCreate(); // if it fails, ValidationException
 
+                }catch(ValidationException $ex) {
+                    if(isset($recipe)){
+                        unlink(__DIR__."../../../../img/".$recipe->getImg());
+                    }
+                    // Get the errors array inside the exepction...
+                    $errors = $ex->getErrors();
+                    // And put it to the view as "errors" variable
+                    $this->view->setVariable("errors", $errors);
+                }
+
+
+                if(empty($errors)){
                     // save the Recipe object into the database
-                    $this->recipeMapper->save($recipe);
+                    $id = $this->recipeMapper->save($recipe);
+
+
+                    /***** AQUI OBTENDREMOS LOS INGREDIENTES CON UN FOREACH Y SE GUARDARAN
+                     * CADA UNO EN LA TABLA INGREDIENTES ******/
+
 
                     // POST-REDIRECT-GET
                     // Everything OK, we will redirect the user to the list of recipes
@@ -152,19 +167,35 @@
                     // perform the redirection. More or less:
                     // header("Location: index.php?controller=recipes&action=index")
                     // die();
-                    $this->view->redirect("home", "index");
+                    $queryString = "id=" . $id;
+                    $this->view->redirect("recipe", "view", $queryString);
 
-                }catch(ValidationException $ex) {
-                    // Get the errors array inside the exepction...
-                    $errors = $ex->getErrors();
-                    // And put it to the view as "errors" variable
-                    $this->view->setVariable("errors", $errors);
+                }else{
+                    if (isset($this->currentUser)) {
+                        $idLikes = $this->likeMapper->findByUsername($_SESSION["currentuser"]);
+                        $this->view->setVariable("idLikes", $idLikes);
+                    }
+
+                    $nRecipes = $this->recipeMapper->countRecipes();
+                    $nPags = ceil($nRecipes / 6);
+                    $recipe = $this->recipeMapper->findAll(0);
+                    if($nPags > 1){
+                        $this->view->setVariable("next", 1);
+                    }
+                    $this->view->setVariable("page", 0);
+
+                    //Retrieve all available ingredients of database
+                    $ingredients = $this->recipeMapper->getIngredients();
+                    $this->view->setVariable("ingredients", $ingredients);
+
+                    // Put the Recipes object visible to the view
+                    //$this->view->setVariable("recipe", $recipe);
+
+                    // render the view (/view/recipes/add.php)
+                    //$this->view->render("recipes", "add");
                 }
-            }
 
-            //Retrieve all available ingredients of database
-            $ingredients = $this->recipeMapper->getIngredients();
-            $this->view->setVariable("ingredients", $ingredients);
+            }
 
             // Put the Recipes object visible to the view
             $this->view->setVariable("recipe", $recipe);
