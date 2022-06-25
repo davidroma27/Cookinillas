@@ -237,27 +237,28 @@ class RecipeMapper {
         $errors = array();
         $errors_img = array();
 
-        if(isset($_FILES['imgUpload']) && $_FILES['imgUpload']['error'] === UPLOAD_ERR_OK){
-            $fileTmpPath = $_FILES['imgUpload']['tmp_name'];
-            $fileName = $_FILES['imgUpload']['name'];
+        if(isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK){
+
+            $fileTmpPath = $_FILES['img']['tmp_name'];
+            $fileName = $_FILES['img']['name'];
 
             $fileNameFields = explode(".", $fileName);
             $fileExtension = strtolower(end($fileNameFields));
 
-            if ($fileExtension != "jpg" || $fileExtension != "jpeg") {
-                array_push($errors_img, "Only .jpg or .jpeg images are allowed");
+            if ($fileExtension != "jpg") {
+                array_push($errors_img, "Only .jpg images are allowed");
             }
 
             if(empty($errors_img)){
                 $newFileName = time() . '_' . $_SESSION["currentuser"] . '.' . $fileExtension;
-                $dest_path = __DIR__ . "../../../../img/" . $newFileName;
+                $dest_path = __DIR__ . "/../media/" . $newFileName;
 
                 $toret["fileName"] = $newFileName;
                 if (!move_uploaded_file($fileTmpPath, $dest_path)) {
                     array_push($errors_img, "Error uploading image");
                 }
             }
-
+            var_dump($errors_img);
         }else{
             array_push($errors_img, "Error uploading image");
         }

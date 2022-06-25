@@ -118,13 +118,10 @@
             $recipe = new Recipe();
 
             if (isset($_POST["submit"])) { // reaching via HTTP Post...
-
                 try {
-                    if(!empty($_FILES["img"]["name"])) { //Manage the file upload
-                        $uploadImage = $this->recipeMapper->uploadImg();
+                    $uploadImage = $this->recipeMapper->uploadImg();
+                    $recipe->setImg($uploadImage["fileName"]);
 
-                        $recipe->setImg($uploadImage["fileName"]);
-                    }
                     // populate the Recipe object with data from the form
                     $recipe->setTitle($_POST["title"]);
                     $recipe->setTime($_POST["time"]);
@@ -139,7 +136,7 @@
 
                 }catch(ValidationException $ex) {
                     if(isset($recipe)){
-                        unlink(__DIR__."../../../../img/".$recipe->getImg());
+                        unlink(__DIR__."/../media/".$recipe->getImg());
                     }
                     // Get the errors array inside the exepction...
                     $errors = $ex->getErrors();
@@ -168,7 +165,7 @@
                     // header("Location: index.php?controller=recipes&action=index")
                     // die();
                     $queryString = "id=" . $id;
-                    $this->view->redirect("recipe", "view", $queryString);
+                    $this->view->redirect("recipes", "view", $queryString);
 
                 }else{
                     if (isset($this->currentUser)) {

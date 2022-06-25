@@ -8,7 +8,7 @@ $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
 $isLike = $view->getVariable("isLike");
 $view->setVariable("title", "View Recipe");
-var_dump($isLike);
+//var_dump($recipe);
 ?>
 
 <div class="title-bar">
@@ -19,7 +19,7 @@ var_dump($isLike);
 
 <main class="recipe-main">
     <div class="recipe__img">
-        <img src="<?= $recipe->getImg() ?>" alt="">
+        <img src="media/<?= $recipe->getImg() ?>" alt="">
     </div>
     <div class="recipe__bar">
         <svg class="recipe__bar-time__logo">
@@ -34,7 +34,6 @@ var_dump($isLike);
 
         <?php if (isset($currentuser)){
             if($isLike) { //SI TIENE LIKE MUESTRA CORAZON LLENO Y ACTION = DISLIKE?>
-                <p>ESTOY EN IS LIKE</p>
                 <form id="like__form" method="POST" action="index.php?controller=like&amp;action=dislike">
                     <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
                     <button id="fav_button" class="fav__button" name="submit" type="submit">
@@ -46,7 +45,6 @@ var_dump($isLike);
                     </button>
                 </form>
             <?php } else{ //SI NO TIENE LIKE MUESTRA CORAZON VACIO Y ACTION = LIKE?>
-                <p>ESTOY EN ELSE</p>
                 <form id="like__form" method="POST" action="index.php?controller=like&amp;action=like">
                     <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
                     <button id="fav_button" class="fav__button" name="submit" type="submit">

@@ -49,7 +49,7 @@ GRANT ALL PRIVILEGES ON `cookinillas`.* TO `cookinillas`@`localhost` WITH GRANT 
 
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
-    `alias` varchar(15) NOT NULL,
+    `alias` varchar(20) NOT NULL,
     `password` varchar(128) NOT NULL,
     `email` varchar(60) NOT NULL,
     PRIMARY KEY (`alias`)
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 DROP TABLE IF EXISTS `ingredientes`;
 CREATE TABLE IF NOT EXISTS `ingredientes` (
   `id_ingr` int(3) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(15) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
   PRIMARY KEY (`id_ingr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -78,11 +78,11 @@ CREATE TABLE IF NOT EXISTS `ingredientes` (
 DROP TABLE IF EXISTS `recetas`;
 CREATE TABLE IF NOT EXISTS `recetas` (
   `id_receta` int(3) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(50) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
   `imagen` varchar(128),
   `tiempo` int(4) NOT NULL,
   `pasos` varchar(8192) NOT NULL,
-  `alias` varchar(15) NOT NULL,
+  `alias` varchar(20) NOT NULL,
   `nlikes` int(4) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_receta`),
   FOREIGN KEY (`alias`) REFERENCES usuarios(`alias`) ON DELETE CASCADE
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `recetas` (
 DROP TABLE IF EXISTS `receta_fav`;
 CREATE TABLE IF NOT EXISTS `receta_fav` (
   `id_receta` int(3) NOT NULL,
-  `alias` varchar(15) NOT NULL,
+  `alias` varchar(20) NOT NULL,
   PRIMARY KEY (`alias`, `id_receta`),
   FOREIGN KEY (`alias`) REFERENCES usuarios(`alias`) ON DELETE CASCADE,
   FOREIGN KEY (`id_receta`) REFERENCES recetas(`id_receta`) ON DELETE CASCADE
@@ -113,7 +113,7 @@ DROP TABLE IF EXISTS `receta_ingrediente`;
 CREATE TABLE IF NOT EXISTS `receta_ingrediente` (
   `id_receta` int(3) NOT NULL,
   `id_ingr` int(3) NOT NULL,
-  `cantidad` varchar(10) NOT NULL,
+  `cantidad` varchar(20) NOT NULL,
   PRIMARY KEY (`id_receta`, `id_ingr`),
   FOREIGN KEY (`id_receta`) REFERENCES recetas(`id_receta`) ON DELETE CASCADE,
   FOREIGN KEY (`id_ingr`)  REFERENCES ingredientes(`id_ingr`) ON DELETE CASCADE
