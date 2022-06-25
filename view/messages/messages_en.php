@@ -30,6 +30,7 @@
         "¿Seguro que deseas eliminar la receta?" => "Are you sure you want to delete the recipe?",
         "Siguiente" => "Next",
         "Anterior" => "Previous",
-        "Debes iniciar sesión para hacer eso" => "You must login in order to do that"
+        "Debes iniciar sesión para hacer eso" => "You must login in order to do that",
+        "Página" => "Page"
     )
 ?>

@@ -144,12 +144,6 @@ footer {
   justify-content: center;
   align-content: center; }
 
-.pag__box {
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
 .home__button {
   display: flex;
   border: none;
@@ -292,17 +286,40 @@ footer {
 
 .main-content {
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   flex: 0 1 100%;
   min-height: 80vh;
   max-width: 100vw;
   background-color: var(--color-secondary);
   box-shadow: inset 0 1rem 1rem rgba(0, 0, 0, 0.2); }
+  .main-content .pag__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem; }
+    .main-content .pag__box #pag_num {
+      font-size: 3rem;
+      text-decoration: none;
+      color: var(--color-tertiary-dark);
+      pointer-events: none; }
+    .main-content .pag__box--content {
+      display: flex;
+      justify-content: center;
+      width: 15rem;
+      align-items: center;
+      text-align: center; }
+    .main-content .pag__box--icon {
+      max-height: 4rem;
+      fill: var(--color-tertiary-dark); }
+    .main-content .pag__box #prev_pag:hover, .main-content .pag__box #sig_pag:hover {
+      background-color: var(--color-tertiary-light);
+      border-radius: 2rem; }
 
 .recipes {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
   max-width: 100vw;
@@ -313,6 +330,7 @@ footer {
     flex-direction: column;
     flex: 0 1 30rem;
     max-width: 100vw;
+    min-width: 30rem;
     border-radius: 1.5rem;
     margin: 1.5rem calc(100% / 30);
     background-color: var(--color-secondary-dark);
@@ -351,12 +369,21 @@ footer {
   font-size: 1.5rem;
   color: var(--color-tertiary-light); }
 
+.form__box {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 100%; }
+
 .recipe__form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   flex: 1 1 60%;
   max-width: 100vw;
+  width: 80%;
   flex-wrap: wrap;
   margin: 4rem;
   padding: 2rem;

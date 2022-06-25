@@ -112,7 +112,7 @@
          */
         public function add() {
             if (!isset($this->currentUser)) {
-                throw new Exception("Not in session. Adding recipes requires login");
+                $this->view->redirect("users", "login");
             }
 
             $recipe = new Recipe();

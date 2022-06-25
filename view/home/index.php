@@ -11,6 +11,7 @@ $errors = $view->getVariable("errors");
 $next = $view->getVariable("next");
 $previous = $view->getVariable("previous");
 $page = $view->getVariable("page");
+var_dump($next);
 
 $view->setVariable("title", "Recipe");
 
@@ -29,7 +30,7 @@ $view->setVariable("title", "Recipe");
         ?>
             <div class="recipes__box">
                 <a href="index.php?controller=recipes&amp;action=view&amp;id=<?= $recipe->getId() ?>" class="recipes__box-link">
-                    <span><img src="<?= $recipe->getImg() ?>" alt="<?= $recipe->getTitle() ?>" class="recipes__box-photo"></span>
+                    <span><img src="media/<?= $recipe->getImg() ?>" alt="<?= $recipe->getTitle() ?>" class="recipes__box-photo"></span>
                 </a>
                 <h3 class="recipes__box-title">
                     <?= $recipe->getTitle() ?>
@@ -41,27 +42,29 @@ $view->setVariable("title", "Recipe");
 
     </div>
 
-    <?php if (isset($previous) || isset($next)): ?>
+
         <div class="pag__box">
-            <?php if (isset($previous)): ?>
-                <a href="index.php?controller=home&action=index&page=<?= $previous ?>" class="pag__box--content" id="sig_pag">
-                    <svg class="pag__box--icon">
-                        <use href="view/img/sprite.svg#icon-arrow-left"></use>
-                    </svg>
-                </a>
-            <?php endif ?>
+<!--            --><?php //if (isset($previous) || isset($next)): ?>
+<!--                --><?php //if (isset($previous)): ?>
+                    <a href="index.php?controller=home&action=index&page=<?= $previous ?>" class="pag__box--content" id="sig_pag" >
+                        <svg class="pag__box--icon">
+                            <use href="view/img/sprite.svg#icon-arrow-left"></use>
+                        </svg>
+                    </a>
+<!--                --><?php //endif ?>
 
-            <a href="index.php?controller=home&action=index&page=<?= $page ?>" class="pag__box--content" id="pag_num">
-                <?= $page ?>
-            </a>
-
-            <?php if (isset($next)): ?>
-                <a href="index.php?controller=home&action=index&page=<?= $next ?>" class="pag__box--content" id="prev_pag">
-                    <svg class="pag__box--icon">
-                        <use href="view/img/sprite.svg#icon-arrow-right"></use>
-                    </svg>
+                <a href="index.php?controller=home&action=index&page=<?= $page ?>" class="pag__box--content" id="pag_num">
+                    <?= i18n("Página") ?> <?= $page ?>
                 </a>
-            <?php endif ?>
+
+<!--                --><?php //if (isset($next)): ?>
+                    <a href="index.php?controller=home&action=index&page=<?= $next ?>" class="pag__box--content" id="prev_pag">
+                        <svg class="pag__box--icon">
+                            <use href="view/img/sprite.svg#icon-arrow-right"></use>
+                        </svg>
+                    </a>
+<!--                --><?php //endif ?>
+<!--            --><?php //endif ?>
         </div>
-    <?php endif ?>
+
 </main>
