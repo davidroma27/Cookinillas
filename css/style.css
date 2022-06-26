@@ -79,6 +79,7 @@ label {
     align-self: flex-start; }
 
 input {
+  width: 100%;
   padding: .5rem;
   border-width: 1px;
   border-radius: .5rem;
@@ -286,6 +287,7 @@ footer {
 
 .main-content {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -350,7 +352,8 @@ footer {
     text-overflow: ellipsis;
     overflow: hidden;
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 1.6rem;
+    font-weight: bold;
     margin: 1rem 1rem 0 1rem; }
   .recipes__box-link {
     display: flex;
@@ -365,10 +368,8 @@ footer {
   .recipes__box-photo:hover {
     filter: opacity(70%); }
   .recipes__box-text {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
     font-size: 1.5rem;
     margin: 1rem; }

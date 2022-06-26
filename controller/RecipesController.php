@@ -292,7 +292,7 @@
                     // get in the view after redirection.
                     $this->view->setFlash(sprintf(i18n("Recipe \"%s\" successfully updated."),$recipe ->getTitle()));
 
-                    $this->view->redirect("recipes", "index");
+                    $this->view->redirect("home", "index");
 
                 }catch(ValidationException $ex) {
                     // Get the errors array inside the exepction...

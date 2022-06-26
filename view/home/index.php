@@ -11,10 +11,6 @@ $errors = $view->getVariable("errors");
 $next = $view->getVariable("next");
 $previous = $view->getVariable("previous");
 $page = $view->getVariable("page");
-var_dump("next ", $next);
-var_dump("previous ", $previous);
-
-
 $view->setVariable("title", "Recipe");
 
 ?>

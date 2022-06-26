@@ -8,7 +8,6 @@ $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
 $isLike = $view->getVariable("isLike");
 $view->setVariable("title", "View Recipe");
-//var_dump($recipe);
 ?>
 
 <div class="title-bar">

@@ -26,13 +26,13 @@ class RecipeMapper {
     }
 
     /**
-     * Retrieves all recipes
+     * Retrieves all recipes in order to display them in home
      *
      * @throws PDOException if a database error occurs
      * @return mixed Array of Recipe instances
      */
     public function findAll($page = 0, $per_page = 6) {
-        $stmt = $this->db->prepare("SELECT recetas.*
+        $stmt = $this->db->prepare("SELECT id_receta, titulo, imagen, pasos
                                             FROM recetas ORDER BY recetas.id_receta DESC LIMIT ?,?");
 
         $offset = $page * $per_page;
@@ -40,8 +40,14 @@ class RecipeMapper {
         $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $recipes = array();
 
+        //Give null values as we dont need this fields in home
+        $time = isset($recipe["time"]) ? $recipe["time"] : null;
+        $ingr = isset($recipe["ingr"]) ? $recipe["ingr"] : null;
+        $quant = isset($recipe["quant"]) ? $recipe["quant"] : null;
+
         foreach ($recipes_db as $recipe) {
-            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"],$recipe["imagen"] ,$recipe["pasos"]));
+            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"],$recipe["imagen"],$time,
+                                                    $ingr,$quant,$recipe["pasos"]));
 
         }
 
