@@ -1,5 +1,6 @@
 <?php
-//file: view/home/index.php
+
+//file: view/users/home.php
 require_once(__DIR__ . "/../../core/ViewManager.php");
 
 $view = ViewManager::getInstance();
@@ -14,19 +15,19 @@ $page = $view->getVariable("page");
 
 $view->setVariable("title", "Recipe");
 
+
 ?>
 
 <div class="title-bar">
     <div class="title-box">
-        <h1 class="title-box__title"><?= i18n("Recetas recientes") ?></h1>
+        <h1 class="title-box__title"><?= i18n("Mis recetas") ?></h1>
     </div>
 </div>
 <main class="main-content">
 
     <div class="recipes">
 
-        <?php foreach ($recipes as $recipe):
-        ?>
+        <?php foreach ($recipes as $recipe): ?>
             <div class="recipes__box">
                 <a href="index.php?controller=recipes&amp;action=view&amp;id=<?= $recipe->getId() ?>" class="recipes__box-link">
                     <span><img src="media/<?= $recipe->getImg() ?>" alt="<?= $recipe->getTitle() ?>" class="recipes__box-photo"></span>
@@ -87,3 +88,5 @@ $view->setVariable("title", "Recipe");
     </div>
 
 </main>
+
+

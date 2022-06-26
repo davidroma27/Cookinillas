@@ -6,6 +6,9 @@ require_once(__DIR__."/../core/I18n.php");
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/UserMapper.php");
 
+require_once(__DIR__."/../model/Recipe.php");
+require_once(__DIR__."/../model/RecipeMapper.php");
+
 require_once(__DIR__."/../controller/BaseController.php");
 
 /**
@@ -24,16 +27,18 @@ class UsersController extends BaseController {
      * @var UserMapper
      */
     private $userMapper;
+    private $recipeMapper;
 
     public function __construct() {
         parent::__construct();
 
         $this->userMapper = new UserMapper();
+        $this->recipeMapper = new RecipeMapper();
 
         // Users controller operates in a "welcome" layout
         // different to the "default" layout where the internal
         // menu is displayed
-        $this->view->setLayout("welcome");
+        //$this->view->setLayout("welcome");
     }
 
     /**
@@ -79,7 +84,7 @@ class UsersController extends BaseController {
                 $this->view->setVariable("errors", $errors);
             }
         }
-
+        $this->view->setLayout("welcome");
         // render the view (/view/users/access.php)
         $this->view->render("users", "access");
     }
@@ -157,6 +162,7 @@ class UsersController extends BaseController {
             }
         }
 
+        $this->view->setLayout("welcome");
         // Put the User object visible to the view
         $this->view->setVariable("user", $user);
 
@@ -164,6 +170,53 @@ class UsersController extends BaseController {
         $this->view->render("users", "access");
 
     }
+
+    /**
+     * Retrieve all recipes of the logged user and show them in private home
+     */
+    public function home(){
+        if (!isset($_SESSION["currentuser"])) {
+            $this->view->redirect("home", "index");
+        }
+
+        //$user = $this->userMapper->findByUsername($_SESSION["currentuser"]);
+        $nUserRecipes = $this->recipeMapper->countRecipesByAlias($_SESSION["currentuser"]);
+
+        $nPags = ceil($nUserRecipes / 6);
+        $page = 0;
+
+        if (isset($_GET["page"])) {
+            if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int)$_GET["page"]) < $nPags) {
+                $page = $temp;
+            } else {
+                $this->view->redirect("user", "home");
+            }
+        }
+
+        $userRecipes = $this->recipeMapper->findByUsername($_SESSION["currentuser"], $page);
+
+        if ($nPags > 1) {
+            $prevPage = $page - 1;
+            $nextPage = $page + 1;
+            if ($page == 0) {
+                $this->view->setVariable("next", $nextPage);
+            } elseif ($page == ($nPags - 1)) {
+                $this->view->setVariable("previous", $prevPage);
+            } else {
+                $this->view->setVariable("next", $nextPage);
+                $this->view->setVariable("previous", $prevPage);
+            }
+        }
+
+        $this->view->setVariable("page", $page);
+
+        // put the array containing recipes object to the view
+        $this->view->setVariable("recipes", $userRecipes);
+
+        // render the view (/view/users/home.php)
+        $this->view->render("users", "home");
+    }
+
 
     /**
      * Action to logout

@@ -1,5 +1,5 @@
 <?php
-//file: view/layouts/default.php
+//file: view/layouts/welcome.php
 
 $view = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");

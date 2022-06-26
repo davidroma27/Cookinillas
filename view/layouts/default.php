@@ -69,7 +69,7 @@
                     </div>
                     <div class="user-nav__user-dropcont">
                         <a href="#"><?= i18n("Recetas favoritas") ?></a>
-                        <a href="#"><?= i18n("Mis recetas") ?></a>
+                        <a href="index.php?controller=users&amp;action=home"><?= i18n("Mis recetas") ?></a>
                     </div>
                 </div>
             </nav>

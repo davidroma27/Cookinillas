@@ -93,6 +93,32 @@ class RecipeMapper {
     }
 
     /**
+     * Load the recipes from the database given an alias
+     *
+     * @throws PDOException if a database error occurs
+     * @return mixed The Recipe instances. NULL if the Recipe is not found
+     */
+    public function findByUsername($alias, $page = 0, $per_page = 6){
+        $stmt = $this->db->prepare("SELECT * FROM recetas WHERE alias = ? ORDER BY id_receta DESC LIMIT ?,?");
+
+        $offset = $page * $per_page;
+        $stmt->execute(array($alias, $offset, $per_page));
+        $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $time = isset($recipe["time"]) ? $recipe["time"] : null;
+        $ingr = isset($recipe["ingr"]) ? $recipe["ingr"] : null;
+        $quant = isset($recipe["quant"]) ? $recipe["quant"] : null;
+
+        $recipes = array();
+
+        foreach ($recipes_db as $recipe){
+            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"],$recipe["imagen"],$time,
+                $ingr,$quant,$recipe["pasos"]));
+        }
+        return $recipes;
+    }
+
+    /**
      * Retrieves all existing ingredients in database
      *
      * @throws PDOException if a database error occurs
@@ -237,6 +263,21 @@ class RecipeMapper {
         $stmt = $this->db->query("SELECT COUNT(*) FROM recetas");
         return $stmt->fetchColumn();
     }
+
+    /**
+     * Counts all Recipes of a given logged user
+     *
+     * @throws PDOException if a database error occurs
+     * @return int the number of recipes
+     */
+    public function countRecipesByAlias($alias){
+        $stmt = $this->db->prepare("SELECT COUNT(recetas.id_receta) FROM recetas, usuarios 
+                                            WHERE usuarios.alias = ?
+                                            AND recetas.alias = usuarios.alias");
+        $stmt->execute(array($alias));
+        return $stmt->fetchColumn();
+    }
+
 
     public function uploadImg(){
         $toret = array();
