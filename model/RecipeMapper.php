@@ -118,6 +118,28 @@ class RecipeMapper {
         return $recipes;
     }
 
+    public function findLikedRecipes($alias, $page = 0, $per_page = 6){
+        $stmt = $this->db->prepare("SELECT recetas.* FROM recetas, receta_fav WHERE recetas.id_receta = receta_fav.id_receta
+                                          AND receta_fav.alias = ? ORDER BY receta_fav.id_receta DESC LIMIT ?,?");
+
+        $offset = $page * $per_page;
+        $stmt->execute(array($alias, $offset, $per_page));
+        $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $time = isset($recipe["time"]) ? $recipe["time"] : null;
+        $ingr = isset($recipe["ingr"]) ? $recipe["ingr"] : null;
+        $quant = isset($recipe["quant"]) ? $recipe["quant"] : null;
+
+        $recipes = array();
+
+        foreach ($recipes_db as $recipe){
+            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"],$recipe["imagen"],$time,
+                $ingr,$quant,$recipe["pasos"]));
+        }
+        return $recipes;
+
+    }
+
     /**
      * Retrieves all existing ingredients in database
      *
@@ -274,6 +296,20 @@ class RecipeMapper {
         $stmt = $this->db->prepare("SELECT COUNT(recetas.id_receta) FROM recetas, usuarios 
                                             WHERE usuarios.alias = ?
                                             AND recetas.alias = usuarios.alias");
+        $stmt->execute(array($alias));
+        return $stmt->fetchColumn();
+    }
+
+    /**
+     * Counts all liked Recipes of a given logged user
+     *
+     * @throws PDOException if a database error occurs
+     * @return int the number of recipes
+     */
+    public function countLikedRecipes($alias){
+        $stmt = $this->db->prepare("SELECT COUNT(recetas.id_receta) FROM recetas, receta_fav WHERE recetas.id_receta = receta_fav.id_receta
+                                          AND receta_fav.alias = ?");
+
         $stmt->execute(array($alias));
         return $stmt->fetchColumn();
     }

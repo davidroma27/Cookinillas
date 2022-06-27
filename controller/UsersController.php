@@ -217,6 +217,51 @@ class UsersController extends BaseController {
         $this->view->render("users", "home");
     }
 
+    /**
+     * Retrieves all liked recipes of the logged user and show them
+     */
+    public function favorites(){
+        if (!isset($_SESSION["currentuser"])) {
+            $this->view->redirect("home", "index");
+        }
+
+        $nLikedRecipes = $this->recipeMapper->countLikedRecipes($_SESSION["currentuser"]);
+
+        $nPags = ceil($nLikedRecipes / 6);
+        $page = 0;
+
+        if (isset($_GET["page"])) {
+            if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int)$_GET["page"]) < $nPags) {
+                $page = $temp;
+            } else {
+                $this->view->redirect("user", "home");
+            }
+        }
+
+        $likedRecipes = $this->recipeMapper->findLikedRecipes($_SESSION["currentuser"], $page);
+
+        if ($nPags > 1) {
+            $prevPage = $page - 1;
+            $nextPage = $page + 1;
+            if ($page == 0) {
+                $this->view->setVariable("next", $nextPage);
+            } elseif ($page == ($nPags - 1)) {
+                $this->view->setVariable("previous", $prevPage);
+            } else {
+                $this->view->setVariable("next", $nextPage);
+                $this->view->setVariable("previous", $prevPage);
+            }
+        }
+
+        $this->view->setVariable("page", $page);
+
+        // put the array containing recipes object to the view
+        $this->view->setVariable("recipes", $likedRecipes);
+
+        // render the view (/view/users/favorites.php)
+        $this->view->render("users", "favorites");
+
+    }
 
     /**
      * Action to logout
