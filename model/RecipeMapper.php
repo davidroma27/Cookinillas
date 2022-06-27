@@ -341,7 +341,6 @@ class RecipeMapper {
                     array_push($errors_img, "Error uploading image");
                 }
             }
-            var_dump($errors_img);
         }else{
             array_push($errors_img, "Error uploading image");
         }

@@ -31,7 +31,7 @@ $view->setVariable("title", "View Recipe");
         </svg>
         <span class="recipe__bar-alias"><?= $recipe->getAlias()->getAlias() ?></span>
 
-        <?php if (isset($currentuser)){
+<!--        --><?php //if (isset($currentuser)){
             if($isLike) { //SI TIENE LIKE MUESTRA CORAZON LLENO Y ACTION = DISLIKE?>
                 <form id="like__form" method="POST" action="index.php?controller=like&amp;action=dislike">
                     <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
@@ -71,12 +71,8 @@ $view->setVariable("title", "View Recipe");
                         </svg>
                     </a>
                 </form>
-        <?php } else{ //SI NO ESTA LOGEADO MUESTRA ALERTA?>
-            echo'<script type="text/javascript">
-                alert('<?= i18n("Debes iniciar sesión para hacer eso")?>');
-                window.location.href="./index.php?controller=users&action=login";
-            </script>'
-        <?php } ?>
+<!--        --><?php //} ?>
+
     </div>
     <div class="recipe__content">
         <div class="recipe__ing">

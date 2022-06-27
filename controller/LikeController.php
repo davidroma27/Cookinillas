@@ -19,7 +19,7 @@ class LikeController extends BaseController{
 
     public function like(){
         if (!isset($_SESSION["currentuser"])) {
-            $this->view->redirect("home", "index");
+            $this->view->redirect("users", "login");
         }
 
         if (isset($_POST["id"])) {
@@ -34,8 +34,7 @@ class LikeController extends BaseController{
         }
     }
 
-    public function dislike()
-    {
+    public function dislike(){
         if (!isset($_SESSION["currentuser"])) {
             $this->view->redirect("home", "index");
         }

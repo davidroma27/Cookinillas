@@ -46,7 +46,7 @@ $view->setVariable("title", "Recipe");
         <?php if (isset($previous) || isset($next)){ ?>
             <?php if (isset($previous)){ ?>
                 <button class="pag__button" type="button">
-                    <a href="index.php?controller=home&action=index&page=<?= $previous ?>" class="pag__box--content" id="sig_pag" >
+                    <a href="index.php?controller=users&action=home&page=<?= $previous ?>" class="pag__box--content" id="sig_pag" >
                         <svg class="pag__box--icon">
                             <use href="view/img/sprite.svg#icon-arrow-left"></use>
                         </svg>
@@ -62,13 +62,13 @@ $view->setVariable("title", "Recipe");
                 </button>
             <?php } ?>
 
-            <a href="index.php?controller=home&action=index&page=<?= $page ?>" class="pag__box--content" id="pag_num">
+            <a href="index.php?controller=users&action=home&page=<?= $page ?>" class="pag__box--content" id="pag_num">
                 <?= i18n("Página") ?> <?= $page ?>
             </a>
 
             <?php if (isset($next)){ ?>
                 <button class="pag__button" type="button">
-                    <a href="index.php?controller=home&action=index&page=<?= $next ?>" class="pag__box--content" id="prev_pag">
+                    <a href="index.php?controller=users&action=home&page=<?= $next ?>" class="pag__box--content" id="prev_pag">
                         <svg class="pag__box--icon">
                             <use href="view/img/sprite.svg#icon-arrow-right"></use>
                         </svg>

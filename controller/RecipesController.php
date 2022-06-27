@@ -244,7 +244,7 @@
             }
 
             if (!isset($this->currentUser)) {
-                throw new Exception("Not in session. Editing recipes requires login");
+                $this->view->redirect("users", "login");
             }
 
             // Get the Recipe object from the database
@@ -338,7 +338,7 @@
                 throw new Exception("id is mandatory");
             }
             if (!isset($this->currentUser)) {
-                throw new Exception("Not in session. Editing recipes requires login");
+                $this->view->redirect("users", "login");
             }
 
             // Get the recipe object from the database
