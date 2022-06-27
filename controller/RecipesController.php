@@ -313,6 +313,12 @@
             $this->view->render("recipes", "edit");
         }
 
+
+        public function search(){
+
+        }
+
+
         /**
          * Action to delete a recipe
          *

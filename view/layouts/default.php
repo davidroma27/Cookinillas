@@ -3,7 +3,7 @@
 
     $view = ViewManager::getInstance();
     $currentuser = $view->getVariable("currentusername");
-
+    $title = $view->getVariable("title");
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +21,23 @@
     <?= $view->getFragment("css") ?>
     <?= $view->getFragment("javascript") ?>
 
-    <title>Cookinillas &mdash; <?= i18n("Cocinando para todos") ?></title>
+    <title>Cookinillas &mdash;
+        <?php if($title == "Add Recipe"){ ?>
+           <?=i18n("Subir receta"); ?>
+        <?php } elseif($title == "View Recipe"){ ?>
+            <?= i18n("Cocinando para todos");?>
+        <?php } elseif($title == "Edit Recipe"){ ?>
+            <?=i18n("Editar receta");?>
+        <?php } elseif($title == "Search Recipe"){ ?>
+            <?=i18n("Buscar receta");?>
+        <?php } elseif($title == "User home"){ ?>
+            <?=i18n("Mis recetas");?>
+        <?php }elseif($title == "Favorites"){ ?>
+            <?=i18n("Recetas favoritas");?>
+        <?php } else{ ?>
+        <?=i18n("Cocinando para todos");?>
+        <?php } ?>
+    </title>
 </head>
 
 <body>
@@ -33,17 +49,15 @@
                 </button>
             </a>
 
-            <form action="index.php?controller=recipes&amp;action=search" class="search">
-                <input type="text" class="search__input" placeholder="<?= i18n("Buscar por ingredientes") ?>">
-                <button class="search__button">
-                    <svg class="search__icon">
-                        <use href="/view/img/sprite.svg#icon-magnifying-glass"></use>
-                    </svg>
-                </button>
-            </form>
-
             <nav class="user-nav">
                 <?php if (isset($currentuser)): ?>
+                    <a href="index.php?controller=recipes&amp;action=search">
+                        <div class="user-nav__icon-search">
+                            <svg class="search__icon">
+                                <use href="/view/img/sprite.svg#icon-magnifying-glass"></use>
+                            </svg>
+                        </div>
+                    </a>
                     <a href="index.php?controller=recipes&amp;action=add">
                         <div class="user-nav__icon-box">
                             <svg id="upload_icon" class="user-nav__icon">

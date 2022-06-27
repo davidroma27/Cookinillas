@@ -13,7 +13,7 @@ $next = $view->getVariable("next");
 $previous = $view->getVariable("previous");
 $page = $view->getVariable("page");
 
-$view->setVariable("title", "Recipe");
+$view->setVariable("title", "Favorites");
 
 
 ?>

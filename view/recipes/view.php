@@ -55,23 +55,26 @@ $view->setVariable("title", "View Recipe");
                     </button>
                 </form>
             <?php } ?>
-                <a href="index.php?controller=recipes&amp;action=edit&amp;id=<?= $recipe->getId() ?>" id="action_button" class="fav__button">
-                    <svg class="fav__icon">
-                        <use href="/view/img/sprite.svg#icon-pencil"></use>
-                    </svg>
-                </a>
-
-                <form method="POST" action="index.php?controller=recipes&amp;action=delete" id="del_recipe_<?= $recipe->getId(); ?>" class="del_recipe">
-                    <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
-                    <a href="#" id="del_button" class="fav__button" onclick="
-                            if (confirm('<?= i18n("¿Seguro que deseas eliminar la receta?")?>')){
-                            document.getElementById('del_recipe_<?= $recipe->getId() ?>').submit()}">
+                <?php if($currentuser === $recipe->getAlias()->getAlias()){ ?>
+                    <a href="index.php?controller=recipes&amp;action=edit&amp;id=<?= $recipe->getId() ?>" id="action_button" class="fav__button">
                         <svg class="fav__icon">
-                            <use href="/view/img/sprite.svg#icon-del"></use>
+                            <use href="/view/img/sprite.svg#icon-pencil"></use>
                         </svg>
                     </a>
-                </form>
-<!--        --><?php //} ?>
+
+                    <form method="POST" action="index.php?controller=recipes&amp;action=delete" id="del_recipe_<?= $recipe->getId(); ?>" class="del_recipe">
+                        <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
+                        <a href="#" id="del_button" class="fav__button" onclick="
+                                if (confirm('<?= i18n("¿Seguro que deseas eliminar la receta?")?>')){
+                                document.getElementById('del_recipe_<?= $recipe->getId() ?>').submit()}">
+                            <svg class="fav__icon">
+                                <use href="/view/img/sprite.svg#icon-del"></use>
+                            </svg>
+                        </a>
+                    </form>
+                <?php } ?>
+
+<!--    --><?php //} ?>
 
     </div>
     <div class="recipe__content">

@@ -118,6 +118,12 @@ class RecipeMapper {
         return $recipes;
     }
 
+    /**
+     * Load the recipes from the database liked by a logged user
+     *
+     * @throws PDOException if a database error occurs
+     * @return mixed The Recipe instances. NULL if the Recipe is not found
+     */
     public function findLikedRecipes($alias, $page = 0, $per_page = 6){
         $stmt = $this->db->prepare("SELECT recetas.* FROM recetas, receta_fav WHERE recetas.id_receta = receta_fav.id_receta
                                           AND receta_fav.alias = ? ORDER BY receta_fav.id_receta DESC LIMIT ?,?");
@@ -137,6 +143,20 @@ class RecipeMapper {
                 $ingr,$quant,$recipe["pasos"]));
         }
         return $recipes;
+
+    }
+
+    /**
+     * Load the recipes from the database given some ingredients
+     *
+     * @throws PDOException if a database error occurs
+     * @return mixed The Recipe instances. NULL if the Recipe is not found
+     */
+    public function findByIngredients($ingr, $page = 0, $per_page = 6){
+        $stmt = $this->db->prepare("SELECT recetas.* FROM recetas, ingredientes, receta_ingrediente 
+                                          WHERE recetas.id_receta = receta_ingrediente.id_receta
+                                          AND receta_ingrediente.id_ingr = ingredientes.id_ingr 
+                                          AND ingredientes.nombre = ? ORDER BY recetas.id_receta DESC LIMIT ?,?");
 
     }
 
