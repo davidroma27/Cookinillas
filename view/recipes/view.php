@@ -56,7 +56,7 @@ $view->setVariable("title", "View Recipe");
                 </form>
             <?php } ?>
                 <?php if($currentuser === $recipe->getAlias()->getAlias()){ ?>
-                    <a href="index.php?controller=recipes&amp;action=edit&amp;id=<?= $recipe->getId() ?>" id="action_button" class="fav__button">
+                    <a href="index.php?controller=recipes&amp;action=edit&amp;id=<?= $recipe->getId() ?>" id="action_button" class="fav__button" title="<?= i18n("Editar receta") ?>">
                         <svg class="fav__icon">
                             <use href="/view/img/sprite.svg#icon-pencil"></use>
                         </svg>
@@ -66,7 +66,7 @@ $view->setVariable("title", "View Recipe");
                         <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
                         <a href="#" id="del_button" class="fav__button" onclick="
                                 if (confirm('<?= i18n("¿Seguro que deseas eliminar la receta?")?>')){
-                                document.getElementById('del_recipe_<?= $recipe->getId() ?>').submit()}">
+                                document.getElementById('del_recipe_<?= $recipe->getId() ?>').submit()}" title="<?= i18n("Borrar receta") ?>">
                             <svg class="fav__icon">
                                 <use href="/view/img/sprite.svg#icon-del"></use>
                             </svg>

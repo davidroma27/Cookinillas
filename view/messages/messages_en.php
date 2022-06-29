@@ -14,6 +14,7 @@
         "Mis recetas" => "My recipes",
         "Subir receta" => "Upload recipe",
         "Editar receta" => "Edit recipe",
+        "Borrar receta" => "Delete recipe",
         "Nombre de la receta" => "Recipe name",
         "Imagen de la receta" => "Recipe image",
         "Tiempo de preparación (minutos)" => "Preparation time (minutes)",
@@ -31,6 +32,8 @@
         "Siguiente" => "Next",
         "Anterior" => "Previous",
         "Debes iniciar sesión para hacer eso" => "You must login in order to do that",
-        "Página" => "Page"
+        "Página" => "Page",
+        "Añadir ingrediente" => "Add ingredient",
+        "Cerrar sesión" => "Sign out"
     )
 ?>

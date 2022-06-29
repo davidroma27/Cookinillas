@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 DROP TABLE IF EXISTS `ingredientes`;
 CREATE TABLE IF NOT EXISTS `ingredientes` (
   `id_ingr` int(3) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) NOT NULL,
+  `nombre` varchar(20) NOT NULL UNIQUE,
   PRIMARY KEY (`id_ingr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

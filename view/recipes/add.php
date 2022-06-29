@@ -7,6 +7,7 @@ $view = ViewManager::getInstance();
 
 $recipe = $view->getVariable("recipe");
 $ingredients = $view->getVariable("ingredients");
+
 $errors = $view->getVariable("errors");
 
 $view->setVariable("title", "Add Recipe");
@@ -36,19 +37,26 @@ $view->setVariable("title", "Add Recipe");
                 <span><?= i18n("Tiempo de preparación (minutos)") ?></span>
                 <input type="number" name="time">
             </label>
-            <label>
-                <span><?= i18n("Ingredientes") ?></span>
-                <input list="ingredients" name="ingr">
-                <datalist id="ingredients">
-                    <?php foreach ($ingredients as $ingr): ?>
-                        <option value="<?php print_r($ingr) ?>"></option>
-                    <?php endforeach; ?>
-                </datalist>
-            </label>
-            <label>
-                <span><?= i18n("Cantidad") ?></span>
-                <input type="text" name="quant">
-            </label>
+                <div class="ingr-input">
+                    <label class="ingrLabel">
+                        <span><?= i18n("Ingredientes") ?></span>
+                        <input class="inputIngr" list="ingredients" name="ingr[]">
+                        <datalist id="ingredients">
+                            <?php foreach ($ingredients as $ingr): ?>
+                                <option value="<?php print_r($ingr) ?>"></option>
+                            <?php endforeach; ?>
+                        </datalist>
+                    </label>
+                    <label class="cantLabel">
+                        <span><?= i18n("Cantidad") ?></span>
+                        <input class="inputCant" type="text" name="quant[]">
+                    </label>
+                    <button class="ingr-input__button" onclick="addInput()" type="button" title="<?= i18n("Añadir ingrediente") ?>">
+                        <svg class="ingr-input__button--icon">
+                            <use href="view/img/sprite.svg#icon-add-ingr"></use>
+                        </svg>
+                    </button>
+                </div>
             <label>
                 <span><?= i18n("Pasos para elaborar la receta") ?></span>
                 <textarea name="steps" id="recipeTextArea" cols="30" rows="10"></textarea>
@@ -57,3 +65,41 @@ $view->setVariable("title", "Add Recipe");
         </form>
     </div>
 </main>
+<script>
+    function addInput(){
+        let ingrParent = document.querySelector(".ingrLabel");
+        let cantParent = document.querySelector(".cantLabel");
+
+        let ingrInput = ingrParent.querySelector(".inputIngr");
+        let cantInput = cantParent.querySelector(".inputCant");
+
+        /******* INGREDIENTS INPUT FIELD POPULATION ******/
+        let newIngr = document.createElement('input');
+        newIngr.type = 'text';
+        newIngr.className = "inputIngr";
+        newIngr.name = "ingr[]";
+        newIngr.setAttribute("list","ingredients");
+
+        let newDL = document.createElement('datalist');
+        newDL.id= "ingredients";
+
+        let json = <?php echo json_encode($ingredients); ?>;
+        //<input class="inputIngr" list="ingredients" name="ingr[]">
+
+        for (const ingr in json) {
+            var option = document.createElement('option');
+            option.value = json[ingr];
+        }
+
+        /******* CANTIDAD INPUT FIELD POPULATION ******/
+        let newCant = document.createElement('input');
+        newCant.type = 'text';
+        newCant.className = "inputCant";
+        newCant.name = "cant[]";
+        //Creating elements in DOM
+        ingrParent.appendChild(newIngr);
+        newDL.appendChild(option);
+        ingrParent.appendChild(newDL);
+        cantParent.appendChild(newCant);
+    }
+</script>

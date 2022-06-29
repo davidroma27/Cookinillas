@@ -44,21 +44,21 @@
     <div class="container">
         <header class="header">
             <a href="index.php?controller=home&amp;action=index">
-                <button class="home__button">
+                <button class="home__button" title="Home">
                     <img src="/view/img/logo.svg" alt="cookinillas logo" class="logo">
                 </button>
             </a>
 
             <nav class="user-nav">
                 <?php if (isset($currentuser)): ?>
-                    <a href="index.php?controller=recipes&amp;action=search">
+                    <a href="index.php?controller=recipes&amp;action=search" title="<?= i18n("Buscar receta") ?>">
                         <div class="user-nav__icon-search">
                             <svg class="search__icon">
                                 <use href="/view/img/sprite.svg#icon-magnifying-glass"></use>
                             </svg>
                         </div>
                     </a>
-                    <a href="index.php?controller=recipes&amp;action=add">
+                    <a href="index.php?controller=recipes&amp;action=add" title="<?= i18n("Subir receta") ?>">
                         <div class="user-nav__icon-box">
                             <svg id="upload_icon" class="user-nav__icon">
                                 <use href="/view/img/sprite.svg#icon-upload-to-cloud"></use>
@@ -72,7 +72,7 @@
 
                             <?php if (isset($currentuser)): ?>
                                <?= printf(i18n($currentuser))?>
-                                <a href="index.php?controller=users&amp;action=logout">
+                                <a href="index.php?controller=users&amp;action=logout" title="<?= i18n("Cerrar sesión") ?>">
                                     <svg class="user-nav__icon">
                                         <use href="/view/img/sprite.svg#icon-exit"></use>
                                     </svg>

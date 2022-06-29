@@ -181,10 +181,6 @@
                     }
                     $this->view->setVariable("page", 0);
 
-                    //Retrieve all available ingredients of database
-                    $ingredients = $this->recipeMapper->getIngredients();
-                    $this->view->setVariable("ingredients", $ingredients);
-
                     // Put the Recipes object visible to the view
                     //$this->view->setVariable("recipe", $recipe);
 
@@ -193,6 +189,10 @@
                 }
 
             }
+
+            //Retrieve all available ingredients of database
+            $ingredients = $this->recipeMapper->getIngredients();
+            $this->view->setVariable("ingredients", $ingredients);
 
             // Put the Recipes object visible to the view
             $this->view->setVariable("recipe", $recipe);
@@ -303,8 +303,8 @@
             }
 
             //Retrieve all available ingredients of database
-            $ingredients = $this->recipeMapper->getIngredients();
-            $this->view->setVariable("ingredients", $ingredients);
+            //$ingredients = $this->recipeMapper->getIngredients();
+            //$this->view->setVariable("ingredients", $ingredients);
 
             // Put the Recipe object visible to the view
             $this->view->setVariable("recipe", $recipe);
@@ -315,7 +315,9 @@
 
 
         public function search(){
-
+            if(isset($_POST["ingredientes"])){
+                $nRecipes = $this->recipeMapper->cou();
+            }
         }
 
 

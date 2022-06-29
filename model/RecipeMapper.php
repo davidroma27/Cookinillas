@@ -152,12 +152,27 @@ class RecipeMapper {
      * @throws PDOException if a database error occurs
      * @return mixed The Recipe instances. NULL if the Recipe is not found
      */
-    public function findByIngredients($ingr, $page = 0, $per_page = 6){
+    public function findByIngredients($ingredient, $page = 0, $per_page = 6){
         $stmt = $this->db->prepare("SELECT recetas.* FROM recetas, ingredientes, receta_ingrediente 
                                           WHERE recetas.id_receta = receta_ingrediente.id_receta
                                           AND receta_ingrediente.id_ingr = ingredientes.id_ingr 
                                           AND ingredientes.nombre = ? ORDER BY recetas.id_receta DESC LIMIT ?,?");
 
+        $offset = $page * $per_page;
+        $stmt->execute(array($ingredient, $offset, $per_page));
+        $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $time = isset($recipe["time"]) ? $recipe["time"] : null;
+        $ingr = isset($recipe["ingr"]) ? $recipe["ingr"] : null;
+        $quant = isset($recipe["quant"]) ? $recipe["quant"] : null;
+
+        $recipes = array();
+
+        foreach ($recipes_db as $recipe){
+            array_push($recipes, new Recipe($recipe["id_receta"],$recipe["titulo"],$recipe["imagen"],$time,
+                $ingr,$quant,$recipe["pasos"]));
+        }
+        return $recipes;
     }
 
     /**
@@ -175,6 +190,23 @@ class RecipeMapper {
             return $ingr;
         }
         else return null;
+    }
+
+    /**
+     * Check if a given ingredient is in the database
+     *
+     * @throws PDOException if a database error occurs
+     * @return bool true if ingredient exists, false otherwise
+     */
+    public function findIngredient($ingr){
+        $stmt = $this->db->query("SELECT nombre FROM ingredientes WHERE ingredientes.nombre = ?");
+        $stmt->execute();
+
+        $ingr = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        if($ingr != NULL){
+            return true;
+        }
+        else return false;
     }
 
     /**
@@ -250,14 +282,19 @@ class RecipeMapper {
      */
     public function save(Recipe $recipe) {
         $stmt1 = $this->db->prepare("INSERT INTO recetas(titulo, imagen, tiempo, pasos, alias) values (?,?,?,?,?)");
-        $stmt2 = $this->db->prepare("INSERT INTO ingredientes(nombre) VALUES (?) ON DUPLICATE KEY UPDATE nombre = nombre");
-        $stmt3 = $this->db->prepare("INSERT INTO receta_ingrediente(id_receta, id_ingr, cantidad) VALUES (?,?,?)");
+        $stmt2 = $this->db->prepare("INSERT IGNORE INTO ingredientes(nombre) VALUES (?)");
+        $ingr = $this->db->prepare("SELECT ingredientes.id_ingr FROM ingredientes,recetas
+                                            WHERE ingredientes.nombre = ?
+                                            AND recetas.id_receta = ?");
+        $stmt3 = $this->db->prepare("INSERT INTO receta_ingrediente(id_receta, id_ingr, cantidad) VALUES(?,?,?)");
 
         $stmt1->execute(array($recipe->getTitle(), $recipe->getImg(), $recipe->getTime(), $recipe->getSteps(), $recipe->getAlias()->getAlias()));
         $recipeid = $this->db->lastInsertId();
 
         $stmt2->execute(array($recipe->getIngr()));
-        $id_ingr = $this->db->lastInsertId();
+        //$id_ingr = $this->db->lastInsertId();
+
+        $id_ingr = $ingr->execute(array($recipe->getIngr(), $recipeid));
         $stmt3->execute(array($recipeid, $id_ingr, $recipe->getQuant()));
 
         return $recipeid;
@@ -334,6 +371,15 @@ class RecipeMapper {
         return $stmt->fetchColumn();
     }
 
+    public function countRecipesByIngredient($ingredient){
+        $stmt = $this->db->prepare("SELECT COUNT(recetas.id_receta) FROM recetas, receta_ingrediente, ingredientes 
+                                          WHERE recetas.id_receta = receta_ingrediente.id_receta
+                                          AND receta_ingrediente.id_ingr = ingredientes.id_ingr
+                                          AND ingredientes.nombre = ?");
+
+        $stmt->execute(array($ingredient));
+        return $stmt->fetchColumn();
+    }
 
     public function uploadImg(){
         $toret = array();

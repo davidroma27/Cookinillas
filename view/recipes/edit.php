@@ -6,7 +6,7 @@ $view = ViewManager::getInstance();
 
 $recipe = $view->getVariable("recipe");
 $errors = $view->getVariable("errors");
-$ingredients = $view->getVariable("ingredients");
+//$ingredients = $view->getVariable("ingredients");
 
 $view->setVariable("title", "Edit Recipe");
 
@@ -38,11 +38,11 @@ $view->setVariable("title", "Edit Recipe");
             <label>
                 <span><?= i18n("Ingredientes") ?></span>
                 <input list="ingredients" name="ingr" value="<?php foreach ($recipe->getIngr() as $ingr): print_r($ingr); endforeach; ?>">
-                <datalist id="ingredients">
-                    <?php foreach ($ingredients as $ingr): ?>
-                        <option value="<?php print_r($ingr) ?>"></option>
-                    <?php endforeach; ?>
-                </datalist>
+<!--                <datalist id="ingredients">-->
+<!--                    --><?php //foreach ($ingredients as $ingr): ?>
+<!--                        <option value="--><?php //print_r($ingr) ?><!--"></option>-->
+<!--                    --><?php //endforeach; ?>
+<!--                </datalist>-->
             </label>
             <label>
                 <span><?= i18n("Cantidad") ?></span>
