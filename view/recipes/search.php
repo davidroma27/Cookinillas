@@ -16,6 +16,7 @@ $errors = $view->getVariable("errors");
 
 $view->setVariable("title", "Search Recipe");
 
+var_dump($recipes);
 ?>
 
 <div class="title-bar">
@@ -27,12 +28,12 @@ $view->setVariable("title", "Search Recipe");
 <main class="main-content">
 
     <div class="form__box">
-        <form action="index.php?controller=recipes&amp;action=search" method="POST" class="recipe__form--search" enctype="multipart/form-data">
+        <form action="index.php?controller=recipes&amp;action=search" method="POST" class="recipe__form--search">
 
             <div class="ingr-input">
                 <label class="ingrLabel">
                     <span><?= i18n("Ingredientes") ?></span>
-                    <input class="inputIngr" list="ingredients" name="ingr[]">
+                    <input class="inputIngr" list="ingredients" name="ingredientes[]">
                     <datalist id="ingredients">
                         <?php foreach ($ingredients as $ingr): ?>
                             <option value="<?php print_r($ingr) ?>"></option>
@@ -44,8 +45,6 @@ $view->setVariable("title", "Search Recipe");
                         <use href="view/img/sprite.svg#icon-add-ingr"></use>
                     </svg>
                 </button>
-
-
             </div>
 
             <input class="form__button--search" name="submit" type="submit" value="<?= i18n("Buscar") ?>">
@@ -66,6 +65,8 @@ $view->setVariable("title", "Search Recipe");
 
                 </div>
             <?php endforeach; ?>
+        <?php }elseif($_POST != null){ ?>
+                <h1>No existen recetas con esos ingredientes</h1>
         <?php } ?>
     </div>
 
@@ -123,7 +124,7 @@ $view->setVariable("title", "Search Recipe");
         let newIngr = document.createElement('input');
         newIngr.type = 'text';
         newIngr.className = "inputIngr";
-        newIngr.name = "ingr[]";
+        newIngr.name = "ingredientes[]";
         newIngr.setAttribute("list","ingredients");
 
         let newDL = document.createElement('datalist');

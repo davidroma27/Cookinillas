@@ -315,8 +315,42 @@
 
 
         public function search(){
-            if(isset($_POST["ingredientes"])){
-                //$nRecipes = $this->recipeMapper->countRecipesByIngredient();
+            if(isset($_POST["ingredientes[]"])){
+                $nRecipes = $this->recipeMapper->countRecipesByIngredient($_POST["ingredientes[]"]);
+
+                $nPags = ceil($nRecipes / 6);
+                $page = 0;
+                if (isset($_GET["page"])) {
+                    if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int)$_GET["page"]) < $nPags) {
+                        $page = $temp;
+                    } else {
+                        if (isset($_SERVER["HTTP_REFERER"])) {
+                            $this->view->redirectToReferer();
+                        } else {
+                            $this->view->redirect("home", "index");
+                        }
+                    }
+                }
+
+                $recipes = $this->recipeMapper->findByIngredients($_POST["ingredientes[]"], $page);
+                $this->view->setVariable($recipes);
+
+                if ($nPags > 1) {
+                    $prevPage = $page - 1;
+                    $nextPage = $page + 1;
+                    if ($page == 0) {
+                        $this->view->setVariable("next", $nextPage);
+                    } elseif ($page == ($nPags - 1)) {
+                        $this->view->setVariable("previous", $prevPage);
+                    } else {
+                        $this->view->setVariable("next", $nextPage);
+                        $this->view->setVariable("previous", $prevPage);
+                    }
+                }
+
+                $this->view->setVariable("page", $page);
+
+
             }
 
             //Retrieve all available ingredients of database

@@ -40,7 +40,7 @@ $view->setVariable("title", "Add Recipe");
                 <div class="ingr-input">
                     <label class="ingrLabel">
                         <span><?= i18n("Ingredientes") ?></span>
-                        <input class="inputIngr" list="ingredients" name="ingr[]">
+                        <input class="inputIngr" list="ingredients" name="ingredientes[]">
                         <datalist id="ingredients">
                             <?php foreach ($ingredients as $ingr): ?>
                                 <option value="<?php print_r($ingr) ?>"></option>
@@ -77,15 +77,14 @@ $view->setVariable("title", "Add Recipe");
         let newIngr = document.createElement('input');
         newIngr.type = 'text';
         newIngr.className = "inputIngr";
-        newIngr.name = "ingr[]";
+        newIngr.name = "ingredientes[]";
         newIngr.setAttribute("list","ingredients");
 
         let newDL = document.createElement('datalist');
         newDL.id= "ingredients";
 
+        //Parse php ingredients to json and generate option values
         let json = <?php echo json_encode($ingredients); ?>;
-        //<input class="inputIngr" list="ingredients" name="ingr[]">
-
         for (const ingr in json) {
             var option = document.createElement('option');
             option.value = json[ingr];

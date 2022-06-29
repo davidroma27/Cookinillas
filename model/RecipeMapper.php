@@ -153,13 +153,16 @@ class RecipeMapper {
      * @return mixed The Recipe instances. NULL if the Recipe is not found
      */
     public function findByIngredients($ingredient, $page = 0, $per_page = 6){
+        $ingredients = implode('\',\'', $ingredient);
+        $ingr = "'" . $ingredients . "'";
+
         $stmt = $this->db->prepare("SELECT recetas.* FROM recetas, ingredientes, receta_ingrediente 
                                           WHERE recetas.id_receta = receta_ingrediente.id_receta
                                           AND receta_ingrediente.id_ingr = ingredientes.id_ingr 
-                                          AND ingredientes.nombre = ? ORDER BY recetas.id_receta DESC LIMIT ?,?");
+                                          AND ingredientes.nombre = '.$ingr.'");
 
         $offset = $page * $per_page;
-        $stmt->execute(array($ingredient, $offset, $per_page));
+        $stmt->execute(array($offset, $per_page));
         $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $time = isset($recipe["time"]) ? $recipe["time"] : null;
@@ -377,7 +380,7 @@ class RecipeMapper {
                                           AND receta_ingrediente.id_ingr = ingredientes.id_ingr
                                           AND ingredientes.nombre = ?");
 
-        $stmt->execute(array($ingredient));
+        $stmt->execute($ingredient);
         return $stmt->fetchColumn();
     }
 

@@ -146,7 +146,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex: 0 1 100%;
   min-height: 80vh;
@@ -271,7 +271,6 @@
 /////////// RECIPE FORM //////////////
 .form__box{
   display: flex;
-  flex: 1;
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -348,6 +347,8 @@
   }
 }
 
+/////////// RECIPE FORM SEARCH VIEW //////////////
+
 .recipe__form--search{
   display: flex;
   flex-direction: row;
@@ -387,6 +388,9 @@
 
   span{
     font-size: 1.5rem;
+  }
+  .main-content{
+    justify-content: flex-start;
   }
 }
 
