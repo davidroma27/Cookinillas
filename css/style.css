@@ -400,6 +400,50 @@ footer {
     cursor: pointer;
     background-color: var(--color-tertiary); }
 
+.recipe__form--search {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 60%;
+  max-width: 100%;
+  width: 50%;
+  flex-wrap: nowrap;
+  margin: 4rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: var(--color-secondary-dark);
+  box-shadow: var(--shadow-dark); }
+  .recipe__form--search .ingr-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; }
+  .recipe__form--search .ingrLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0; }
+  .recipe__form--search .ingr-input > .ingrLabel, .recipe__form--search .ingr-input > .form__button--search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0; }
+  .recipe__form--search span {
+    font-size: 1.5rem; }
+
+.form__button--search {
+  height: 5rem;
+  border: none;
+  padding: .5rem;
+  border-radius: .5rem;
+  max-width: 30%;
+  background-color: var(--color-tertiary-dark);
+  color: var(--color-tertiary-light); }
+  .form__button--search:hover {
+    cursor: pointer;
+    background-color: var(--color-tertiary); }
+
 .access-container {
   display: flex;
   justify-content: center;

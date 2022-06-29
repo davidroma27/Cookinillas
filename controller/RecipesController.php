@@ -316,8 +316,15 @@
 
         public function search(){
             if(isset($_POST["ingredientes"])){
-                $nRecipes = $this->recipeMapper->cou();
+                //$nRecipes = $this->recipeMapper->countRecipesByIngredient();
             }
+
+            //Retrieve all available ingredients of database
+            $ingredients = $this->recipeMapper->getIngredients();
+            $this->view->setVariable("ingredients", $ingredients);
+
+            // render the view (/view/recipes/search.php)
+            $this->view->render("recipes", "search");
         }
 
 
