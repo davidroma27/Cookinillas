@@ -149,11 +149,6 @@
                     // save the Recipe object into the database
                     $id = $this->recipeMapper->save($recipe);
 
-
-                    /***** AQUI OBTENDREMOS LOS INGREDIENTES CON UN FOREACH Y SE GUARDARAN
-                     * CADA UNO EN LA TABLA INGREDIENTES ******/
-
-
                     // POST-REDIRECT-GET
                     // Everything OK, we will redirect the user to the list of recipes
                     // We want to see a message after redirection, so we establish
@@ -162,40 +157,26 @@
                     $this->view->setFlash(sprintf(i18n("Recipe \"%s\" successfully added."),$recipe ->getTitle()));
 
                     // perform the redirection. More or less:
-                    // header("Location: index.php?controller=recipes&action=index")
+                    // header("Location: index.php?controller=recipes&action=index?id=1")
                     // die();
                     $queryString = "id=" . $id;
                     $this->view->redirect("recipes", "view", $queryString);
 
-                }else{
-                    if (isset($this->currentUser)) {
-                        $idLikes = $this->likeMapper->findByUsername($_SESSION["currentuser"]);
-                        $this->view->setVariable("idLikes", $idLikes);
-                    }
-
-                    $nRecipes = $this->recipeMapper->countRecipes();
-                    $nPags = ceil($nRecipes / 6);
-                    $recipe = $this->recipeMapper->findAll(0);
-                    if($nPags > 1){
-                        $this->view->setVariable("next", 1);
-                    }
-                    $this->view->setVariable("page", 0);
-
-                    // Put the Recipes object visible to the view
-                    //$this->view->setVariable("recipe", $recipe);
-
-                    // render the view (/view/recipes/add.php)
-                    //$this->view->render("recipes", "add");
                 }
+
+                if (isset($this->currentUser)) {
+                    $idLikes = $this->likeMapper->findByUsername($_SESSION["currentuser"]);
+                    $this->view->setVariable("idLikes", $idLikes);
+                }
+
+                // Put the Recipes object visible to the view
+                $this->view->setVariable("recipe", $recipe);
 
             }
 
             //Retrieve all available ingredients of database
             $ingredients = $this->recipeMapper->getIngredients();
             $this->view->setVariable("ingredients", $ingredients);
-
-            // Put the Recipes object visible to the view
-            $this->view->setVariable("recipe", $recipe);
 
             // render the view (/view/recipes/add.php)
             $this->view->render("recipes", "add");
@@ -318,38 +299,8 @@
             if(isset($_POST["ingredientes[]"])){
                 $nRecipes = $this->recipeMapper->countRecipesByIngredient($_POST["ingredientes[]"]);
 
-                $nPags = ceil($nRecipes / 6);
-                $page = 0;
-                if (isset($_GET["page"])) {
-                    if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int)$_GET["page"]) < $nPags) {
-                        $page = $temp;
-                    } else {
-                        if (isset($_SERVER["HTTP_REFERER"])) {
-                            $this->view->redirectToReferer();
-                        } else {
-                            $this->view->redirect("home", "index");
-                        }
-                    }
-                }
-
-                $recipes = $this->recipeMapper->findByIngredients($_POST["ingredientes[]"], $page);
+                $recipes = $this->recipeMapper->findByIngredients($_POST["ingredientes[]"]);
                 $this->view->setVariable($recipes);
-
-                if ($nPags > 1) {
-                    $prevPage = $page - 1;
-                    $nextPage = $page + 1;
-                    if ($page == 0) {
-                        $this->view->setVariable("next", $nextPage);
-                    } elseif ($page == ($nPags - 1)) {
-                        $this->view->setVariable("previous", $prevPage);
-                    } else {
-                        $this->view->setVariable("next", $nextPage);
-                        $this->view->setVariable("previous", $prevPage);
-                    }
-                }
-
-                $this->view->setVariable("page", $page);
-
 
             }
 

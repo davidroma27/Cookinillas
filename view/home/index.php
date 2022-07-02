@@ -8,10 +8,6 @@ $recipes = $view->getVariable("recipes");
 $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
 
-$next = $view->getVariable("next");
-$previous = $view->getVariable("previous");
-$page = $view->getVariable("page");
-
 $view->setVariable("title", "Recipe");
 
 ?>
@@ -41,49 +37,5 @@ $view->setVariable("title", "Recipe");
     </div>
 
 
-    <div class="pag__box">
-        <?php if (isset($previous) || isset($next)){ ?>
-            <?php if (isset($previous)){ ?>
-                <button class="pag__button" type="button">
-                    <a href="index.php?controller=home&action=index&page=<?= $previous ?>" class="pag__box--content" id="sig_pag" >
-                        <svg class="pag__box--icon">
-                            <use href="view/img/sprite.svg#icon-arrow-left"></use>
-                        </svg>
-                    </a>
-                </button>
-            <?php }else{ ?>
-                <button class="pag__button" type="button" disabled>
-                    <a class="pag__box--content" id="sig_pag" >
-                        <svg class="pag__box--icon">
-                            <use href="view/img/sprite.svg#icon-arrow-left"></use>
-                        </svg>
-                    </a>
-                </button>
-            <?php } ?>
-
-            <a href="index.php?controller=home&action=index&page=<?= $page ?>" class="pag__box--content" id="pag_num">
-                <?= i18n("Página") ?> <?= $page ?>
-            </a>
-
-            <?php if (isset($next)){ ?>
-                <button class="pag__button" type="button">
-                    <a href="index.php?controller=home&action=index&page=<?= $next ?>" class="pag__box--content" id="prev_pag">
-                        <svg class="pag__box--icon">
-                            <use href="view/img/sprite.svg#icon-arrow-right"></use>
-                        </svg>
-                    </a>
-                </button>
-
-            <?php }else{ ?>
-                <button class="pag__button" type="button" disabled>
-                    <a class="pag__box--content" id="prev_pag">
-                        <svg class="pag__box--icon">
-                            <use href="view/img/sprite.svg#icon-arrow-right"></use>
-                        </svg>
-                    </a>
-                </button>
-            <?php } ?>
-        <?php } ?>
-    </div>
 
 </main>

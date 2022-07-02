@@ -31,8 +31,7 @@ $view->setVariable("title", "View Recipe");
         </svg>
         <span class="recipe__bar-alias"><?= $recipe->getAlias()->getAlias() ?></span>
 
-<!--        --><?php //if (isset($currentuser)){
-            if($isLike) { //SI TIENE LIKE MUESTRA CORAZON LLENO Y ACTION = DISLIKE?>
+            <?php if($isLike) { //SI TIENE LIKE MUESTRA CORAZON LLENO Y ACTION = DISLIKE?>
                 <form id="like__form" method="POST" action="index.php?controller=like&amp;action=dislike">
                     <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
                     <button id="fav_button" class="fav__button" name="submit" type="submit">
@@ -73,8 +72,6 @@ $view->setVariable("title", "View Recipe");
                         </a>
                     </form>
                 <?php } ?>
-
-<!--    --><?php //} ?>
 
     </div>
     <div class="recipe__content">

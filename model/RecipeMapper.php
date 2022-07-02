@@ -31,12 +31,11 @@ class RecipeMapper {
      * @throws PDOException if a database error occurs
      * @return mixed Array of Recipe instances
      */
-    public function findAll($page = 0, $per_page = 6) {
+    public function findAll() {
         $stmt = $this->db->prepare("SELECT id_receta, titulo, imagen, pasos
-                                            FROM recetas ORDER BY recetas.id_receta DESC LIMIT ?,?");
+                                            FROM recetas ORDER BY recetas.id_receta DESC LIMIT 10");
 
-        $offset = $page * $per_page;
-        $stmt->execute(array($offset, $per_page));
+        $stmt->execute();
         $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $recipes = array();
 
@@ -98,11 +97,10 @@ class RecipeMapper {
      * @throws PDOException if a database error occurs
      * @return mixed The Recipe instances. NULL if the Recipe is not found
      */
-    public function findByUsername($alias, $page = 0, $per_page = 6){
-        $stmt = $this->db->prepare("SELECT * FROM recetas WHERE alias = ? ORDER BY id_receta DESC LIMIT ?,?");
+    public function findByUsername($alias){
+        $stmt = $this->db->prepare("SELECT * FROM recetas WHERE alias = ? ORDER BY id_receta DESC LIMIT 10");
 
-        $offset = $page * $per_page;
-        $stmt->execute(array($alias, $offset, $per_page));
+        $stmt->execute(array($alias));
         $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $time = isset($recipe["time"]) ? $recipe["time"] : null;
@@ -124,12 +122,11 @@ class RecipeMapper {
      * @throws PDOException if a database error occurs
      * @return mixed The Recipe instances. NULL if the Recipe is not found
      */
-    public function findLikedRecipes($alias, $page = 0, $per_page = 6){
+    public function findLikedRecipes($alias){
         $stmt = $this->db->prepare("SELECT recetas.* FROM recetas, receta_fav WHERE recetas.id_receta = receta_fav.id_receta
-                                          AND receta_fav.alias = ? ORDER BY receta_fav.id_receta DESC LIMIT ?,?");
+                                          AND receta_fav.alias = ? ORDER BY receta_fav.id_receta DESC LIMIT 10");
 
-        $offset = $page * $per_page;
-        $stmt->execute(array($alias, $offset, $per_page));
+        $stmt->execute(array($alias));
         $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $time = isset($recipe["time"]) ? $recipe["time"] : null;
@@ -152,7 +149,7 @@ class RecipeMapper {
      * @throws PDOException if a database error occurs
      * @return mixed The Recipe instances. NULL if the Recipe is not found
      */
-    public function findByIngredients($ingredient, $page = 0, $per_page = 6){
+    public function findByIngredients($ingredient){
         $ingredients = implode('\',\'', $ingredient);
         $ingr = "'" . $ingredients . "'";
 
@@ -161,8 +158,7 @@ class RecipeMapper {
                                           AND receta_ingrediente.id_ingr = ingredientes.id_ingr 
                                           AND ingredientes.nombre = '.$ingr.'");
 
-        $offset = $page * $per_page;
-        $stmt->execute(array($offset, $per_page));
+        $stmt->execute();
         $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $time = isset($recipe["time"]) ? $recipe["time"] : null;

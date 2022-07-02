@@ -182,33 +182,7 @@ class UsersController extends BaseController {
         //$user = $this->userMapper->findByUsername($_SESSION["currentuser"]);
         $nUserRecipes = $this->recipeMapper->countRecipesByAlias($_SESSION["currentuser"]);
 
-        $nPags = ceil($nUserRecipes / 6);
-        $page = 0;
-
-        if (isset($_GET["page"])) {
-            if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int)$_GET["page"]) < $nPags) {
-                $page = $temp;
-            } else {
-                $this->view->redirect("user", "home");
-            }
-        }
-
-        $userRecipes = $this->recipeMapper->findByUsername($_SESSION["currentuser"], $page);
-
-        if ($nPags > 1) {
-            $prevPage = $page - 1;
-            $nextPage = $page + 1;
-            if ($page == 0) {
-                $this->view->setVariable("next", $nextPage);
-            } elseif ($page == ($nPags - 1)) {
-                $this->view->setVariable("previous", $prevPage);
-            } else {
-                $this->view->setVariable("next", $nextPage);
-                $this->view->setVariable("previous", $prevPage);
-            }
-        }
-
-        $this->view->setVariable("page", $page);
+        $userRecipes = $this->recipeMapper->findByUsername($_SESSION["currentuser"]);
 
         // put the array containing recipes object to the view
         $this->view->setVariable("recipes", $userRecipes);
@@ -227,39 +201,18 @@ class UsersController extends BaseController {
 
         $nLikedRecipes = $this->recipeMapper->countLikedRecipes($_SESSION["currentuser"]);
 
-        $nPags = ceil($nLikedRecipes / 6);
-        $page = 0;
+        $likedRecipes = $this->recipeMapper->findLikedRecipes($_SESSION["currentuser"]);
 
-        if (isset($_GET["page"])) {
-            if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int)$_GET["page"]) < $nPags) {
-                $page = $temp;
-            } else {
-                $this->view->redirect("user", "home");
-            }
+        if($nLikedRecipes > 0){
+            // put the array containing recipes object to the view
+            $this->view->setVariable("recipes", $likedRecipes);
+
+            // render the view (/view/users/favorites.php)
+            $this->view->render("users", "favorites");
+
+        }else{
+            $this->view->redirect("home", "index");
         }
-
-        $likedRecipes = $this->recipeMapper->findLikedRecipes($_SESSION["currentuser"], $page);
-
-        if ($nPags > 1) {
-            $prevPage = $page - 1;
-            $nextPage = $page + 1;
-            if ($page == 0) {
-                $this->view->setVariable("next", $nextPage);
-            } elseif ($page == ($nPags - 1)) {
-                $this->view->setVariable("previous", $prevPage);
-            } else {
-                $this->view->setVariable("next", $nextPage);
-                $this->view->setVariable("previous", $prevPage);
-            }
-        }
-
-        $this->view->setVariable("page", $page);
-
-        // put the array containing recipes object to the view
-        $this->view->setVariable("recipes", $likedRecipes);
-
-        // render the view (/view/users/favorites.php)
-        $this->view->render("users", "favorites");
 
     }
 
