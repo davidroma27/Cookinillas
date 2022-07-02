@@ -94,7 +94,7 @@ $view->setVariable("title", "Add Recipe");
         let newCant = document.createElement('input');
         newCant.type = 'text';
         newCant.className = "inputCant";
-        newCant.name = "cant[]";
+        newCant.name = "quant[]";
         //Creating elements in DOM
         ingrParent.appendChild(newIngr);
         newDL.appendChild(option);

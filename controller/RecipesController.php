@@ -125,7 +125,7 @@
                     // populate the Recipe object with data from the form
                     $recipe->setTitle($_POST["title"]);
                     $recipe->setTime($_POST["time"]);
-                    $recipe->setIngr($_POST["ingr"]);
+                    $recipe->setIngr($_POST["ingredientes"]);
                     $recipe->setQuant($_POST["quant"]);
                     $recipe->setSteps($_POST["steps"]);
                     // The user of the Recipe is the currentUser (user in session)

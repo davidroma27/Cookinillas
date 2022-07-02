@@ -286,20 +286,25 @@ class RecipeMapper {
     public function save(Recipe $recipe) {
         $stmt1 = $this->db->prepare("INSERT INTO recetas(titulo, imagen, tiempo, pasos, alias) values (?,?,?,?,?)");
         $stmt2 = $this->db->prepare("INSERT IGNORE INTO ingredientes(nombre) VALUES (?)");
-        $ingr = $this->db->prepare("SELECT ingredientes.id_ingr FROM ingredientes,recetas
-                                            WHERE ingredientes.nombre = ?
-                                            AND recetas.id_receta = ?");
+        $ingr = $this->db->prepare("SELECT id_ingr FROM ingredientes WHERE nombre = ?");
         $stmt3 = $this->db->prepare("INSERT INTO receta_ingrediente(id_receta, id_ingr, cantidad) VALUES(?,?,?)");
 
         $stmt1->execute(array($recipe->getTitle(), $recipe->getImg(), $recipe->getTime(), $recipe->getSteps(), $recipe->getAlias()->getAlias()));
         $recipeid = $this->db->lastInsertId();
 
-        $stmt2->execute(array($recipe->getIngr()));
+        $arr1 = $recipe->getIngr();
+        $arr2 = $recipe->getQuant();
+
+        $res = array_combine($arr1, $arr2);
+
+        foreach ($res as $i => $c){
+            $stmt2 ->execute(array($i));
+            $ingr->execute(array($i));
+            $id_ingr = $ingr->fetch(PDO::FETCH_COLUMN);
+            $stmt3->execute(array($recipeid, $id_ingr, $c));
+        }
+
         //$id_ingr = $this->db->lastInsertId();
-
-        $id_ingr = $ingr->execute(array($recipe->getIngr(), $recipeid));
-        $stmt3->execute(array($recipeid, $id_ingr, $recipe->getQuant()));
-
         return $recipeid;
     }
 

@@ -190,7 +190,7 @@ class Recipe
     /**
      * Sets the ingredients of the recipe
      *
-     * @param string $ingr The ingredients list of the recipe
+     * @param array $ingr The ingredients list of the recipe
      * @return void
      */
     public function setIngr($ingr)
@@ -211,7 +211,7 @@ class Recipe
     /**
      * Sets the quantity of each ingredient
      *
-     * @param string $quant The quantity of each ingredient
+     * @param array $quant The quantity of each ingredient
      * @return void
      */
     public function setQuant( $quant)
@@ -299,10 +299,10 @@ class Recipe
         if ($this->time == NULL ) {
             $errors["time"] = "time is mandatory";
         }
-        if (strlen(trim($this->ingr)) == 0 ) {
+        if ($this->ingr == null ) {
             $errors["ingr"] = "ingredients is mandatory";
         }
-        if (strlen(trim($this->quant)) == 0 ) {
+        if ($this->quant == null ){
             $errors["quant"] = "quantity is mandatory";
         }
         if (strlen(trim($this->steps)) == 0 ) {
