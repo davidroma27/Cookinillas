@@ -296,11 +296,10 @@
 
 
         public function search(){
-            if(isset($_POST["ingredientes[]"])){
-                $nRecipes = $this->recipeMapper->countRecipesByIngredient($_POST["ingredientes[]"]);
+            if(isset($_POST["ingredientes"])){
 
-                $recipes = $this->recipeMapper->findByIngredients($_POST["ingredientes[]"]);
-                $this->view->setVariable($recipes);
+                $recipes = $this->recipeMapper->findByIngredients($_POST["ingredientes"]);
+                $this->view->setVariable("recipes", $recipes);
 
             }
 

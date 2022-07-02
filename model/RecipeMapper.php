@@ -151,12 +151,15 @@ class RecipeMapper {
      */
     public function findByIngredients($ingredient){
         $ingredients = implode('\',\'', $ingredient);
+
+        $length = count($ingredient);
         $ingr = "'" . $ingredients . "'";
 
-        $stmt = $this->db->prepare("SELECT recetas.* FROM recetas, ingredientes, receta_ingrediente 
-                                          WHERE recetas.id_receta = receta_ingrediente.id_receta
-                                          AND receta_ingrediente.id_ingr = ingredientes.id_ingr 
-                                          AND ingredientes.nombre = '.$ingr.'");
+        $stmt = $this->db->prepare("SELECT DISTINCT recetas.* FROM recetas 
+                                            LEFT JOIN receta_ingrediente ON recetas.id_receta = receta_ingrediente.id_receta
+                                            INNER JOIN ingredientes ON receta_ingrediente.id_ingr = ingredientes.id_ingr 
+                                          AND ingredientes.nombre IN('$ingredients') 
+                                          GROUP BY recetas.id_receta HAVING COUNT(ingredientes.nombre) = $length");
 
         $stmt->execute();
         $recipes_db = $stmt->fetchAll(PDO::FETCH_ASSOC);

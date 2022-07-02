@@ -12,8 +12,6 @@ $ingredients = $view->getVariable("ingredients");
 $errors = $view->getVariable("errors");
 
 $view->setVariable("title", "Search Recipe");
-
-var_dump($recipes);
 ?>
 
 <div class="title-bar">
