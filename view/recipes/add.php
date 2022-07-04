@@ -37,26 +37,26 @@ $view->setVariable("title", "Add Recipe");
                 <span><?= i18n("Tiempo de preparación (minutos)") ?></span>
                 <input type="number" name="time">
             </label>
-                <div class="ingr-input">
-                    <label class="ingrLabel">
-                        <span><?= i18n("Ingredientes") ?></span>
-                        <input class="inputIngr" list="ingredients" name="ingredientes[]">
-                        <datalist id="ingredients">
-                            <?php foreach ($ingredients as $ingr): ?>
-                                <option value="<?php print_r($ingr) ?>"></option>
-                            <?php endforeach; ?>
-                        </datalist>
-                    </label>
-                    <label class="cantLabel">
-                        <span><?= i18n("Cantidad") ?></span>
-                        <input class="inputCant" type="text" name="quant[]">
-                    </label>
-                    <button class="ingr-input__button" onclick="addInput()" type="button" title="<?= i18n("Añadir ingrediente") ?>">
-                        <svg class="ingr-input__button--icon">
-                            <use href="view/img/sprite.svg#icon-add-ingr"></use>
-                        </svg>
-                    </button>
-                </div>
+            <div class="ingr-input">
+                <label class="ingrLabel">
+                    <span><?= i18n("Ingredientes") ?></span>
+                    <input class="inputIngr" list="ingredients" name="ingredientes[]">
+                    <datalist id="ingredients">
+                        <?php foreach ($ingredients as $ingr): ?>
+                            <option value="<?php print_r($ingr) ?>"></option>
+                        <?php endforeach; ?>
+                    </datalist>
+                </label>
+                <label class="cantLabel">
+                    <span><?= i18n("Cantidad") ?></span>
+                    <input class="inputCant" type="text" name="quant[]">
+                </label>
+                <button class="ingr-input__button" onclick="addInput()" type="button" title="<?= i18n("Añadir ingrediente") ?>">
+                    <svg class="ingr-input__button--icon">
+                        <use href="view/img/sprite.svg#icon-add-ingr"></use>
+                    </svg>
+                </button>
+            </div>
             <label>
                 <span><?= i18n("Pasos para elaborar la receta") ?></span>
                 <textarea name="steps" id="recipeTextArea" cols="30" rows="10"></textarea>

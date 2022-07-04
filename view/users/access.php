@@ -29,10 +29,15 @@
 
     <label class="username"><?= i18n("Nombre de usuario")?></label>
     <input type="text" name="alias" value="">
-    <?= isset($errors["alias"])?i18n($errors["Nombre de usuario"]):"" ?><br>
+    <p>
+    <?= isset($errors["alias"])?i18n($errors["alias"]):"" ?><br>
+    </p>
 
     <label class="username"><?= i18n("Contraseña")?></label>
     <input type="password" name="passwd">
+    <p>
+    <?= isset($errors["passwd"])?i18n($errors["passwd"]):"" ?><br>
+    </p>
 
     <label class="username"><?= i18n("e-mail")?></label>
     <input type="text" name="email">

@@ -255,7 +255,7 @@
                 // populate the Recipe object with data form the form
                 $recipe->setTitle($_POST["title"]);
                 $recipe->setTime($_POST["time"]);
-                $recipe->setIngr($_POST["ingr"]);
+                $recipe->setIngr($_POST["ingredientes"]);
                 $recipe->setQuant($_POST["quant"]);
                 $recipe->setSteps($_POST["steps"]);
 
@@ -264,7 +264,7 @@
                     $recipe->checkIsValidForUpdate(); // if it fails, ValidationException
 
                     // update the Recipe object in the database
-                    $this->recipeMapper->update($recipe);
+                    $id = $this->recipeMapper->update($recipe);
 
                     // POST-REDIRECT-GET
                     // Everything OK, we will redirect the user to the list of posts
@@ -273,7 +273,11 @@
                     // get in the view after redirection.
                     $this->view->setFlash(sprintf(i18n("Recipe \"%s\" successfully updated."),$recipe ->getTitle()));
 
-                    $this->view->redirect("home", "index");
+                    // perform the redirection. More or less:
+                    // header("Location: index.php?controller=recipes&action=index?id=1")
+                    // die();
+                    $queryString = "id=" . $id;
+                    $this->view->redirect("recipes", "view", $queryString);
 
                 }catch(ValidationException $ex) {
                     // Get the errors array inside the exepction...
@@ -284,8 +288,8 @@
             }
 
             //Retrieve all available ingredients of database
-            //$ingredients = $this->recipeMapper->getIngredients();
-            //$this->view->setVariable("ingredients", $ingredients);
+            $ingredients = $this->recipeMapper->getIngredients();
+            $this->view->setVariable("ingredients", $ingredients);
 
             // Put the Recipe object visible to the view
             $this->view->setVariable("recipe", $recipe);

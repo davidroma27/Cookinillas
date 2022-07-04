@@ -312,18 +312,33 @@ class RecipeMapper {
      *
      * @param Recipe $recipe The recipe to be saved
      * @throws PDOException if a database error occurs
-     * @return void
+     * @return int
      */
     public function update(Recipe $recipe) {
-        $stmt1 = $this->db->prepare("UPDATE recetas set titulo=?, imagen=?, tiempo=?, pasos=? where id_receta=?");
-        $stmt2 = $this->db->prepare("INSERT INTO ingredientes(nombre) VALUES (?) ON DUPLICATE KEY UPDATE nombre = nombre");
-        $stmt3 = $this->db->prepare("UPDATE receta_ingrediente set id_ingr=?, cantidad=? WHERE id_receta=?");
+        $stmt1 = $this->db->prepare("UPDATE recetas SET titulo=?, imagen=?, tiempo=?, pasos=? WHERE id_receta=?");
+        $stmt2 = $this->db->prepare("INSERT IGNORE INTO ingredientes(nombre) VALUES (?)");
+        $ingr = $this->db->prepare("SELECT id_ingr FROM ingredientes WHERE nombre = ?");
+        $stmt3 = $this->db->prepare("DELETE FROM receta_ingrediente WHERE id_receta=?");
+        $stmt4 = $this->db->prepare("INSERT INTO receta_ingrediente(id_receta, id_ingr, cantidad) VALUES(?,?,?)");
 
         $stmt1->execute(array($recipe->getTitle(), $recipe->getImg(), $recipe->getTime(), $recipe->getSteps(), $recipe->getId()));
-        $stmt2->execute(array($recipe->getIngr()));
-        $id_ingr = $this->db->lastInsertId();
-        $stmt3->execute(array($recipe->getId(), $id_ingr, $recipe->getQuant()));
+        $recipeid = $recipe->getId();
 
+        $stmt3->execute(array($recipeid)); //Deletes intermediate table relationships
+
+        $arr1 = $recipe->getIngr();
+        $arr2 = $recipe->getQuant();
+
+        $res = array_combine($arr1, $arr2);
+
+        foreach ($res as $i => $c){
+            $stmt2 ->execute(array($i));
+            $ingr->execute(array($i));
+            $id_ingr = $ingr->fetch(PDO::FETCH_COLUMN);
+            $stmt4->execute(array($recipeid, $id_ingr, $c));
+        }
+
+        return $recipeid;
     }
 
     /**
