@@ -16,6 +16,10 @@ $view->setVariable("title", "View Recipe");
     </div>
 </div>
 
+<div id="flash">
+    <p><?= $view->popFlash() ?></p>
+</div>
+
 <main class="recipe-main">
     <div class="recipe__img">
         <img src="media/<?= $recipe->getImg() ?>" alt="">
@@ -101,3 +105,10 @@ $view->setVariable("title", "View Recipe");
         </div>
     </div>
 </main>
+
+<script>
+    const flash = document.querySelector("#flash");
+
+    setTimeout(function() {flash.remove()}, 3000);
+
+</script>

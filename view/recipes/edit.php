@@ -21,16 +21,21 @@ $view->setVariable("title", "Edit Recipe");
 
 <main class="main-content">
     <div class="form__box--edit">
-        <form action="index.php?controller=recipes&amp;action=edit" method="POST" class="recipe__form--edit" enctype="multipart/form-data">
+        <form action="index.php?controller=recipes&amp;action=edit" method="POST" class="recipe__form--edit" enctype="multipart/form-data"
+        name="Recipe" onsubmit="return checkEmptyForm()">
 
             <input type="hidden" name="id" value="<?= $recipe->getId() ?>">
             <label>
                 <span><?= i18n("Nombre de la receta") ?></span>
                 <input type="text" name="title" value="<?= $recipe->getTitle() ?>">
             </label>
+            <label>
+                <span><?= i18n("Imagen actual") ?></span>
+                <img src="/media/<?= $recipe->getImg() ?>" alt="" width="150"">
+            </label>
             <label class="file-upload">
                 <span><?= i18n("Imagen de la receta") ?></span>
-                <input id="sel_file" type="file" name="img">
+                <input id="sel_file" type="file" name="img" value="<?= $recipe->getImg() ?>"
             </label>
             <label>
                 <span><?= i18n("Tiempo de preparación (minutos)") ?></span>
@@ -71,7 +76,7 @@ $view->setVariable("title", "Edit Recipe");
 
 </main>
 
-<script>
+<script type="text/javascript">
     function addInput(){
         let ingrParent = document.querySelector(".ingrLabel");
         let cantParent = document.querySelector(".cantLabel");
@@ -106,5 +111,16 @@ $view->setVariable("title", "Edit Recipe");
         newDL.appendChild(option);
         ingrParent.appendChild(newDL);
         cantParent.appendChild(newCant);
+    }
+
+    function checkEmptyForm(){
+        let titleInput = document.forms["Recipe"]["title"].value;
+        let timeInput = document.forms["Recipe"]["time"].value;
+        let stepsInput = document.forms["Recipe"]["steps"].value;
+
+        if(titleInput === "" || timeInput === "" || stepsInput === "") {
+            alert("Todos los campos deben estar cubiertos");
+            return false;
+        }
     }
 </script>

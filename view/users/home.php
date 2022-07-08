@@ -11,7 +11,6 @@ $errors = $view->getVariable("errors");
 
 $view->setVariable("title", "User home");
 
-
 ?>
 
 <div class="title-bar">
@@ -22,6 +21,9 @@ $view->setVariable("title", "User home");
 <main class="main-content">
 
     <div class="recipes">
+        <?php if(empty($recipes)){ ?>
+            <h1>Aún no has subido ninguna receta</h1>
+        <?php } ?>
 
         <?php foreach ($recipes as $recipe): ?>
             <div class="recipes__box">

@@ -299,6 +299,9 @@ class Recipe
         if ($this->time == NULL ) {
             $errors["time"] = "time is mandatory";
         }
+        if ($this->img == NULL ) {
+            $errors["img"] = "image is mandatory";
+        }
         if ($this->ingr == null ) {
             $errors["ingr"] = "ingredients is mandatory";
         }
@@ -330,6 +333,24 @@ class Recipe
 
         if (!isset($this->id)) {
             $errors["id"] = "id is mandatory";
+        }
+        if (strlen(trim($this->title)) == 0 ) {
+            $errors["title"] = "title is mandatory";
+        }
+        if ($this->time == NULL ) {
+            $errors["time"] = "time is mandatory";
+        }
+        if ($this->ingr == null ) {
+            $errors["ingr"] = "ingredients is mandatory";
+        }
+        if ($this->quant == null ){
+            $errors["quant"] = "quantity is mandatory";
+        }
+        if (strlen(trim($this->steps)) == 0 ) {
+            $errors["steps"] = "steps is mandatory";
+        }
+        if ($this->alias == NULL ) {
+            $errors["alias"] = "alias is mandatory";
         }
 
         if (sizeof($errors) > 0) {

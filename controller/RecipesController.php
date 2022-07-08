@@ -67,7 +67,7 @@
             // find the recipe object in the database
             $recipe = $this->recipeMapper->findById($recipeid);
             if ($recipe == NULL) {
-                throw new Exception("no such post with id: ".$recipeid);
+                throw new Exception("no such recipe with id: ".$recipeid);
             }
 
             // put the recipe object to the view
@@ -119,10 +119,13 @@
 
             if (isset($_POST["submit"])) { // reaching via HTTP Post...
                 try {
-                    $uploadImage = $this->recipeMapper->uploadImg();
-                    $recipe->setImg($uploadImage["fileName"]);
+
+                    if(!empty($_FILES["img"]["name"])) { //Manage the file upload
+                        $uploadImage = $this->recipeMapper->uploadImg();
+                    }
 
                     // populate the Recipe object with data from the form
+                    $recipe->setImg($uploadImage["fileName"]);
                     $recipe->setTitle($_POST["title"]);
                     $recipe->setTime($_POST["time"]);
                     $recipe->setIngr($_POST["ingredientes"]);
@@ -231,6 +234,8 @@
             // Get the Recipe object from the database
             $recipeid = $_REQUEST["id"];
             $recipe = $this->recipeMapper->findById($recipeid);
+            //Get the stored image name
+            $img = $recipe->getImg();
 
             // Does the recipe exist?
             if ($recipe == NULL) {
@@ -243,16 +248,19 @@
             }
 
             if (isset($_POST["submit"])) { // reaching via HTTP Post...
+
                 if(!empty($_FILES["img"]["name"])) { //Manage the file upload
+                    $uploadImage = $this->recipeMapper->uploadImg();
+                    $recipe->setImg($uploadImage["fileName"]);
 
-                    //Get file info
-                    $fileName = $_FILES["img"]["name"];
-                    $path = "view/img/".$fileName;
-
-                    $recipe->setImg($path);
+                    //if image was updated, deletes old stored image
+                    if($img != $uploadImage["fileName"]){
+                        unlink(__DIR__."/../media/".$img);
+                    }
                 }
 
-                // populate the Recipe object with data form the form
+                // populate the Recipe object with data from the form
+                //$recipe->setImg($uploadImage["fileName"]);
                 $recipe->setTitle($_POST["title"]);
                 $recipe->setTime($_POST["time"]);
                 $recipe->setIngr($_POST["ingredientes"]);
@@ -280,6 +288,10 @@
                     $this->view->redirect("recipes", "view", $queryString);
 
                 }catch(ValidationException $ex) {
+                    //Delete img if some error ocurred
+                    if(isset($recipe)){
+                        unlink(__DIR__."/../media/".$recipe->getImg());
+                    }
                     // Get the errors array inside the exepction...
                     $errors = $ex->getErrors();
                     // And put it to the view as "errors" variable
@@ -350,7 +362,7 @@
 
             // Does the post exist?
             if ($recipe == NULL) {
-                throw new Exception("no such post with id: ".$recipeid);
+                throw new Exception("no such recipe with id: ".$recipeid);
             }
 
             // Check if the Recipe author is the currentUser (in Session)
@@ -358,6 +370,8 @@
                 throw new Exception("Recipe author is not the logged user");
             }
 
+            //Delete image from /media folder
+            unlink(__DIR__."/../media/".$recipe->getImg());
             // Delete the Recipe object from the database
             $this->recipeMapper->delete($recipe);
 
@@ -366,7 +380,7 @@
             // We want to see a message after redirection, so we establish
             // a "flash" message (which is simply a Session variable) to be
             // get in the view after redirection.
-            $this->view->setFlash(sprintf(i18n("Post \"%s\" successfully deleted."),$recipe ->getTitle()));
+            $this->view->setFlash(sprintf(i18n("Recipe \"%s\" successfully deleted."),$recipe ->getTitle()));
 
             // perform the redirection. More or less:
             // header("Location: index.php?controller=recipes&action=index")

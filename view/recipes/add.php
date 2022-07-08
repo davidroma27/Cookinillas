@@ -23,7 +23,8 @@ $view->setVariable("title", "Add Recipe");
 <main class="main-content">
 
     <div class="form__box">
-        <form action="index.php?controller=recipes&amp;action=add" method="POST" class="recipe__form" enctype="multipart/form-data">
+        <form action="index.php?controller=recipes&amp;action=add" method="POST" class="recipe__form" enctype="multipart/form-data"
+              name="Recipe" onsubmit="return checkEmptyForm()">
 
             <label>
                 <span><?= i18n("Nombre de la receta") ?></span>
@@ -65,7 +66,7 @@ $view->setVariable("title", "Add Recipe");
         </form>
     </div>
 </main>
-<script>
+<script type="text/javascript">
     function addInput(){
         let ingrParent = document.querySelector(".ingrLabel");
         let cantParent = document.querySelector(".cantLabel");
@@ -83,22 +84,41 @@ $view->setVariable("title", "Add Recipe");
         let newDL = document.createElement('datalist');
         newDL.id= "ingredients";
 
-        //Parse php ingredients to json and generate option values
-        let json = <?php echo json_encode($ingredients); ?>;
-        for (const ingr in json) {
-            var option = document.createElement('option');
-            option.value = json[ingr];
-        }
-
         /******* CANTIDAD INPUT FIELD POPULATION ******/
         let newCant = document.createElement('input');
         newCant.type = 'text';
         newCant.className = "inputCant";
         newCant.name = "quant[]";
+
+        cantParent.appendChild(newCant);
+
+        //Parse php ingredients to json and generate option values
+        let json = <?php echo json_encode($ingredients); ?>;
+
+        for (const ingr in json) {
+            var option = document.createElement('option');
+
+            if(ingr !== "") {
+                option.value = json[ingr];
+            }else option.value = " ";
+        }
+
         //Creating elements in DOM
         ingrParent.appendChild(newIngr);
         newDL.appendChild(option);
         ingrParent.appendChild(newDL);
-        cantParent.appendChild(newCant);
+
+    }
+
+    function checkEmptyForm(){
+        let titleInput = document.forms["Recipe"]["title"].value;
+        let imgInput = document.forms["Recipe"]["img"].value;
+        let timeInput = document.forms["Recipe"]["time"].value;
+        let stepsInput = document.forms["Recipe"]["steps"].value;
+
+        if(titleInput === "" || imgInput === "" || timeInput === "" || stepsInput === "") {
+            alert("Todos los campos deben estar cubiertos");
+            return false;
+        }
     }
 </script>

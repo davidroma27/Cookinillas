@@ -34,6 +34,8 @@
         "Debes iniciar sesión para hacer eso" => "You must login in order to do that",
         "Página" => "Page",
         "Añadir ingrediente" => "Add ingredient",
-        "Cerrar sesión" => "Sign out"
+        "Cerrar sesión" => "Sign out",
+        "Imagen actual" => "Current image",
+        "Aún no has subido ninguna receta" => "You haven't uploaded any recipe yet"
     )
 ?>
