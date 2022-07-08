@@ -220,60 +220,7 @@ class RecipeMapper {
     public function getNLikes(){
 
     }*/
-
-
-    /**
-     * Loads a Recipe from the database given its ids (With LIKES)
-     *
-     * @throws PDOException if a database error occurs
-     * @return Recipe The Recipe instances. NULL if the Recipe is not found
-     *
-    public function findByIdWithLikes($recipeid){
-        $stmt = $this->db->prepare("SELECT
-            R.id_receta AS 'recetas.id_receta',
-            R.titulo AS 'recetas.titulo',
-            R.imagen AS 'recetas.imagen',
-            R.tiempo AS 'recetas.tiempo',
-            R.pasos AS 'recetas.pasos',
-            R.alias AS 'recetas.alias',
-            F.id_rec_fav AS 'receta_fav.id_rec_fav',
-            F.id_receta AS 'receta_fav.id_receta',
-            F.alias AS 'receta_fav.alias'
-        FROM
-            recetas R
-        LEFT OUTER JOIN receta_fav F ON
-            R.id_receta = F.id_receta
-        WHERE
-            R.id_receta = ?");
-
-        $stmt->execute(array($recipeid));
-        $recipe_wt_likes= $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if (sizeof($recipe_wt_likes) > 0) {
-            $recipe = new Recipe($recipe_wt_likes[0]["recetas.id_receta"],
-                $recipe_wt_likes[0]["recetas.titulo"],
-                $recipe_wt_likes[0]["recetas.imagen"],
-                $recipe_wt_likes[0]["recetas.tiempo"],
-                $recipe_wt_likes[0]["recetas.pasos"],
-                new User($recipe_wt_likes[0]["recetas.alias"]));
-            $likes_array = array();
-            if ($recipe_wt_likes[0]["receta_fav.id_rec_fav"]!=null) {
-                foreach ($recipe_wt_likes as $like){
-                    $like = new Favorite( $like["receta_fav.id_rec_fav"],
-                        new User($like["receta_fav.alias"]),
-                        $like["receta_fav.id_receta"],
-                        $recipe);
-                    array_push($likes_array, $like);
-                }
-            }
-            $recipe->setFavorite($likes_array);
-
-            return $recipe;
-        }else {
-            return NULL;
-        }
-    }
-     */
+    
 
     /**
      * Saves a Recipe into the database

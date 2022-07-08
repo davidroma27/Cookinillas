@@ -17,6 +17,9 @@ $view->setVariable("title", "Recipe");
         <h1 class="title-box__title"><?= i18n("Recetas recientes") ?></h1>
     </div>
 </div>
+<div id="flash">
+    <p><?= $view->popFlash() ?></p>
+</div>
 <main class="main-content">
 
     <div class="recipes">
@@ -36,6 +39,11 @@ $view->setVariable("title", "Recipe");
         <?php endforeach; ?>
     </div>
 
-
-
 </main>
+
+<script>
+    const flash = document.querySelector("#flash");
+
+    setTimeout(function() {flash.remove()}, 3000);
+
+</script>
